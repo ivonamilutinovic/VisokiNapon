@@ -39,30 +39,77 @@ class SocketServer
         TcpClient client;
         int indicator = 1;
         int numOfQuest = 0;
+        int q10 = 0;
+        int q50 = 0;
+        int q100 = 0;
+        int positionOfQuest = 0;
+        int earning = 0;
+
+        /* OVDE SE GENERISU U NIS PITANJA IZ BAZE */
+        Question[] questions = {
+                                    new Question("1. slovo azbuke?", "a", 10000),
+                                    new Question("2. slovo azbuke?", "b", 10000),
+                                    new Question("3. slovo azbuke?", "v", 10000),
+                                    new Question("4. slovo azbuke?", "g", 10000),
+                                    new Question("5. slovo azbuke?", "d", 10000),
+                                    new Question("7. slovo azbuke?", "e", 50000),
+                                    new Question("9. slovo azbuke?", "z", 50000),
+                                    new Question("10. slovo azbuke?", "i", 50000),
+                                    new Question("11. slovo azbuke?", "j", 50000),
+                                    new Question("12. slovo azbuke?", "k", 50000),
+                                    new Question("13. slovo azbuke?", "l", 100000),
+                                    new Question("14. slovo azbuke?", "lj", 100000),
+                                    new Question("15. slovo azbuke?", "m", 100000),
+                                    new Question("16. slovo azbuke?", "n", 100000),
+                                    new Question("17. slovo azbuke?", "nj", 100000),
+                                    };
 
         lock (_lock) client = list_clients[id];
 
-        while (indicator > 0 && numOfQuest < 3)
+        while (indicator > 0)
         {
 
             NetworkStream stream = client.GetStream();
             byte[] buffer = new byte[1024];
 
-            /* pitanje servera */
-
-            Question[] questions = {
-                                    new Question("Gde je rodjen Vuk Karadzic?", "Trsic"),
-                                    new Question("Ime kursa koji polazemo?", "Razvoj softvera 2"),
-                                    new Question("Glavni grad Nemacke je?", "Berlin"),
-                                    };
-
-
-            broadcast(questions[numOfQuest].getQuestion());
-            Console.WriteLine("I sent question: " + questions[numOfQuest].getQuestion());
-
-            /* odgovor klijenta */
-
+            /* #################### primam zahtev za pitanje i saljem ga ############################# */
             int byte_count = stream.Read(buffer, 0, buffer.Length);
+            string data = Encoding.ASCII.GetString(buffer, 0, byte_count);
+            
+            /* pitanja od 10000 */
+            if (data.Equals("10000", StringComparison.OrdinalIgnoreCase)) {
+                positionOfQuest = q10;
+                broadcast(questions[positionOfQuest].getQuestion());
+                Console.WriteLine("I sent question: " + questions[positionOfQuest].getQuestion());
+                q10++;
+                numOfQuest++;
+            }
+
+            /* pitanja od 50000 */
+            if (data.Equals("50000", StringComparison.OrdinalIgnoreCase))
+            {
+                positionOfQuest = 5 + q50;
+                broadcast(questions[positionOfQuest].getQuestion());
+                Console.WriteLine("I sent question: " + questions[positionOfQuest].getQuestion());
+                q50++;
+                numOfQuest++;
+            }
+
+            /*pitanje od 100000 */
+            if (data.Equals("100000", StringComparison.OrdinalIgnoreCase))
+            {
+                positionOfQuest = 10 + q100;
+                broadcast(questions[positionOfQuest].getQuestion());
+                Console.WriteLine("I sent question: " + questions[positionOfQuest].getQuestion());
+                q100++;
+                numOfQuest++;
+            }
+
+            /* ######################################################################################## */
+
+            /* ###################### odgovor klijenta  ##################################*/
+
+            byte_count = stream.Read(buffer, 0, buffer.Length);
 
             if (byte_count == 0)
             {
@@ -70,30 +117,38 @@ class SocketServer
             }
 
 
-            string data = Encoding.ASCII.GetString(buffer, 0, byte_count);
-            if (data.Equals(questions[numOfQuest].getAnswer(), StringComparison.OrdinalIgnoreCase))
+            data = Encoding.ASCII.GetString(buffer, 0, byte_count);
+            if (data.Equals(questions[positionOfQuest].getAnswer(), StringComparison.OrdinalIgnoreCase))
             {
+
+                earning += questions[positionOfQuest].getValue(); 
+                /* provera da li je pitanje ujedno i poslednje pitanje */
+                if (numOfQuest >= 15)
+                {
+                    string gameOver = "You won! " + earning.ToString() ;
+                    broadcast(gameOver);
+                    Console.WriteLine("I sent the message about winning! Earning won: " + earning);
+                    break;
+                }
+                /* #################################################### */
+
                 Console.WriteLine("I got correct answer: " + data + " Move on!");
-                numOfQuest++;
+                string winner = "Move on!";
+                broadcast(winner);
+                Console.WriteLine("I sent indicator to continue the game: " + winner);
             }
             else
             {
                 indicator = 0;
                 Console.WriteLine("I got incorrect answer: " + data + " Break connection with this client.");
             }
+
+            /* ########################################################################## */
         }
 
-        if (numOfQuest >= 3)
-        {
-            /* odgovorio je na sva pitanja koja su njemu postavljena */
-            ;
-            broadcast("You won!");
-            Console.WriteLine("I sent the message about winning! ");
-        }
-        else
+        if (indicator == 0)
         {
             /* nazalost je napravio gresku */
-
             string loser = "end";
             broadcast(loser);
             Console.WriteLine("I sent breacking connection string: " + loser);

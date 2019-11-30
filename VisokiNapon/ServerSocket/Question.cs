@@ -8,11 +8,13 @@ namespace ServerApplication
     {
         public string question;
         public string answer;
+        int value;
 
-        public Question(String question, String answer)
+        public Question(String question, String answer, int value)
         {
             this.question = question;
             this.answer = answer;
+            this.value = value;
         }
 
 
@@ -25,6 +27,11 @@ namespace ServerApplication
         public String getAnswer()
         {
             return answer;
+        }
+
+        public int getValue()
+        {
+            return value;
         }
 
     }
