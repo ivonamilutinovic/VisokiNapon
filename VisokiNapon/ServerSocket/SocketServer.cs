@@ -5,7 +5,8 @@ using System.Text;
 using System.Collections.Generic;
 using System.Net;
 using ServerApplication;
-
+using System.Data;
+using System.Data.SqlClient;
 class SocketServer
 {
     static readonly object _lock = new object();
@@ -14,7 +15,7 @@ class SocketServer
     static void Main(string[] args)
     {
         int count = 1;
-
+        
         TcpListener ServerSocket = new TcpListener(IPAddress.Any, 5000);
         ServerSocket.Start();
 
@@ -44,25 +45,49 @@ class SocketServer
         int q100 = 0;
         int positionOfQuest = 0;
         int earning = 0;
-
-        /* OVDE SE GENERISU U NIS PITANJA IZ BAZE */
-        Question[] questions = {
-                                    new Question("1. slovo azbuke?", "a", 10000),
-                                    new Question("2. slovo azbuke?", "b", 10000),
-                                    new Question("3. slovo azbuke?", "v", 10000),
-                                    new Question("4. slovo azbuke?", "g", 10000),
-                                    new Question("5. slovo azbuke?", "d", 10000),
-                                    new Question("7. slovo azbuke?", "e", 50000),
-                                    new Question("9. slovo azbuke?", "z", 50000),
-                                    new Question("10. slovo azbuke?", "i", 50000),
-                                    new Question("11. slovo azbuke?", "j", 50000),
-                                    new Question("12. slovo azbuke?", "k", 50000),
-                                    new Question("13. slovo azbuke?", "l", 100000),
-                                    new Question("14. slovo azbuke?", "lj", 100000),
-                                    new Question("15. slovo azbuke?", "m", 100000),
-                                    new Question("16. slovo azbuke?", "n", 100000),
-                                    new Question("17. slovo azbuke?", "nj", 100000),
-                                    };
+        int numberOfInsertedQues = 0;
+        string selectedQues;
+        string selectedAnsw;
+        int selectedVal;
+        Question[] questions = new Question[15];
+        
+        
+        using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-DSSAV0H\\RS2SERVER;Initial Catalog=VisokiNapon;Integrated Security=True;"))
+        using (SqlCommand cmd = new SqlCommand("SELECT * " +
+                                                   "FROM(SELECT TOP 5 * " +
+                                                        "FROM dbo.Pitanja " +
+                                                        "Where Cena = 10000 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                        "UNION ALL " +
+                                                        "SELECT TOP 5 * " +
+                                                        "FROM dbo.Pitanja " +
+                                                        "Where Cena = 50000 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                        "UNION ALL " +
+                                                        "SELECT TOP 5 * " +
+                                                        "FROM dbo.Pitanja " +
+                                                        "Where Cena = 100000 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND())) T " +
+                                                    "ORDER BY 4; ", connection))
+        
+        {
+            connection.Open();
+            using (SqlDataReader reader = cmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        selectedQues = reader[1].ToString();
+                        selectedAnsw = reader[2].ToString().TrimEnd();
+                        selectedVal = Convert.ToInt32(reader[3]);
+                        
+                        questions[numberOfInsertedQues++] = new Question(selectedQues, selectedAnsw, selectedVal);
+                    }
+                }
+            }
+            connection.Close();
+        }
 
         lock (_lock) client = list_clients[id];
 
