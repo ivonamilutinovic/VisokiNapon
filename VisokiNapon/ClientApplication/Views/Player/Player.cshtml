@@ -1,4 +1,4 @@
-@* @model Player -- pitati asistentkinju zasto dolazi do problema sa prepoznavanjem *@
+@model ClientApplication.Models.Player 
 @{
     ViewBag.Title = "Visoki napon";
 }
@@ -16,12 +16,11 @@
         <tr>
             <td>Password:</td>
             <td>&nbsp;</td>
-            <td><input type="text" name="username" placeholder="Your password.."></td>
+            <td><input type="text" name="username" placeholder="Your password.." ></td>
         </tr>
         <tr>
-            <td colspan="3"><button class="button">Unesi</button></td>
+            <td colspan="3"><button class="button" onclick="window.location.href='@Url.Action("Player", "ModeChoosing")' ">Unesi</button></td>
         </tr>
     </table>
-    @RenderBody()
 
 </form>

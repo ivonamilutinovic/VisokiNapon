@@ -2,29 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using ClientApplication.Models;
 
 namespace ClientApplication.Controllers
 {
-    public class ClientController{
+    public class ClientController : Controller{
 
-        private readonly ILogger<PlayerController> _logger;
-
-        public PlayerController(ILogger<PlayerController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Player()
+        public IActionResult Answering()
         {
             return View();
         }
 
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult MatrixOfQuestions()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return View();
         }
 
+        public IActionResult ModeChoosing()
+        {
+                return View();
+        }
+
+        public IActionResult Question()
+        {
+                return View();
+        }
     }
 }
