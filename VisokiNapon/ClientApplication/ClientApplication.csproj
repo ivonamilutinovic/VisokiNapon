@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="Models\" />
     <Folder Include="Resources\" />
     <Folder Include="Views\Client\" />
@@ -21,6 +22,9 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+=======
+    <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />
+>>>>>>> 4707f8c009dc28d3c893de115f9a1ffca4542beb
   </ItemGroup>
 
 </Project>
