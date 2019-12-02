@@ -1,0 +1,27 @@
+@* @model Player -- pitati asistentkinju zasto dolazi do problema sa prepoznavanjem *@
+@{
+    ViewBag.Title = "Visoki napon";
+}
+<img src="C:\Users\mivona\source\repos\VisokiNapon\VisokiNapon\Resources\logo.png" alt="logo" class="center">
+<form class="container">
+    <table>
+        <col width="70">
+        <col width="10">
+        <col width="350">
+        <tr>
+            <td>Username:</td>
+            <td>&nbsp;</td>
+            <td><input type="text" name="username" placeholder="Your username.."></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>&nbsp;</td>
+            <td><input type="text" name="username" placeholder="Your password.."></td>
+        </tr>
+        <tr>
+            <td colspan="3"><button class="button">Unesi</button></td>
+        </tr>
+    </table>
+    @RenderBody()
+
+</form>
