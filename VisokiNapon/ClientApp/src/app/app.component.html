@@ -1,0 +1,9 @@
+<div *ngIf="Screen1 && !Screen2 && !Screen3 && !Screen4; then firstPage"></div>
+<div *ngIf="!Screen1 && Screen2 && !Screen3 && !Screen4; then secondPage"></div>
+<div *ngIf="!Screen1 && !Screen2 && Screen3 && !Screen4; then thirdPage"></div>
+<div *ngIf="!Screen1 && !Screen2 && !Screen3 && Screen4; then fourthPage"></div>
+<ng-template #firstPage><app-welcome></app-welcome></ng-template>
+<ng-template #secondPage><app-login></app-login></ng-template>
+<ng-template #thirdPage><app-table></app-table></ng-template>
+<ng-template #fourthPage><app-answer></app-answer></ng-template>
+
