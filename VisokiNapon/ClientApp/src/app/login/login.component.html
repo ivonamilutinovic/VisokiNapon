@@ -1,0 +1,27 @@
+
+<form >
+    <div class = "form-group">
+        <label for ="username">Username</label>
+        <input
+            required
+            minlength="5"
+            maxlength="12"
+            ngModel
+            name ="username"
+            id = "username"
+            type = "text"
+            class = "form-control"></div>
+        <div class = "form-group">
+        <label for ="password">Password</label>
+        <input
+            ngModel
+            required
+            minlength="6"
+            maxlength="18"
+            name = "password"
+            id = "password"
+            type = "password"
+            type = "text"
+            class = "form-control"> </div>
+        <button type ="button"  (click)="checkLoginInfo()">Unesi</button>   
+</form>
