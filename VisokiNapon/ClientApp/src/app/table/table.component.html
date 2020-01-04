@@ -1,0 +1,15 @@
+<form >
+    <div class = "form-group">
+        <label class = "value1" [hidden]=Correct>Tacan odgovor...Nastavljate igru...</label>
+        <label [hidden]="CategoryArray.length==1">Otvarate {{Round-counter}} polja</label>
+        <td>
+            <tr>
+                <button type = "button" [disabled]= '(BooleanArray[i] || CategoryArray[i] < 0)'
+                    *ngFor = "let round of CategoryArray; let i = index" (click)="processClick(i);">
+                         {{ CategoryArray[i] < 0 ? 
+                 "/" : (((BooleanArray[i]==true && flag==false ) || (BooleanArray[i]==false && flag==true)) ? 
+                            10000*CategoryArray[i] : i+1)}}</button> 
+            </tr>
+        </td>    
+    </div>
+</form>

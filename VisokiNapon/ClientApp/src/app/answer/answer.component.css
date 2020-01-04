@@ -1,0 +1,40 @@
+  
+  body{
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  
+
+
+  .value1{
+    width: 300px;
+    height: 50px;
+    position: absolute;
+    bottom: 7%;
+    left: 39%;
+    background-color: #ccc2d6;
+    border: 2px solid #dad8d7;
+    color: white;	
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 4px;
+}
+
+.value2{
+  width: 700px;
+  height: 40px;
+  position: absolute;
+  bottom: 78%;
+  left: 26%;
+  background-color: #ccc2d6;
+  border: 2px solid #dad8d7;
+  color: white;	
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+  

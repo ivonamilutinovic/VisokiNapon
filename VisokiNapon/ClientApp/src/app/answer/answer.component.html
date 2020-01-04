@@ -1,0 +1,20 @@
+<form >
+    <div class = "form-group">
+        <label class = "value2" [hidden]="wrong">
+            {{ End==16 ? "CESTITAMO.." : "POGRESAN ODGOVOR.."}} Osvojeno: {{GuaranteedSum}}</label>
+        <label >Vrednost pitanja:{{Price}} </label>
+        <label for ="answer" >{{ QTextArray[Number] ? QTextArray[Number] : 'null' }}</label>
+            <input
+                [disabled]="!wrong"
+                #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
+                ngModel
+                name ="answer"
+                id = "answer"
+                type = "text"
+                placeholder="Unesite odgovor...."
+             class = "form-control">
+        <label class = "value1">Osvojeno: {{Sum}} </label>
+        
+        </div>    
+</form>
+ 
