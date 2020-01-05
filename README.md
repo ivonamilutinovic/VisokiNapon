@@ -10,3 +10,23 @@ Odgovaranje na pitanja sastoji se od èetiri runde ili faze. Pritom, igraè ima na
 U jednoj sesiji igre ukljuèena su najmanje èetiri igraèa, dok je broj sesija neogranièen. 
 Dok jedan igraè iz sesije igra, drugi posmatraju i ukljuèuju se u sluèaju tendera. 
 Sesija se završava kada svi igraèi završe igru. Pobednik sesije je igraè koji je osvojio najveæi iznos.
+
+Pokretanje
+
+Pozicionirati se u folder ClientApp i izvrsiti komandu
+npm install
+
+Pozicionirati se u glavni folder (na nivou gde je .csproj fajl) i izvrsiti komandu
+dotnet restore
+
+U fajlu appsettings.json azurirati ime servera i ime baze po potrebi
+"Default": "server=DESKTOP-DSSAV0H\\RS2SERVER; database=VisokiNapon; Integrated Security = SSPI;"
+
+Izvrsiti komandu
+dotnet-ef database update
+
+Izvrsiti komandu
+dotnet run
+
+U pretrazivacu otvoriti stranicu 
+https://localhost:5001/
