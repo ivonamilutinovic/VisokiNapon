@@ -18,7 +18,7 @@ export class MakeqService {
     })
   };*/
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     //this.myAppUrl = environment.appUrl;
   }
   

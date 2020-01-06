@@ -1,15 +1,30 @@
-<form >
+<form class="container">
     <div class = "form-group">
-        <label class = "value1" [hidden]=Correct>Tacan odgovor...Nastavljate igru...</label>
-        <label [hidden]="CategoryArray.length==1">Otvarate {{Round-counter}} polja</label>
-        <td>
-            <tr>
-                <button type = "button" [disabled]= '(BooleanArray[i] || CategoryArray[i] < 0)'
-                    *ngFor = "let round of CategoryArray; let i = index" (click)="processClick(i);">
-                         {{ CategoryArray[i] < 0 ? 
-                 "/" : (((BooleanArray[i]==true && flag==false ) || (BooleanArray[i]==false && flag==true)) ? 
-                            10000*CategoryArray[i] : i+1)}}</button> 
+        <label class = "value" [hidden]="CategoryArray.length==1">Otvarate {{Round - counter}} {{Round - counter == 1 ? "polje" : "polja"}} </label>
+         <label class = "feedback" [hidden]=Correct>Odgovor je tačan! Nastavljate igru!</label>
+        <table *ngFor = "let round of CategoryArray; let i = index" align="center">
+            <tr *ngIf="CategoryArray.length % 2 == 0 && i % 2 == 0">    
+                <td>
+                    <button class="button"  type = "button" [disabled]= '(BooleanArray[i] || CategoryArray[i] < 0)' (click)="processClick(i);">
+                             {{ CategoryArray[i] < 0 ? 
+                     "/" : (((BooleanArray[i]==true && flag == false ) || (BooleanArray[i]==false && flag==true)) ? 
+                                10000*CategoryArray[i] : i+1)}}</button> 
+                </td>
+                <td>
+                    <button class = "button"  type = "button" [disabled]= '(BooleanArray[i + 1] || CategoryArray[i+1] < 0)' (click)="processClick(i+1);">
+                             {{ CategoryArray[i+1] < 0 ? 
+                     "/" : (((BooleanArray[i+1] == true && flag == false ) || (BooleanArray[i+1] == false && flag == true)) ? 
+                                10000 * CategoryArray[i+1] : i + 2)}}</button> 
+                </td>
             </tr>
-        </td>    
+            <tr *ngIf = "CategoryArray.length % 2 == 1">    
+                <td>
+                    <button class="button"  type = "button" [disabled]= '(BooleanArray[i] || CategoryArray[i] < 0)' (click)="processClick(i);">
+                             {{ CategoryArray[i] < 0 ? 
+                     "/" : (((BooleanArray[i]==true && flag == false ) || (BooleanArray[i]==false && flag==true)) ? 
+                                10000*CategoryArray[i] : i+1)}}</button> 
+                </td>
+            </tr>
+        </table>    
     </div>
 </form>

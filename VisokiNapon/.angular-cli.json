@@ -8,7 +8,7 @@
       "root": "ClientApp",
       "outDir": "dist",
       "assets": [
-        "assets",
+        "src/assets"
         "favicon.ico"
       ],
       "index": "index.html",

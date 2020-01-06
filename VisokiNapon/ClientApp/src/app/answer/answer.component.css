@@ -1,33 +1,76 @@
-  
-  body{
-      font-family: Arial, Helvetica, sans-serif;
-  }
-  
-
-
-  .value1{
-    width: 300px;
-    height: 50px;
-    position: absolute;
-    bottom: 7%;
-    left: 39%;
-    background-color: #ccc2d6;
-    border: 2px solid #dad8d7;
-    color: white;	
-    text-align: center;
-    vertical-align: middle;
-    line-height: 50px;
-    font-size: 18px;
-    border-radius: 4px;
-}
-
-.value2{
+.feedback{
   width: 700px;
   height: 40px;
   position: absolute;
-  bottom: 78%;
+  top: 8px;
   left: 26%;
+  background-color: #35373b;
+  border: 2px solid #dad8d7;
+  color: white; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.valuOfQuestion{
+  width: 300px;
+  height: 50px;
+  position: absolute;
+  top: 50px;
+  left: 39%;
   background-color: #ccc2d6;
+  border: 2px solid #dad8d7;
+  color: white; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.question{
+  width: 900px;
+  height: 200px;
+  position: absolute;
+  top: 100px;
+  left: 17%;
+  background-color: #614e75;
+  border: 2px solid #dad8d7;
+  color: white;
+  text-align: center; 
+  vertical-align: middle;
+  line-height: 200px;
+  font-size: 20px;
+  border-radius: 4px;
+}
+
+input[type=text], select {
+  width: 360px;
+  height: 50px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color:#ccc2d6;
+  position: absolute;
+  top: 295px;
+  left: 37%;
+  background-color: #ccc2d6;
+  color: white;
+}
+
+
+.wonAmount{
+  width: 300px;
+  height: 50px;
+  position: absolute;
+  top: 360px;
+  left: 39%;
+  background-color: #35373b;
   border: 2px solid #dad8d7;
   color: white;	
   text-align: center;
@@ -37,4 +80,5 @@
   border-radius: 4px;
 }
 
-  
+
+ 

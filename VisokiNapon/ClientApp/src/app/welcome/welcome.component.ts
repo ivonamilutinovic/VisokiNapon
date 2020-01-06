@@ -43,7 +43,8 @@ export class WelcomeComponent implements OnInit {
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
     this.makeqService.getQuestions().subscribe(questions => this.questions = questions);
     //this.makeqService.postAnswer().subscribe(response => console.log("response from POST", response));
-}
+  }
+  
   practice(){
     //this.makeqService.validate_user(...).subscribe(res => console.log(res))
     var i=0
@@ -53,6 +54,7 @@ export class WelcomeComponent implements OnInit {
       this.QTextArray[i]=item["text"]
       i++
     }
+
     this.data.changeCategoryArray(this.CategoryArray)
     this.data.changeQTextArray(this.QTextArray)
     
@@ -64,5 +66,5 @@ export class WelcomeComponent implements OnInit {
     this.data.changeScreen1(false)
     this.data.changeScreen2(true)
   }
-
 }
+

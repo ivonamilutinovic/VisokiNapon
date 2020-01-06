@@ -1,26 +1,62 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-  }
+.button{
+  width: 150px;
+  background-color: #614e75;
+  border: 2px solid #dad8d7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+}
 
-  .value1{
-    width: 500px;
-    height: 50px;
-    position: fixed;
-    bottom: 128%;
-    left: 9%;
-    background-color: #ccc2d6;
-    border: 2px solid #dad8d7;
-    color: white;	
-    text-align: center;
-    vertical-align: middle;
-    line-height: 50px;
-    font-size: 18px;
-    border-radius: 4px;
-  }
+.value{
+  width: 200px;
+  height: 50px;
+  top: 8px;
+  left: 95px;
+  position: fixed;
+  background-color: #35373b;
+  border: 2px solid #dad8d7;
+  color: white;	
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.feedback{
+  width: 300px;
+  height: 100px;
+  position: fixed;
+  top: 58px;
+  left: 50px;
+  background-color: #35373b;
+  border: 2px solid #dad8d7;
+  color: white;	
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+  font-size: 18px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}
 
 
-  .btn-disable[disabled] {
-    cursor: not-allowed;
-    pointer-events: all !important;
-    opacity: 0.8;
-  }
+.button:hover {
+  background-color: #4c3d5c;
+  border: 2.25px solid #918b88;
+}
+.btn-disable[disabled] {
+  cursor: not-allowed;
+  pointer-events: all !important;
+  opacity: 0.8;
+}
+
+.container {
+  position: absolute;
+  top: 405px;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}

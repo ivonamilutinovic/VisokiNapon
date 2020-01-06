@@ -1,9 +1,9 @@
 <form >
     <div class = "form-group">
-        <label class = "value2" [hidden]="wrong">
-            {{ End==16 ? "CESTITAMO.." : "POGRESAN ODGOVOR.."}} Osvojeno: {{GuaranteedSum}}</label>
-        <label >Vrednost pitanja:{{Price}} </label>
-        <label for ="answer" >{{ QTextArray[Number] ? QTextArray[Number] : 'null' }}</label>
+        <label class = "feedback" [hidden]="wrong">
+            {{ End==16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
+        <label class = "valuOfQuestion">Vrednost pitanja: {{Price}} </label>
+        <label for ="answer" class="question">{{ QTextArray[Number] ? QTextArray[Number] : 'null' }}</label>
             <input
                 [disabled]="!wrong"
                 #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
@@ -13,7 +13,7 @@
                 type = "text"
                 placeholder="Unesite odgovor...."
              class = "form-control">
-        <label class = "value1">Osvojeno: {{Sum}} </label>
+        <label class = "wonAmount">Osvojeno: {{Sum}} </label>
         
         </div>    
 </form>

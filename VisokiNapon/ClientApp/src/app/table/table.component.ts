@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
   //QAnswerArray : Array<string>
   BooleanArray : Array<boolean>
 
-  Indikator : boolean
+  Indicator : boolean
   Counter : number
   flag : boolean = false
   Price : number
@@ -41,7 +41,7 @@ export class TableComponent implements OnInit {
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
     //this.data.NizOdgovoraM.subscribe(message => this.Odgovori = message)
     this.data.currentBooleanArray.subscribe(message => this.BooleanArray = message)
-    this.data.currentIndicator.subscribe(message => this.Indikator = message)
+    this.data.currentIndicator.subscribe(message => this.Indicator = message)
     this.data.currentCounter.subscribe(message => this.Counter = message)
     this.data.currentPrice.subscribe(message => this.Price = message)
     this.data.currentcounter.subscribe(message => this.counter = message);
@@ -56,9 +56,9 @@ export class TableComponent implements OnInit {
     console.log(i+1)
     this.BooleanArray[i]=true
     this.data.changeBooleanArray(this.BooleanArray)
-    if(this.Indikator==true){  //slucaj kada korisnik bira pitanje na koje odgovara
-      this.Indikator = false
-      this.data.changeIndicator(this.Indikator)
+    if(this.Indicator==true){  //slucaj kada korisnik bira pitanje na koje odgovara
+      this.Indicator = false
+      this.data.changeIndicator(this.Indicator)
       this.counter++
       this.data.changecounter(this.counter)
       this.Number = i
@@ -73,18 +73,18 @@ export class TableComponent implements OnInit {
       
                                     
     }
-    else if(this.Round-this.counter-1<0 && this.Counter==0){ //otvara 5 polja 
-      for(var i =0;i<this.Field;i++){
-        this.BooleanArray[i]=!this.BooleanArray[i];             //promeni omogucene/onemogucene dugmice
+    else if(this.Round - this.counter - 1 < 0 && this.Counter == 0){ //otvara 5 polja // 4 polja
+      for(var i = 0; i < this.Field; i++){
+        this.BooleanArray[i] = !this.BooleanArray[i];             //promeni omogucene/onemogucene dugmice
         this.data.changeBooleanArray(this.BooleanArray);
       }
       this.flag= true
       this.Counter=0
       this.data.changeCounter(this.Counter)
-      this.Indikator=true
-      this.data.changeIndicator(this.Indikator)
+      this.Indicator=true
+      this.data.changeIndicator(this.Indicator)
     }
-    else if(this.Counter==(this.Round-this.counter-1)){                           //otvara peto polje
+    else if(this.Counter == (this.Round-this.counter-1)){                           //otvara peto polje
       for(var i =0;i<this.Field;i++){
         this.BooleanArray[i]=!this.BooleanArray[i];             //promeni omogucene/onemogucene dugmice
         this.data.changeBooleanArray(this.BooleanArray);
@@ -92,8 +92,8 @@ export class TableComponent implements OnInit {
       this.flag= true
       this.Counter=0
       this.data.changeCounter(this.Counter)
-      this.Indikator=true
-      this.data.changeIndicator(this.Indikator)
+      this.Indicator=true
+      this.data.changeIndicator(this.Indicator)
     }
     else{
       this.Counter++
