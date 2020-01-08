@@ -1,27 +1,160 @@
-<img src="logo.png" alt="logo" class="center">
 <form class="container">
-    <div class = "form-group">
+    
+	<div class = "form-group">
+		<label class="head-title"> SIGN IN </label>
         <label for ="username">Username</label>
         <input
             required
             minlength="5"
-            maxlength="12"
+            maxlength="24"
             ngModel
             name ="username"
             id = "username"
             type = "text"
-            class = "form-control"></div>
-        <div class = "form-group">
+            pattern = "^[a-zA-Z0-9]+(?:[-_]?[a-zA-Z0-9]+)*$"
+            #username = "ngModel"
+            class = "form-control" #usernameparam >
+            <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
+                <div *ngIf="username.errors.required">Korisnicko ime je obavezno...</div>
+                <div *ngIf="username.errors.minlength">Korisnicko ime mora imati minimum 5 karaktera...</div>
+                <div *ngIf="username.errors.pattern">Korisnicko ime mora poceti slovom ili brojem, 
+                    moze sadrzati - i _ kao separatore, i ne sme se zavrsiti istim. </div>
+			</div>
+	</div>
+    
+	<div class = "form-group">
         <label for ="password">Password</label>
         <input
             ngModel
             required
-            minlength="6"
+            minlength="8"
             maxlength="18"
             name = "password"
             id = "password"
-            type = "password"
+            [type] = "s_h ? 'text' : 'password' " 
+			pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+			#password = "ngModel"			
+            class = "form-control" #passwordparam>
+			<div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                <div *ngIf="password.errors.required">Pasvord je obavezan...</div>
+                <div *ngIf="password.errors.minlength">Pasvord mora sadrzati minimum 8 karaktera...</div>
+                <div *ngIf="password.errors.pattern">Pasvord se mora sastojati od malih i velikih slova, specijalnih karaktera
+													i brojeva...</div>
+			</div>
+            <button (click)="s_h=!s_h"> {{!s_h ? "Show" : "Hide"}} password</button> 
+	</div>
+    <button type ="button" class="button" (click)="checkLoginInfo(usernameparam.value, passwordparam.value)">Prijavi se</button> 
+	<div style= "color:red;"> {{message}}</div>
+</form>
+
+
+<form class="container2">
+	
+    <div class = "form-group">	
+		<label class="head-title"> SIGN UP </label>
+        <label for ="email">Email</label>
+        <input
+            required
+            ngModel
+            name ="email"
+            id = "email"
             type = "text"
-            class = "form-control"> </div>
-        <button type ="button" class="button" (click)="checkLoginInfo()">Unesi</button>   
+			pattern = "[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"
+			#email = "ngModel"	
+            class = "form-control" #emailparam>
+			<div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                <div *ngIf="email.errors.required">Email je obavezan...</div>
+                <div *ngIf="email.errors.pattern">Uneli ste neispravan mail...</div>
+			</div>
+	</div>
+	
+	<div class = "form-group">
+        <label for ="name">Ime</label>
+        <input
+            required
+            maxlength="30"
+            ngModel
+            name ="name"
+            id = "name"
+            type = "text"
+            class = "form-control" #nameparam>
+	</div>	
+	
+	<div class = "form-group">
+        <label for ="surname">Prezime</label>
+        <input
+            required
+            maxlength="30"
+            ngModel
+            name ="surname"
+            id = "surname"
+            type = "text"
+            class = "form-control" #surnameparam>
+	</div>	
+			
+	<div class = "form-group">
+      <label for ="username">Username</label>
+        <input
+            required
+            minlength="5"
+            maxlength="24"
+            ngModel
+            name ="newusername"
+            id = "newusername"
+            type = "text"
+            pattern = "^[a-zA-Z0-9]+(?:[-_]?[a-zA-Z0-9]+)*$"
+            #newusername = "ngModel"
+            class = "form-control" #newusernameparam >
+            <div class="alert alert-danger" *ngIf="newusername.touched && !newusername.valid">
+                <div *ngIf="newusername.errors.required">Korisnicko ime je obavezno...</div>
+                <div *ngIf="newusername.errors.minlength">Korisnicko ime mora imati minimum 5 karaktera...</div>
+                <div *ngIf="newusername.errors.pattern">Korisnicko ime mora poceti slovom ili brojem, 
+                    moze sadrzati - i _ kao separatore, i ne sme se zavrsiti istim. </div>
+			</div>
+	</div>	
+			
+    <div class = "form-group">
+        <label for ="password">Password</label>
+        <input
+            ngModel
+            required
+            minlength="8"
+            maxlength="18"
+            name = "newpassword"
+            id = "newpassword"
+            [type] = "s_h1 ? 'text' : 'password' " 
+			pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+			#newpassword = "ngModel"			
+            class = "form-control" #newpasswordparam>
+			<div class="alert alert-danger" *ngIf="newpassword.touched && !newpassword.valid">
+                <div *ngIf="newpassword.errors.required">Pasvord je obavezan...</div>
+                <div *ngIf="newpassword.errors.minlength">Pasvord mora sadrzati minimum 8 karaktera...</div>
+                <div *ngIf="newpassword.errors.pattern">Pasvord se mora sastojati od malih i velikih slova, specijalnih karaktera
+													i brojeva...</div>
+			</div>
+            <button (click)="s_h1=!s_h1"> {{!s_h1 ? "Show" : "Hide"}} password</button> 
+    </div>
+    
+    <div class = "form-group">
+        <label for ="confirmpassword">Confirm Password</label>
+        <input
+            ngModel
+            required
+            #confirmpassword = "ngModel"
+            minlength="8"
+            maxlength="18"
+            name = "confirmpassword"
+            id = "confirmpassword"
+            type = "text"
+            class = "form-control" #confirmpasswordparam>
+            <div class="alert alert-danger" *ngIf="confirmpassword.dirty && newpassword.value.length==0">Niste uneli pasvord...</div>
+            <div class="alert alert-danger" *ngIf="confirmpassword.dirty 
+                && (confirmpassword.value.length > newpassword.value.length || confirmpassword.value.length < newpassword.value.length
+				|| (confirmpassword.value != newpassword.value 
+                && confirmpassword.value.length == newpassword.value.length))">Pasvordi se ne poklapaju...</div>
+	</div>
+  
+	<button type ="button" class="button" 
+	(click)="checkSignUpInfo(emailparam.value, nameparam.value, surnameparam.value, newusernameparam.value, newpasswordparam.value)">Registruj se</button>   
+	<div style= "color:red;"> {{signupmessage}}</div>
 </form>
