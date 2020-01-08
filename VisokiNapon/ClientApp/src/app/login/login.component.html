@@ -145,7 +145,7 @@
             maxlength="18"
             name = "confirmpassword"
             id = "confirmpassword"
-            type = "text"
+            [type] = "s_h1 ? 'text' : 'password' "
             class = "form-control" #confirmpasswordparam>
             <div class="alert alert-danger" *ngIf="confirmpassword.dirty && newpassword.value.length==0">Niste uneli pasvord...</div>
             <div class="alert alert-danger" *ngIf="confirmpassword.dirty 
@@ -155,6 +155,6 @@
 	</div>
   
 	<button type ="button" class="button" 
-	(click)="checkSignUpInfo(emailparam.value, nameparam.value, surnameparam.value, newusernameparam.value, newpasswordparam.value)">Registruj se</button>   
+	(click)="checkSignUpInfo(emailparam.value, nameparam.value, surnameparam.value, newusernameparam.value, newpasswordparam.value, confirmpasswordparam.value)">Registruj se</button>   
 	<div style= "color:red;"> {{signupmessage}}</div>
 </form>

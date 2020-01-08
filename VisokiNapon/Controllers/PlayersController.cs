@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using AutoMapper;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 //using Microsoft.Data.SqlClient;
 //using System.Data.SqlClient;
 
@@ -44,6 +45,7 @@ namespace VISOKI_NAPON.Controllers
         public string surname {get;set;}
 		public string username {get;set;}
         public string password {get;set;}
+		public string confirmpassword {get;set;}
     }
      
         [HttpPost("/api/v3/login")]
@@ -60,7 +62,7 @@ namespace VISOKI_NAPON.Controllers
 
          [HttpPost("/api/v3/register")]
         public async Task<IActionResult> register([FromBody]signUpObj obj){
-
+			
             string pas = await Task.FromResult(context.Players.AsEnumerable()
             .Where(que => que.Username == obj.username).Select(que=>que.Password).FirstOrDefault());
             if(pas != null)
@@ -71,6 +73,22 @@ namespace VISOKI_NAPON.Controllers
 			if(usr!=null)
 				return Json(false); // vec postoji registrovani korisnik sa datim email-om
 
+			// provera za mail adresu
+			if (!Regex.Match(obj.email, @"[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}").Success)
+				return Json(false);
+			
+			// provera za username
+			if (!Regex.Match(obj.username, @"^[a-zA-Z0-9]+(?:[-_]?[a-zA-Z0-9]+)*$").Success || obj.username.Length < 5 || obj.username.Length > 24)
+				return Json(false);
+			
+			// provera za password
+			if (!Regex.Match(obj.password, @"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}").Success || obj.password.Length < 8 || obj.password.Length > 18)
+				return Json(false);
+			
+			// provera za confirmpassword same as password
+			if (obj.confirmpassword==null || !obj.confirmpassword.Equals(obj.password, StringComparison.CurrentCultureIgnoreCase))
+				return Json(false);
+						
 			var p = new Player { EmailId = obj.email, Name = obj.name, Surname = obj.surname, Username = obj.username,
 								Password = obj.password };
 
@@ -87,16 +105,3 @@ namespace VISOKI_NAPON.Controllers
 
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
