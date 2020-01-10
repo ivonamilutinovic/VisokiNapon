@@ -27,23 +27,26 @@ namespace VISOKI_NAPON.Controllers
         
         private readonly IMapper mapper;
         private readonly VisokiNaponDbContext context;
+        
         public QuestionsController(VisokiNaponDbContext context, IMapper mapper)
         {
             this.mapper = mapper;
             this.context = context;
         }
+        
         public class obj {
-        public string tex {get;set;}
-        public string ans {get;set;}
-    }
+            public string tex {get; set;}
+            public string ans {get; set;}
+        }
+        
         [HttpGet("/api/v3/questions")]
         public async Task<IEnumerable<QuestionResource>> GetQuestions(){
-             var questions = await context.Questions
+            var questions = await context.Questions
                                        .FromSqlRaw("SELECT Id, Text,null as Answer, Category " +
                                                    "FROM(SELECT TOP 5 * " +
                                                         "FROM dbo.Questions " +
                                                         "Where Category = 1 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +                                                        
                                                         "UNION ALL " +
                                                         "SELECT TOP 5 * " +
                                                         "FROM dbo.Questions " +
@@ -53,18 +56,36 @@ namespace VISOKI_NAPON.Controllers
                                                         "SELECT TOP 1 * " +
                                                         "FROM dbo.Questions " +
                                                         "Where Category = 4 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
                                                         "UNION ALL " +
                                                         "SELECT TOP 5 * " +
                                                         "FROM dbo.Questions " +
                                                         "Where Category = 3 " +
                                                         "ORDER BY RAND(CHECKSUM(*) * RAND())) T " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) ; ").ToListAsync();           
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) ;").ToListAsync();           
 
-             return mapper.Map<List<Question>, List<QuestionResource>>(questions);
+            var replacementQuestions = await context.Questions
+                                       .FromSqlRaw("SELECT Id, Text,null as Answer, Category " +
+                                                   "FROM(SELECT TOP 2 * " +
+                                                        "FROM dbo.Questions " +
+                                                        "Where Category = 1 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +                                                        
+                                                        "UNION ALL " +
+                                                        "SELECT TOP 2 * " +
+                                                        "FROM dbo.Questions " +
+                                                        "Where Category = 2 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                        "UNION ALL " +
+                                                        "SELECT TOP 2 * " +
+                                                        "FROM dbo.Questions " +
+                                                        "Where Category = 3 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND())) T " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) ;").ToListAsync();           
+
+            return mapper.Map<List<Question>, List<QuestionResource>>(questions.Concat(replacementQuestions).ToList());
         }
-
-      /*[HttpGet("/api/crash_rep")]
+        
+        /*[HttpGet("/api/crash_rep")]
+        /*[HttpGet("/api/crash_rep")]
         public async Task<IEnumerable<any>> GetCrR(){
              var crashMid = await "goran".ToListAsync();
              return crashMid;
@@ -74,6 +95,7 @@ namespace VISOKI_NAPON.Controllers
         public string v(){
             return "initialize....";
         }*/
+        
         [HttpPost("/api/v3/answer")]
         public async Task<IActionResult> TestName([FromBody]obj obj){
             string ques = await Task.FromResult(context.Questions.AsEnumerable()
@@ -83,6 +105,7 @@ namespace VISOKI_NAPON.Controllers
             else 
                 return Json(false);
         }
+                
         //logic
         //var query = from w in context.Questions where w.Text == text select w.Answer;
         /* 

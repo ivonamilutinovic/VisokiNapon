@@ -2,17 +2,9 @@ img {
   display: block;
   margin-top:3%;
 }
-
-input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+.imgDiv{
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
-
 button{
   height: 170px;
   width: 449px;
@@ -35,7 +27,7 @@ button:hover {
 }
 .container {
     position: absolute;
-    top: 65%;
+    top: 10%;
     left: 17%;
     
 }

@@ -9,6 +9,7 @@ import { TableComponent } from './table/table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 import { AnswerComponent } from './answer/answer.component';
 import { MakeqService } from './makeq.service';
 
@@ -19,7 +20,8 @@ import { MakeqService } from './makeq.service';
     TableComponent,
     WelcomeComponent,
     LoginComponent,
-    AnswerComponent
+    AnswerComponent,
+	SignupComponent
   ],
   imports: [
     BrowserModule,

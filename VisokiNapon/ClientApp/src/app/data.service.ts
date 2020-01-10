@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable }      from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable()
@@ -31,6 +31,12 @@ export class DataService {
   changeScreen4(message: boolean) {
     this.defaultScreen4.next(message)
   }
+  
+  private defaultScreen5 = new BehaviorSubject<boolean>(false);
+  currentScreen5 = this.defaultScreen5.asObservable();
+  changeScreen5(message: boolean) {
+    this.defaultScreen5.next(message)
+  }
 
 /*private i :number;
   private j : number
@@ -42,7 +48,13 @@ export class DataService {
       this.arrayNumbersS[j] = this.arrayNumberS[this.i - 1];
       this.arrayNumbersS[this.i - 1] = k;
   }*/
-  private defaultCategoryArrayC : Array<number> = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  private defaultCategoryArrayC : Array<number> = [0, 0, 0, 0, 
+                                                   0, 0, 0, 0,
+                                                   0, 0, 0, 0,
+                                                   0, 0, 0, 0,
+                                                   0, 0, 0, 0,
+                                                   0, 0];
   private defaultCategoryArray = new BehaviorSubject<Array<number>>(this.defaultCategoryArrayC)
   currentCategoryArray = this.defaultCategoryArray.asObservable();
   changeCategoryArray(message: Array<number>){
@@ -52,24 +64,29 @@ export class DataService {
   removeFromArray(message: number) {
     this.defaultCategoryArrayC.splice(message, 1);
     this.defaultCategoryArray.next(this.defaultCategoryArrayC)
+
     this.defaultQTextArrayC.splice(message, 1);
     this.defaultQTextArray.next(this.defaultQTextArrayC)
+    
     //this.defaultQAnswerArrayC.splice(message, 1);
     //this.defaultQAnswerArray.next(this.defaultQAnswerArrayC)
+    
     this.defaultBooleanArrayC.splice(message, 1);
     this.defaultBooleanArray.next(this.defaultBooleanArrayC)
-
   }
   
   private defaultQTextArrayC =["?","?","?","?",
-                         "?","?","?","?",
-                         "?","?","?","?",
-                         "?","?","?","?"]
+                               "?","?","?","?",
+                               "?","?","?","?",
+                               "?","?","?","?",
+                               "?","?","?","?",
+                               "?","?"]
   private defaultQTextArray = new BehaviorSubject<Array<string>>(this.defaultQTextArrayC)
   currentQTextArray = this.defaultQTextArray.asObservable();
   changeQTextArray(message: Array<string>){
     this.defaultQTextArray.next(message)
   }
+  
   /*private defaultQAnswerArrayC = [...]
   private defaultQAnswerArray = new BehaviorSubject<Array<string>>(this.defaultQAnswerArrayC)
   currentQAnswerArray = this.defaultQAnswerArray.asObservable();
@@ -77,8 +94,12 @@ export class DataService {
     this.defaultQAnswerArray.next(message)
   }*/
 
-  private defaultBooleanArrayC : Array<boolean> = [ false, false, false, false, false, false, false, false,
-     false, false, false, false, false, false, false, false ];
+  private defaultBooleanArrayC : Array<boolean> = [false, false, false, false, 
+                                                   false, false, false, false,
+                                                   false, false, false, false,
+                                                   false, false, false, false,
+                                                   false, false, false, false,
+                                                   false, false];
   private defaultBooleanArray = new BehaviorSubject<Array<boolean>>(this.defaultBooleanArrayC)
   currentBooleanArray = this.defaultBooleanArray.asObservable();
   changeBooleanArray(message: Array<boolean>){
@@ -113,18 +134,18 @@ export class DataService {
     this.defaultSum.next(message)
   }
 
-  private defaultPriceC : number = 0
-  private defaultPrice = new BehaviorSubject<number>(this.defaultPriceC);
-  currentPrice = this.defaultPrice.asObservable();
-  changePrice(message: number) {
-    this.defaultPrice.next(message)
+  private defaultValueOfQuestionC : number = 0
+  private defaultValueOfQuestion = new BehaviorSubject<number>(this.defaultValueOfQuestionC);
+  currentValueOfQuestion = this.defaultValueOfQuestion.asObservable();
+  changeValueOfQuestion(message: number) {
+    this.defaultValueOfQuestion.next(message)
   }
 
-  private defaultRoundC : number = 5
-  private defaultRound = new BehaviorSubject<number>(this.defaultRoundC);
-  currentRound = this.defaultRound.asObservable();
-  changeRound(message: number) {
-    this.defaultRound.next(message)
+  private defaultNumberOfQuestionPerRoundC : number = 5
+  private defaultNumberOfQuestionPerRound = new BehaviorSubject<number>(this.defaultNumberOfQuestionPerRoundC);
+  currentNumberOfQuestionPerRound = this.defaultNumberOfQuestionPerRound.asObservable();
+  changeNumberOfQuestionPerRound(message: number) {
+    this.defaultNumberOfQuestionPerRound.next(message)
   }
 
   private defaultFieldC : number = 16
@@ -134,11 +155,11 @@ export class DataService {
     this.defaultField.next(message)
   }
 
-  private defaultcounterC : number = 0
-  private defaultcounter = new BehaviorSubject<number>(this.defaultcounterC);
-  currentcounter = this.defaultcounter.asObservable();
-  changecounter(message: number) {
-    this.defaultcounter.next(message)
+  private defaultcounterPerRoundC : number = 0
+  private defaultcounterPerRound = new BehaviorSubject<number>(this.defaultcounterPerRoundC);
+  currentcounterPerRound = this.defaultcounterPerRound.asObservable();
+  changecounterPerRound(message: number) {
+    this.defaultcounterPerRound.next(message)
   }
 
   private defaultGuaranteedSumC : number = 0
@@ -148,11 +169,11 @@ export class DataService {
     this.defaultGuaranteedSum.next(message)
   }
 
-  private defaultEndC : number = 0
-  private defaultEnd = new BehaviorSubject<number>(this.defaultEndC);
-  currentEnd = this.defaultEnd.asObservable();
-  changeEnd(message: number) {
-    this.defaultEnd.next(message)
+  private defaultEndOfGameC : number = 0
+  private defaultEndOfGame = new BehaviorSubject<number>(this.defaultEndOfGameC);
+  currentEndOfGame = this.defaultEndOfGame.asObservable();
+  changeEndOfGame(message: number) {
+    this.defaultEndOfGame.next(message)
   }
 
   private defaultCorrectC : boolean = true
@@ -162,5 +183,17 @@ export class DataService {
     this.defaultCorrect.next(message)
   }
 
+  private defaultusedReplaceQuestionHelp1C : boolean = false
+  private defaultusedReplaceQuestionHelp1 = new BehaviorSubject<boolean>(this.defaultusedReplaceQuestionHelp1C);
+  currentusedReplaceQuestionHelp1 = this.defaultusedReplaceQuestionHelp1.asObservable();
+  changeusedReplaceQuestionHelp1(message: boolean) {
+    this.defaultusedReplaceQuestionHelp1.next(message)
+  }
 
+  private defaultusedReplaceQuestionHelp2C : boolean = false
+  private defaultusedReplaceQuestionHelp2 = new BehaviorSubject<boolean>(this.defaultusedReplaceQuestionHelp2C);
+  currentusedReplaceQuestionHelp2 = this.defaultusedReplaceQuestionHelp2.asObservable();
+  changeusedReplaceQuestionHelp2(message: boolean) {
+    this.defaultusedReplaceQuestionHelp2.next(message)
+  }
 }
