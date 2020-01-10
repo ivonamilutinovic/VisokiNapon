@@ -31,6 +31,12 @@ export class DataService {
   changeScreen4(message: boolean) {
     this.defaultScreen4.next(message)
   }
+  
+  private defaultScreen5 = new BehaviorSubject<boolean>(false);
+  currentScreen5 = this.defaultScreen5.asObservable();
+  changeScreen5(message: boolean) {
+    this.defaultScreen5.next(message)
+  }
 
 /*private i :number;
   private j : number

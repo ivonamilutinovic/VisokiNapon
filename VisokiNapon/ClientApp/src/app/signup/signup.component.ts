@@ -6,18 +6,18 @@ import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   
   Screen1 : boolean
   Screen2 : boolean
   Screen3 : boolean
   Screen4 : boolean
   Screen5 : boolean
-  s_h : boolean = false
+  s_h1 : boolean = false
   message : string = ""
   signupmessage : string = ""
   response : any
@@ -41,15 +41,24 @@ export class LoginComponent implements OnInit {
   }
 
 
-  checkLoginInfo(username: string, password : string){
-  
-    var objLogin = {
-      user: username,
-      pass: password
-     }
+  changeToLogin(){
+		this.data.changeScreen5(false)
+		this.data.changeScreen2(true)
+  }
 
-    const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.http.post('/api/v3/login/', objLogin, {
+  checkSignUpInfo(uemail: string, uname: string, usurname: string, usr: string, pass : string , confpass : string){
+	  
+	var objSignup = {
+	  email : uemail,
+	  name: uname,
+	  surname: usurname,
+      username: usr,
+      password: pass,
+	  confirmpassword : confpass
+     }  
+	
+	const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.http.post('/api/v3/register/', objSignup, {
             headers: headerOptions
     }).subscribe(t=> {console.log("resenje ",t," ", typeof(t)) 
     this.response =t
@@ -66,21 +75,17 @@ export class LoginComponent implements OnInit {
 		this.data.changeCategoryArray(this.CategoryArray)
 		this.data.changeQTextArray(this.QTextArray)
 	
-		this.data.changeScreen2(false)
+		this.data.changeScreen5(false)
 		this.data.changeScreen3(true)
     }
     else {
-		this.message = "Uneli ste pogresan password ili username. Pokusajte ponovo! Zadovoljite sve uslove iz padajucih prozora!"
-		/* ispisacemo mu zasto je odbijen login, npr. nema username-a, ili password-a */
+		this.signupmessage = "Email adresa je vec registrovana ili je uneti username zauzet. " +  
+							"Pokusajte ponovo! Zadovoljite sve uslove iz padajucih prozora!"
+		/* ispisacemo mu zasto je odbijen signup, npr. zauzet username, ili vec postoji mail */
     //  this.data.changeScreen2(false)
     //  this.data.changeScreen3(true)
     }
-  }) 
-
+  }) 	
   }
 
-  changeToSignup(){
-		this.data.changeScreen2(false)
-		this.data.changeScreen5(true)
-}
 }

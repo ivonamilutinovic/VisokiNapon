@@ -19,7 +19,7 @@ export class AnswerComponent implements OnInit {
   Screen2 : boolean
   Screen3 : boolean
   Screen4 : boolean
-  
+  Screen5 : boolean
 
   Number : number
   BooleanArray : Array<boolean>
@@ -44,6 +44,7 @@ export class AnswerComponent implements OnInit {
     this.data.currentScreen2.subscribe(message => this.Screen2 = message)
     this.data.currentScreen3.subscribe(message => this.Screen3 = message)
     this.data.currentScreen4.subscribe(message => this.Screen4 = message)
+	this.data.currentScreen5.subscribe(message => this.Screen5 = message)
     this.data.currentQNumber.subscribe(message => this.Number = message)
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
