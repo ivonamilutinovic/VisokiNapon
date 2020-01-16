@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { CountdownModule } from 'ngx-countdown';
+
 
 /*const HttpUploadOptions = {
   headers: new HttpHeaders({ "Accept": "application/json" })
@@ -28,7 +30,7 @@ export class AnswerComponent implements OnInit{
   //QAnswerArray           : Array<string>        /*** ***/
   ValueOfQuestion          : number     
   Sum                      : number               /*** Sum - how much money did player earn ***/
-  wrong                    : boolean = true       /*** indicates whether the player can write in the text field for ansewer ***/ 
+  GameOver                 : boolean = true       /*** indicates whether the player can write in the text field for ansewer ***/ 
   usedReplaceQuestionHelp1 : boolean              /*** indicates whether the player used the first replace question help ***/
   usedReplaceQuestionHelp2 : boolean              /*** indicates whether the player used the second replace question help ***/ 
   NumberOfQuestionPerRound : number               /***  ***/
@@ -42,6 +44,12 @@ export class AnswerComponent implements OnInit{
   
   constructor(private data : DataService, private http: HttpClient) { }
   
+  async timer(delay: number) {
+    return new Promise(r => {
+        setTimeout(r, delay);
+    })
+  }
+
   ngOnInit() {
     this.data.currentScreen1.subscribe(message => this.Screen1 = message)
     this.data.currentScreen2.subscribe(message => this.Screen2 = message)
@@ -84,7 +92,7 @@ export class AnswerComponent implements OnInit{
     
     this.http.post('/api/v3/answer/', obj, {
             headers: headerOptions
-    }).subscribe(t => {console.log("solution ", t, " ", typeof(t)) 
+    }).subscribe(async t => {console.log("solution ", t, " ", typeof(t)) 
     
     this.response = t
     
@@ -132,9 +140,17 @@ export class AnswerComponent implements OnInit{
       this.Correct = false
       this.data.changeCorrect(this.Correct)
       
-      if(this.EndOfGame == 16)
-        this.wrong = false
-      else{
+      if(this.EndOfGame == 16){
+        this.GameOver = false
+        this.data.changeGameOver(this.GameOver)
+        
+        // After 5 seconds, player is returned to the homepage 
+        await this.timer(5000);
+        
+        window.location.reload();
+        //this.data.changeScreen4(false)
+        //this.data.changeScreen1(true)
+      }else{
         this.data.changeScreen4(false)
         this.data.changeScreen3(true)
       }
@@ -145,9 +161,17 @@ export class AnswerComponent implements OnInit{
       }
     }
     else { /* case of wrong answer */
-      this.wrong = false
+      this.GameOver = false
+      this.data.changeGameOver(this.GameOver)
       this.Sum = 0
       this.data.changeSum(this.Sum)
+      
+      // After 5 seconds, player is returned to the homepage
+      await this.timer(5000);
+      
+      window.location.reload();
+      //this.data.changeScreen4(false)
+      //this.data.changeScreen1(true)
     }})
 
   }
@@ -157,8 +181,9 @@ export class AnswerComponent implements OnInit{
   ***/
   replaceQuestion1(){
 
-    this.data.changeusedReplaceQuestionHelp1(true)
- 
+    this.usedReplaceQuestionHelp1 = true
+    this.data.changeusedReplaceQuestionHelp1(this.usedReplaceQuestionHelp2)
+
     var category = this.CategoryArray[this.Number]
     this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category - 1]
     this.data.changeQTextArray(this.QTextArray)
@@ -169,10 +194,17 @@ export class AnswerComponent implements OnInit{
   ***/
   replaceQuestion2(){
 
-    this.data.changeusedReplaceQuestionHelp2(true)
+    this.usedReplaceQuestionHelp2 = true
+    this.data.changeusedReplaceQuestionHelp2(this.usedReplaceQuestionHelp2)
     
     var category = this.CategoryArray[this.Number]
     this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category]
     this.data.changeQTextArray(this.QTextArray)
+  }
+
+  tender(){
+
+
+
   }
 }

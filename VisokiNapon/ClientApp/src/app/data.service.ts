@@ -196,4 +196,12 @@ export class DataService {
   changeusedReplaceQuestionHelp2(message: boolean) {
     this.defaultusedReplaceQuestionHelp2.next(message)
   }
+
+  private GameOverC : boolean = true
+  private defaultGameOver = new BehaviorSubject<boolean>(this.GameOverC);
+  currentGameOver = this.defaultGameOver.asObservable();
+  changeGameOver(message: boolean) {
+    this.defaultGameOver.next(message)
+  }
+
 }
