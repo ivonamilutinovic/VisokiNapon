@@ -1,18 +1,18 @@
 <form >
     <div class = "form-group">
-        <label class = "feedback" [hidden]="wrong">
+        <label class = "feedback" [hidden]="GameOver">
             {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
-        <button class="tender">T</button>
         
-        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"><img src="replaceSign.png" width="30px" height= "30px"></button>
-        
+        <button class="tender" (click)="tender()" [disabled]="false">T</button>        
+        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"><img src="replaceSign.png" width="30px" height= "30px"></button>        
         <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"><img src="replaceSign.png" width="30px" height= "30px"></button>   
+        
         
         <label class = "valueOfQuestion">Vrednost pitanja: {{ValueOfQuestion}} </label>
         
         <label for ="answer" class="question"> {{QTextArray[Number] ? QTextArray[Number] : 'null'}}</label>
         
-        <input [disabled]="!wrong"
+        <input [disabled]="!GameOver"
                #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
                ngModel
                name ="answer"

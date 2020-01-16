@@ -18,15 +18,15 @@ import { Observable } from 'rxjs';
 })
 
 export class WelcomeComponent implements OnInit {
-  Screen1 : boolean
-  Screen2 : boolean
-  Screen3 : boolean
-  Screen4 : boolean
-  Screen5 : boolean
-  CategoryArray : Array<number>
-  QTextArray : Array<string>
-  questions: any[]  //$: Observable<QuestionM[]>;
-  ques: string[]
+  Screen1                             : boolean
+  Screen2                             : boolean
+  Screen3                             : boolean
+  Screen4                             : boolean
+  Screen5                             : boolean
+  CategoryArray                       : Array<number>
+  QTextArray                          : Array<string>
+  questions                           : any[]  //$: Observable<QuestionM[]>;
+  ques                                : string[]
   //private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
   /*postData = {
     test: 'my content'
@@ -50,11 +50,11 @@ export class WelcomeComponent implements OnInit {
   
   practice(){
     //this.makeqService.validate_user(...).subscribe(res => console.log(res))
-    var i=0
+    var i = 0
     for(const item of this.questions ){
-      this.CategoryArray[i]=item["category"]
+      this.CategoryArray[i] = item["category"]
       //this.Ids[i]=item["id"]
-      this.QTextArray[i]=item["text"]
+      this.QTextArray[i] = item["text"]
       i++
     }
 

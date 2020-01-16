@@ -46,9 +46,10 @@
   background-color: #4c3d5c;
   border: 2.25px solid #918b88;
 }
-.btn-disable[disabled] {
-  cursor: not-allowed;
-  pointer-events: all !important;
+
+
+.used{ 
+  background-color: #ffb3b3;
   opacity: 0.8;
 }
 

@@ -96,6 +96,22 @@ input[type=text], select {
   border-radius: 4px;
 }
 
+.tenderDisabled{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50px;
+  left: 232px;
+  background-color: #ffb3b3;
+  border: 2px solid #ffb3b3;
+  color: white; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 28px;
+  border-radius: 4px;
+}
+
 .replaceQuestion1{
   width: 50px;
   height: 50px;
@@ -118,3 +134,10 @@ input[type=text], select {
   border-radius: 4px;
 }
  
+.replaceQuestion1:disabled{ 
+  background-color: #ffb3b3;
+}
+
+.replaceQuestion2:disabled{
+  background-color: #ffb3b3;
+}
