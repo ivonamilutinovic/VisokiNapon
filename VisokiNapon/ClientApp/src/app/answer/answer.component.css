@@ -141,3 +141,17 @@ input[type=text], select {
 .replaceQuestion2:disabled{
   background-color: #ffb3b3;
 }
+
+.timer{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50px;
+  right: 232px;
+  text-align: center;
+  color: white;
+  padding-top: 10px;
+  background-color: #ccc2d6;
+  border: 2px solid #dad8d7;
+  border-radius: 4px;
+}

@@ -42,6 +42,12 @@ export class AnswerComponent implements OnInit{
 
   response                 : any
   
+  helps					   : boolean = true       /*** ability of using helps ***/
+  timeBool                 : any				  /*** boolean for operations with time and action on time ***/
+  infoBool                 : any				  /*** boolean for operations with time and action on time ***/  
+  help1					   : boolean = false      /*** tells whether timer to use in combination with help1  ***/
+  help2					   : boolean = false      /*** tells whether timer to use in combination with help2  ***/
+  
   constructor(private data : DataService, private http: HttpClient) { }
   
   async timer(delay: number) {
@@ -55,7 +61,7 @@ export class AnswerComponent implements OnInit{
     this.data.currentScreen2.subscribe(message => this.Screen2 = message)
     this.data.currentScreen3.subscribe(message => this.Screen3 = message)
     this.data.currentScreen4.subscribe(message => this.Screen4 = message)
-	  this.data.currentScreen5.subscribe(message => this.Screen5 = message)
+	this.data.currentScreen5.subscribe(message => this.Screen5 = message)
     
     this.data.currentQNumber.subscribe(message => this.Number = message)
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
@@ -73,6 +79,22 @@ export class AnswerComponent implements OnInit{
 
     this.data.currentusedReplaceQuestionHelp1.subscribe(message => this.usedReplaceQuestionHelp1 = message);
     this.data.currentusedReplaceQuestionHelp2.subscribe(message => this.usedReplaceQuestionHelp2 = message);
+	
+	this.timeBool = setTimeout(function() {
+	  this.GameOver = false
+      this.data.changeGameOver(this.GameOver)
+      this.Sum = 0
+      this.data.changeSum(this.Sum)
+	  this.helps = false;
+
+	  // After 5 seconds, player is returned to the homepage
+	  this.infoBool = setTimeout(function() { 
+		window.location.reload();
+	  }.bind(this), 5000);
+	  
+	  console.log(this.edited);
+	}.bind(this), 25000);
+	
   }
 
   /*** 
@@ -133,7 +155,10 @@ export class AnswerComponent implements OnInit{
           this.NumberOfQuestionPerRound = 1
       }
 
-      this.Sum = this.Sum + this.ValueOfQuestion
+	  clearTimeout(this.infoBool)
+	  clearTimeout(this.timeBool)
+      
+	  this.Sum = this.Sum + this.ValueOfQuestion
       this.data.changeSum(this.Sum)
       this.EndOfGame++
       this.data.changeEndOfGame(this.EndOfGame)
@@ -142,8 +167,14 @@ export class AnswerComponent implements OnInit{
       
       if(this.EndOfGame == 16){
         this.GameOver = false
+		this.GuaranteedSum = this.Sum
         this.data.changeGameOver(this.GameOver)
-        
+        this.helps = false
+		this.help1 = false
+		this.help2 = false
+		clearTimeout(this.infoBool)
+		clearTimeout(this.timeBool)
+		
         // After 5 seconds, player is returned to the homepage 
         await this.timer(5000);
         
@@ -163,9 +194,14 @@ export class AnswerComponent implements OnInit{
     else { /* case of wrong answer */
       this.GameOver = false
       this.data.changeGameOver(this.GameOver)
-      this.Sum = 0
+      this.Sum = this.GuaranteedSum
       this.data.changeSum(this.Sum)
-      
+      this.helps = false
+	  this.help1 = false
+	  this.help2 = false
+	  clearTimeout(this.infoBool)
+	  clearTimeout(this.timeBool)
+	  
       // After 5 seconds, player is returned to the homepage
       await this.timer(5000);
       
@@ -182,11 +218,31 @@ export class AnswerComponent implements OnInit{
   replaceQuestion1(){
 
     this.usedReplaceQuestionHelp1 = true
-    this.data.changeusedReplaceQuestionHelp1(this.usedReplaceQuestionHelp2)
-
+    this.data.changeusedReplaceQuestionHelp1(this.usedReplaceQuestionHelp1)
+	
+	this.help1 = true
+	
     var category = this.CategoryArray[this.Number]
     this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category - 1]
     this.data.changeQTextArray(this.QTextArray)
+	
+	clearTimeout(this.infoBool)
+	clearTimeout(this.timeBool)
+	
+	this.timeBool = setTimeout(function() {
+	  this.GameOver = false
+      this.data.changeGameOver(this.GameOver)
+      this.Sum = 0
+      this.data.changeSum(this.Sum)
+	  this.helps = false;
+      
+	  // After 5 seconds, player is returned to the homepage
+	  this.infoBool = setTimeout(function() { 
+		window.location.reload();
+	  }.bind(this), 5000);
+	  
+	  console.log(this.edited);
+	}.bind(this), 25000);
   }
 
   /*** 
@@ -196,10 +252,30 @@ export class AnswerComponent implements OnInit{
 
     this.usedReplaceQuestionHelp2 = true
     this.data.changeusedReplaceQuestionHelp2(this.usedReplaceQuestionHelp2)
+	
+	this.help2 = true
     
     var category = this.CategoryArray[this.Number]
     this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category]
     this.data.changeQTextArray(this.QTextArray)
+	
+	clearTimeout(this.infoBool)
+	clearTimeout(this.timeBool)
+	
+	this.timeBool = setTimeout(function() {
+	  this.GameOver = false
+      this.data.changeGameOver(this.GameOver)
+      this.Sum = 0
+      this.data.changeSum(this.Sum)
+	  this.helps = false;
+      
+	  // After 5 seconds, player is returned to the homepage
+	  this.infoBool = setTimeout(function() { 
+		window.location.reload();
+	  }.bind(this), 5000);
+	  
+	  console.log(this.edited);
+	}.bind(this), 25000);
   }
 
   tender(){

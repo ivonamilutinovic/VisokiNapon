@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AnswerComponent } from './answer/answer.component';
 import { MakeqService } from './makeq.service';
+import { CountdownModule } from 'ngx-countdown';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MakeqService } from './makeq.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+	CountdownModule
   ],
   providers: [DataService, MakeqService],
   bootstrap: [AppComponent]

@@ -3,13 +3,17 @@
         <label class = "feedback" [hidden]="GameOver">
             {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
         
-        <button class="tender" (click)="tender()" [disabled]="false">T</button>        
-        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"><img src="replaceSign.png" width="30px" height= "30px"></button>        
-        <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"><img src="replaceSign.png" width="30px" height= "30px"></button>   
+        <button class="tender" (click)="tender()" [disabled]="false"  *ngIf = "helps">T</button>        
+        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"  *ngIf = "helps"><img src="replaceSign.png" width="30px" height= "30px"></button>        
+        <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="replaceSign.png" width="30px" height= "30px"></button>   
         
         
         <label class = "valueOfQuestion">Vrednost pitanja: {{ValueOfQuestion}} </label>
-        
+		
+		<label class = "timer" *ngIf = "!helps1 && !helps2 && helps" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+		<label class = "timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+		<label class = "timer" *ngIf = "help2" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+		
         <label for ="answer" class="question"> {{QTextArray[Number] ? QTextArray[Number] : 'null'}}</label>
         
         <input [disabled]="!GameOver"
