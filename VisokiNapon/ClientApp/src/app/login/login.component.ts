@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
       this.data.changeScreen3(true)
     }
     else {
-      this.message = "Uneli ste pogresan password ili username. Pokusajte ponovo! Zadovoljite sve uslove iz padajucih prozora!"
+      this.message = "Uneli ste pogresan password ili username. Pokusajte ponovo!"
       /* ispisacemo mu zasto je odbijen login, npr. nema username-a, ili password-a */
       //  this.data.changeScreen2(false)
       //  this.data.changeScreen3(true)

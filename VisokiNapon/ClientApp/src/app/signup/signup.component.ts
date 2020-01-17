@@ -80,7 +80,7 @@ export class SignupComponent implements OnInit {
     }
     else {
 		this.signupmessage = "Email adresa je vec registrovana ili je uneti username zauzet. " +  
-							"Pokusajte ponovo! Zadovoljite sve uslove iz padajucih prozora!"
+							"Pokusajte ponovo!"
 		/* ispisacemo mu zasto je odbijen signup, npr. zauzet username, ili vec postoji mail */
     //  this.data.changeScreen2(false)
     //  this.data.changeScreen3(true)

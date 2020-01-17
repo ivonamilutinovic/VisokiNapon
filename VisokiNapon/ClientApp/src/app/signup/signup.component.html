@@ -103,7 +103,11 @@
                 && confirmpassword.value.length == newpassword.value.length))">Pasvordi se ne poklapaju...</div>
 	</div>
 	<div class = "form-group">
-	<button type ="button" class="button" 
+	<button type ="button" class="button" [disabled]="!newpassword.valid || !newusername.valid || !email.valid || 
+	(confirmpassword.dirty && newpassword.value.length==0) || (confirmpassword.dirty 
+                && (confirmpassword.value.length > newpassword.value.length || confirmpassword.value.length < newpassword.value.length
+				|| (confirmpassword.value != newpassword.value 
+                && confirmpassword.value.length == newpassword.value.length)))" 
 	(click)="checkSignUpInfo(emailparam.value, nameparam.value, surnameparam.value, newusernameparam.value, newpasswordparam.value, confirmpasswordparam.value)">Registruj se</button>   
 	<div style= "color:red;"> {{signupmessage}}</div>
 	</div>

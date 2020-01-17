@@ -44,7 +44,8 @@
             <button (click)="s_h=!s_h"> {{!s_h ? "Show" : "Hide"}} password</button> 
 	</div>
 	<div class = "form-group">
-    <button type ="button" class="button" (click)="checkLoginInfo(usernameparam.value, passwordparam.value)">Prijavi se</button> 
+    <button type ="button" class="button" [disabled]="!password.valid || !username.valid"  
+	(click)="checkLoginInfo(usernameparam.value, passwordparam.value)">Prijavi se</button> 
 	<div style= "color:red;"> {{message}}</div>
 	</div>
 	<div class = "form-group">
