@@ -13,8 +13,9 @@ Sesija se završava kada svi igrači završe igru. Pobednik sesije je igrač koj
 
 ## Pokretanje:
 
-1. Pozicionirati se u folder *ClientApp* iz komandne linije i izvršiti komandu
+1. Pozicionirati se u folder *ClientApp* iz komandne linije i izvršiti komande
 <pre>npm install</pre>
+<pre>npm install ngx-countdown</pre>
 
 2. Pozicionirati se u glavni folder (na nivou gde je *.csproj* fajl) i izvršiti komandu
 <pre>dotnet restore</pre>
