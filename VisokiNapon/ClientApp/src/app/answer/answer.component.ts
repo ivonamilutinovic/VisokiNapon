@@ -24,7 +24,7 @@ export class AnswerComponent implements OnInit{
   Screen5                  : boolean
 
   Number                   : number               /*** Number - ****/
-  BooleanArray             : Array<boolean>       /*** BooleanArray - array which elements indicates whether the question is opend or not ****/
+  IsDisabledArray             : Array<boolean>       /*** IsDisabledArray - array which elements indicates whether the question is opend or not ****/
   CategoryArray            : Array<number>        /*** CategoryArray - array with categories which questions belong ****/
   QTextArray               : Array<string>        /*** QTextArray - array with text of questions ***/
   //QAnswerArray           : Array<string>        /*** ***/
@@ -68,7 +68,7 @@ export class AnswerComponent implements OnInit{
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
     //this.data.QAnswerArray.subscribe(message => this.QAnswerArray = message)
     this.data.currentSum.subscribe(message => this.Sum = message)
-    this.data.currentBooleanArray.subscribe(message => this.BooleanArray = message)
+    this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
     this.data.currentValueOfQuestion.subscribe(message => this.ValueOfQuestion = message);
     this.data.currentcounterPerRound.subscribe(message => this.counterPerRound = message);
     this.data.currentField.subscribe(message => this.Field = message);
@@ -131,8 +131,8 @@ export class AnswerComponent implements OnInit{
       for(var i = 0; i < this.Field; i++){
         console.log("Field tralala:" + this.Field +  " "  + i)
         console.log("i:" + i)
-        this.BooleanArray[i] = false;             
-      }this.data.changeBooleanArray(this.BooleanArray);
+        this.IsDisabledArray[i] = false;             
+      }this.data.changeIsDisabledArray(this.IsDisabledArray);
       
       /* 
        All questions on witch player has answerd are deleting from CategoryArray.  
@@ -279,7 +279,7 @@ export class AnswerComponent implements OnInit{
   }
 
   tender(){
-
+    
 
 
   }

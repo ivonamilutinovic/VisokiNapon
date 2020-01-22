@@ -27,7 +27,6 @@ button:hover {
 }
 .container {
     position: absolute;
-    top: 10%;
-    left: 17%;
-    
+    top: 30px;
+    left: 225px;    
 }

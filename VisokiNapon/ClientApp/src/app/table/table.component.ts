@@ -20,8 +20,8 @@ export class TableComponent implements OnInit {
   CategoryArray                    : Array<number>
   QTextArray                       : Array<string>
   //QAnswerArray                   : Array<string>
-  BooleanArray                     : Array<boolean>
-
+  IsDisabledArray                  : Array<boolean>
+  
   Indicator                        : boolean
   Counter                          : number
   flag                             : boolean = false
@@ -31,6 +31,7 @@ export class TableComponent implements OnInit {
   counterPerRound                  : number
   case                             : number = 0
   Correct                          : boolean
+
 
   constructor(private data : DataService) { }
   
@@ -44,7 +45,7 @@ export class TableComponent implements OnInit {
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
     //this.data.NizOdgovoraM.subscribe(message => this.Odgovori = message)
-    this.data.currentBooleanArray.subscribe(message => this.BooleanArray = message)
+    this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
     this.data.currentIndicator.subscribe(message => this.Indicator = message)
     this.data.currentCounter.subscribe(message => this.Counter = message)
     this.data.currentValueOfQuestion.subscribe(message => this.ValueOfQuestion = message)
@@ -56,8 +57,9 @@ export class TableComponent implements OnInit {
   
   processClick(i: number){
     
-    this.BooleanArray[i] = true                       // player clicked on button
-    this.data.changeBooleanArray(this.BooleanArray) 
+    this.IsDisabledArray[i] = true                       // player clicked on button
+    this.data.changeIsDisabledArray(this.IsDisabledArray) 
+
     if(this.Indicator == true){                       // case when user choose to answer on question
       this.Indicator = false
       this.data.changeIndicator(this.Indicator)
@@ -71,7 +73,7 @@ export class TableComponent implements OnInit {
       this.ValueOfQuestion = this.CategoryArray[this.Number] * 10000
       this.data.changeValueOfQuestion(this.ValueOfQuestion)
       
-      this.CategoryArray[i] = -1                   // we set CategoryArray[i] when user choosed to answer on ith question 
+      this.CategoryArray[i] = -1                     // we set CategoryArray[i] when user choosed to answer on ith question 
       this.data.changeCategoryArray(this.CategoryArray)
       
       this.flag = false                           
@@ -83,8 +85,8 @@ export class TableComponent implements OnInit {
     /* the player enters in new round */
     else if(this.NumberOfQuestionPerRound - this.counterPerRound - 1 < 0 && this.Counter == 0){
       for(var i = 0; i < this.Field; i++)
-        this.BooleanArray[i] = !this.BooleanArray[i];
-      this.data.changeBooleanArray(this.BooleanArray);
+        this.IsDisabledArray[i] = !this.IsDisabledArray[i];
+      this.data.changeIsDisabledArray(this.IsDisabledArray);
 
       this.flag = true
       this.Counter = 0
@@ -97,8 +99,8 @@ export class TableComponent implements OnInit {
     /* case when user opens the last question in that round */
     else if(this.Counter == (this.NumberOfQuestionPerRound - this.counterPerRound - 1)){            
       for(var i = 0; i < this.Field; i++)
-        this.BooleanArray[i] = !this.BooleanArray[i];
-      this.data.changeBooleanArray(this.BooleanArray);
+        this.IsDisabledArray[i] = !this.IsDisabledArray[i];
+      this.data.changeIsDisabledArray(this.IsDisabledArray);
 
       this.flag = true
       this.Counter = 0

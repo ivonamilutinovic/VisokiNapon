@@ -13,8 +13,8 @@
 .value{
   width: 200px;
   height: 50px;
-  top: 8px;
-  left: 95px;
+  top: 40px;
+  left: 135px;
   position: fixed;
   background-color: #35373b;
   border: 2px solid #dad8d7;
@@ -30,8 +30,8 @@
   width: 300px;
   height: 100px;
   position: fixed;
-  top: 58px;
-  left: 50px;
+  top: 90px;
+  left: 90px; 
   background-color: #35373b;
   color: white;	
   text-align: center;
@@ -52,14 +52,17 @@
 
 .used{ 
   background-color: #ffb3b3;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-.container {
+
+.clicked{ 
+  background-color: #33293d;
+}
+
+
+.container{
   position: absolute;
-  top: 405px;
-  left: 50%;
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
+  top: 30px;
+  left: 100px;
 }

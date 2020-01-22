@@ -71,8 +71,8 @@ export class DataService {
     //this.defaultQAnswerArrayC.splice(message, 1);
     //this.defaultQAnswerArray.next(this.defaultQAnswerArrayC)
     
-    this.defaultBooleanArrayC.splice(message, 1);
-    this.defaultBooleanArray.next(this.defaultBooleanArrayC)
+    this.defaultIsDisabledArrayC.splice(message, 1);
+    this.defaultIsDisabledArray.next(this.defaultIsDisabledArrayC)
   }
   
   private defaultQTextArrayC =["?","?","?","?",
@@ -94,16 +94,16 @@ export class DataService {
     this.defaultQAnswerArray.next(message)
   }*/
 
-  private defaultBooleanArrayC : Array<boolean> = [false, false, false, false, 
-                                                   false, false, false, false,
-                                                   false, false, false, false,
-                                                   false, false, false, false,
-                                                   false, false, false, false,
-                                                   false, false];
-  private defaultBooleanArray = new BehaviorSubject<Array<boolean>>(this.defaultBooleanArrayC)
-  currentBooleanArray = this.defaultBooleanArray.asObservable();
-  changeBooleanArray(message: Array<boolean>){
-    this.defaultBooleanArray.next(message)
+  private defaultIsDisabledArrayC : Array<boolean> = [false, false, false, false, 
+                                                      false, false, false, false,
+                                                      false, false, false, false,
+                                                      false, false, false, false,
+                                                      false, false, false, false,
+                                                      false, false];
+  private defaultIsDisabledArray = new BehaviorSubject<Array<boolean>>(this.defaultIsDisabledArrayC)
+  currentIsDisabledArray = this.defaultIsDisabledArray.asObservable();
+  changeIsDisabledArray(message: Array<boolean>){
+    this.defaultIsDisabledArray.next(message)
   }
 
   private defaultCounterC : number = 0;
