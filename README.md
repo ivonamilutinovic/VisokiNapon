@@ -7,15 +7,16 @@ Kviz se sastoji od 16 pitanja koja donose različite novčane vrednosti (pet pit
 Ukoliko se igrač odluči za ovo polje, ima opciju da udvostruči osvojeni iznos ili da ga izgubi u potpunosti. 
 Odgovaranje na pitanja sastoji se od četiri runde ili faze. Pritom, igrač ima na raspolaganju tri vrste pomoći - dve zamene pitanja i tender. 
 
-U jednoj sesiji igre uključena su najmanje četiri igrača, dok je broj sesija neograničen. 
-Dok jedan igrač iz sesije igra, drugi posmatraju i uključuju se u slučaju tendera. 
-Sesija se završava kada svi igrači završe igru. Pobednik sesije je igrač koji je osvojio najveći iznos.
+Postoje dve vrste igrača, oni koji igraju Visoki napon, i oni koji odgovaraju na tenderska pitanja koja postavljaju (prosleđuju) igrači koji igraju Visoki napon.
+Cilj igrača koji igraju Visoki napon jeste da osvoje što veću sumu. Pored što veće osvojene sume, cilj onih koji odgovaraju na tenderska pitanja je da imaju što više prihvaćenih ponuda sa tačnim odgovorom. 
+
 
 ## Pokretanje:
 
 1. Pozicionirati se u folder *ClientApp* iz komandne linije i izvršiti komande
 <pre>npm install</pre>
 <pre>npm install ngx-countdown</pre>
+<pre>npm install @angular/youtube-player</pre>
 
 2. Pozicionirati se u glavni folder (na nivou gde je *.csproj* fajl) i izvršiti komandu
 <pre>dotnet restore</pre>
