@@ -1,4 +1,4 @@
-<form >
+<form *ngIf = "show">
     <div class = "form-group">
         <label class = "feedback" [hidden]="GameOver">
             {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
@@ -8,13 +8,13 @@
         <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="replaceSign.png" width="30px" height= "30px"></button>   
         
         
-        <label class = "valueOfQuestion">Vrednost pitanja: {{ValueOfQuestion}} </label>
+        <label class = "valueOfQuestion">Vrednost pitanja: {{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
 		
-		<label class = "timer" *ngIf = "!helps1 && !helps2 && helps" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+		<label class = "timer" *ngIf = "(!helps1 && !helps2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		<label class = "timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		<label class = "timer" *ngIf = "help2" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		
-        <label for ="answer" class="question"> {{QTextArray[Number] ? QTextArray[Number] : 'null'}}</label>
+        <label for ="answer" class="question"> {{ youtube ? trimedQuestion : (QTextArray[Number] ? QTextArray[Number] : 'null')}}</label>
         
         <input [disabled]="!GameOver"
                #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
@@ -29,5 +29,17 @@
         
         </div>    
 </form>
+
+<div *ngIf = "!show" class = "container">
+<p class = "inform"> POGLEDAJTE KLIP! USKORO DOBIJATE PITANJE NA TEMU IZ VIDEA! </p>
+<youtube-player
+  [videoId] = video_id
+  suggestedQuality="highres"
+  [height]="480"
+  [width]="848"
+  [startSeconds]="0"
+  [endSeconds]="60">
+</youtube-player>
+</div>
 
  

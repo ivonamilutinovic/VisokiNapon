@@ -13,6 +13,7 @@ import { SignupComponent } from './signup/signup.component';
 import { AnswerComponent } from './answer/answer.component';
 import { MakeqService } from './makeq.service';
 import { CountdownModule } from 'ngx-countdown';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CountdownModule } from 'ngx-countdown';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	CountdownModule
+	CountdownModule,
+	YouTubePlayerModule
   ],
   providers: [DataService, MakeqService],
   bootstrap: [AppComponent]

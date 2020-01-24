@@ -155,3 +155,22 @@ input[type=text], select {
   border: 2px solid #dad8d7;
   border-radius: 4px;
 }
+
+.container {
+    position: absolute;
+	top: 50%;
+    left: 50%;
+	width: 848px;
+    margin-right: -50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.inform {
+	color : white;
+	font-size: 150%;
+	font-weight: bold; 
+	width: 848px;
+	text-align: center;
+}

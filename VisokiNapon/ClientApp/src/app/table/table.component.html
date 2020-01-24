@@ -10,14 +10,14 @@
                          [class.used]='CategoryArray[i] < 0' (click)="processClick(i);">
                              {{ CategoryArray[i] < 0 ? 
                     (i+1) : (((IsDisabledArray[i] == true && flag == false ) || (IsDisabledArray[i] == false && flag == true)) ? 
-                                10000 * CategoryArray[i] : i + 1)}}</button> 
+                               (CategoryArray[i]==4 ? 'Visoki napon' : 10000 * CategoryArray[i]) : i + 1)}}</button> 
                 </td>
                 <td>
                     <button class = "button"  type = "button" [disabled]= '(IsDisabledArray[i + 1] || CategoryArray[i+1] < 0)' [class.clicked]='(IsDisabledArray[i+1] == true && flag == false ) || (IsDisabledArray[i+1] == false && flag == true)'
                          [class.used]='CategoryArray[i + 1] < 0'  (click)="processClick(i+1);">
                              {{ CategoryArray[i+1] < 0 ? 
                     (i+2) : (((IsDisabledArray[i+1] == true && flag == false ) || (IsDisabledArray[i+1] == false && flag == true)) ? 
-                                10000 * CategoryArray[i+1] : i + 2)}}</button> 
+                                (CategoryArray[i+1]==4 ? 'Visoki napon' : 10000 * CategoryArray[i+1]) : i + 2)}}</button> 
                 </td>
             </tr>
             <tr *ngIf = "CategoryArray.length % 2 == 1 && i < CategoryArray.length - 6">    
@@ -26,7 +26,7 @@
                             [class.clicked]='(IsDisabledArray[i] == true && flag == false ) || (IsDisabledArray[i] == false && flag == true)' [class.used]='CategoryArray[i] < 0' (click)="processClick(i);">
                              {{ CategoryArray[i] < 0 ? 
                     (i+1) : (((IsDisabledArray[i] == true && flag == false ) || (IsDisabledArray[i] == false && flag == true)) ? 
-                                10000 * CategoryArray[i] : i + 1)}}</button> 
+                                (CategoryArray[i]==4 ? 'Visoki napon' : 10000 * CategoryArray[i]) : i + 1)}}</button> 
                 </td>
             </tr>
         </table>    

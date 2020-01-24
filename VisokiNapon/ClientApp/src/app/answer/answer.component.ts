@@ -47,6 +47,11 @@ export class AnswerComponent implements OnInit{
   infoBool                 : any				  /*** boolean for operations with time and action on time ***/  
   help1					   : boolean = false      /*** tells whether timer to use in combination with help1  ***/
   help2					   : boolean = false      /*** tells whether timer to use in combination with help2  ***/
+  video_id 				   : string				  /*** youtube video id ***/
+  trimedQuestion 		   : string				  /*** Text of question when Visoki Napon field is choosen ***/
+  public show			   : boolean = true;	  /*** tells whether to show youtube clip in html or not ***/
+  youtube				   : boolean = false      /*** tells whether Visoki napon field was choosen  ***/
+  
   
   constructor(private data : DataService, private http: HttpClient) { }
   
@@ -80,20 +85,53 @@ export class AnswerComponent implements OnInit{
     this.data.currentusedReplaceQuestionHelp1.subscribe(message => this.usedReplaceQuestionHelp1 = message);
     this.data.currentusedReplaceQuestionHelp2.subscribe(message => this.usedReplaceQuestionHelp2 = message);
 	
-	this.timeBool = setTimeout(function() {
-	  this.GameOver = false
-      this.data.changeGameOver(this.GameOver)
-      this.Sum = 0
-      this.data.changeSum(this.Sum)
-	  this.helps = false;
+	if(this.QTextArray[this.Number].indexOf( "#!!#" )>= 0){
+		const tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		document.body.appendChild(tag);
+		
+		this.video_id = this.QTextArray[this.Number].substring(0,this.QTextArray[this.Number].indexOf( "#!!#" ))
+		this.trimedQuestion = this.QTextArray[this.Number].substring(this.QTextArray[this.Number].indexOf( "#!!#" ) + 4)
+		this.show = false;
+		this.youtube = true;
+		
+		
+		setTimeout(function() {
+		this.show = true;
+		this.helps = false;		
+		this.timeBool = setTimeout(function() {
+			this.GameOver = false
+			this.data.changeGameOver(this.GameOver)
+			this.Sum = 0
+			this.data.changeSum(this.Sum)
 
-	  // After 5 seconds, player is returned to the homepage
-	  this.infoBool = setTimeout(function() { 
-		window.location.reload();
-	  }.bind(this), 5000);
+			// After 5 seconds, player is returned to the homepage
+			this.infoBool = setTimeout(function() { 
+				window.location.reload();
+			}.bind(this), 5000);
 	  
-	  console.log(this.edited);
-	}.bind(this), 25000);
+			console.log(this.edited);
+			}.bind(this), 25000);
+		
+		}.bind(this), 40000);
+	}
+	else {
+		this.timeBool = setTimeout(function() {
+			this.GameOver = false
+			this.data.changeGameOver(this.GameOver)
+			this.Sum = 0
+			this.data.changeSum(this.Sum)
+			this.helps = false;
+
+			// After 5 seconds, player is returned to the homepage
+			this.infoBool = setTimeout(function() { 
+				window.location.reload();
+			}.bind(this), 5000);
+	  
+			console.log(this.edited);
+		}.bind(this), 25000);
+	
+    }
 	
   }
 
@@ -158,7 +196,10 @@ export class AnswerComponent implements OnInit{
 	  clearTimeout(this.infoBool)
 	  clearTimeout(this.timeBool)
       
-	  this.Sum = this.Sum + this.ValueOfQuestion
+	  if(this.QTextArray[this.Number].indexOf( "#!!#" )>= 0)
+		this.Sum = this.Sum*2
+	  else	
+		this.Sum = this.Sum + this.ValueOfQuestion
       this.data.changeSum(this.Sum)
       this.EndOfGame++
       this.data.changeEndOfGame(this.EndOfGame)
