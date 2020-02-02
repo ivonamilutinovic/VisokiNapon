@@ -4,12 +4,13 @@ import { MakeqService } from '../makeq.service';
 import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
-/*const httpOpt = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Accept': 'application/json, text/plain'
-  })
-};*/
+
+// const httpOpt = {
+//   headers: new HttpHeaders({
+//     'Content-Type': 'application/json',
+//     'Accept': 'application/json, text/plain'
+//   })
+// };
 
 @Component({
   selector: 'app-welcome',
@@ -18,42 +19,51 @@ import { Observable } from 'rxjs';
 })
 
 export class WelcomeComponent implements OnInit {
-  Screen1                             : boolean
-  Screen2                             : boolean
-  Screen3                             : boolean
-  Screen4                             : boolean
-  Screen5                             : boolean
+  WelcomeScreen                       : boolean
+  LogInScreen                         : boolean
+  QuestionsScreen                     : boolean
+  AnsweringScreen                     : boolean
+  SignUpScreen                        : boolean
+  TopListScreen                       : boolean
+  ChooseModeScreen                    : boolean
+  TenderScreen                        : boolean
   CategoryArray                       : Array<number>
   QTextArray                          : Array<string>
   questions                           : any[]  //$: Observable<QuestionM[]>;
   ques                                : string[]
-  //private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  /*postData = {
-    test: 'my content'
-  }*/
+  
+  // private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+  // postData = {
+  //   test: 'my content'
+  // }
   
   constructor(private data : DataService, private makeqService : MakeqService) {
     //this.http.post('/api/v1/answer', JSON.stringify('log'), httpOpt).toPromise().then(data=>{console.log(data);
    // })
    }
   ngOnInit() {
-    this.data.currentScreen1.subscribe(message => this.Screen1 = message)
-    this.data.currentScreen2.subscribe(message => this.Screen2 = message)
-    this.data.currentScreen3.subscribe(message => this.Screen3 = message)
-    this.data.currentScreen4.subscribe(message => this.Screen4 = message)
-	  this.data.currentScreen5.subscribe(message => this.Screen5 = message)
+    this.data.currentWelcomeScreen.subscribe(message => this.WelcomeScreen = message)
+    this.data.currentLogInScreen.subscribe(message => this.LogInScreen = message)
+    this.data.currentQuestionsScreen.subscribe(message => this.QuestionsScreen = message)
+    this.data.currentAnsweringScreen.subscribe(message => this.AnsweringScreen = message)
+	  this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message) 
+  	this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
+    this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
+	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
-    this.makeqService.getQuestions().subscribe(questions => this.questions = questions);
-    //this.makeqService.postAnswer().subscribe(response => console.log("response from POST", response));
+	  this.makeqService.getQuestions().subscribe(questions => this.questions = questions);
+    // this.makeqService.postAnswer().subscribe(response => console.log("response from POST", response));
   }
   
   practice(){
-    //this.makeqService.validate_user(...).subscribe(res => console.log(res))
+    // this.makeqService.validate_user(...).subscribe(res => console.log(res))
+    this.data.changePracticeMode(true)
+
     var i = 0
-    for(const item of this.questions ){
+    for(const item of this.questions){
       this.CategoryArray[i] = item["category"]
-      //this.Ids[i]=item["id"]
+      // this.Ids[i] = item["id"]
       this.QTextArray[i] = item["text"]
       i++
     }
@@ -61,13 +71,14 @@ export class WelcomeComponent implements OnInit {
     this.data.changeCategoryArray(this.CategoryArray)
     this.data.changeQTextArray(this.QTextArray)
     
-    this.data.changeScreen1(false)
-    this.data.changeScreen3(true)
+    this.data.showWelcomeScreen(false)
+    this.data.showQuestionsScreen(true)
   }
 
-  compete(){
-    this.data.changeScreen1(false)
-    this.data.changeScreen2(true)
+  logIn(){
+    this.data.changePracticeMode(false)
+    this.data.showWelcomeScreen(false)
+    this.data.showLogInScreen(true)
   }
 }
 

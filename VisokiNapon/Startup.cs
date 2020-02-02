@@ -32,8 +32,7 @@ namespace VISOKI_NAPON
        
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<VisokiNaponDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddDbContext<VisokiNaponPlayersDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Players")));
-
+            
             services.AddControllersWithViews();
             
             services.AddSpaStaticFiles(configuration =>

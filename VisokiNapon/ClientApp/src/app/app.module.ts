@@ -11,10 +11,12 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AnswerComponent } from './answer/answer.component';
+import { ToplistComponent } from './toplist/toplist.component';
+import { ChooseModeComponent } from './choosemode/choosemode.component';
+import { TenderComponent } from './tender/tender.component';
 import { MakeqService } from './makeq.service';
 import { CountdownModule } from 'ngx-countdown';
 import {YouTubePlayerModule} from '@angular/youtube-player';
-
 
 @NgModule({
   declarations: [
@@ -23,7 +25,10 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     WelcomeComponent,
     LoginComponent,
     AnswerComponent,
-	SignupComponent
+    SignupComponent,
+    ToplistComponent,
+    ChooseModeComponent,
+    TenderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +36,8 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	CountdownModule,
-	YouTubePlayerModule
+	  CountdownModule,
+	  YouTubePlayerModule
   ],
   providers: [DataService, MakeqService],
   bootstrap: [AppComponent]

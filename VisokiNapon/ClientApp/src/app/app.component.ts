@@ -7,22 +7,29 @@ import { DataService } from './data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'Visoki Napon';
-  Screen1 : boolean
-  Screen2 : boolean
-  Screen3 : boolean
-  Screen4 : boolean
-  Screen5 : boolean
-  
-  constructor(private data : DataService) { }
+  WelcomeScreen       : boolean
+  LogInScreen         : boolean
+  QuestionsScreen     : boolean
+  AnsweringScreen     : boolean
+  SignUpScreen        : boolean
+  TopListScreen       : boolean
+  ChooseModeScreen    : boolean
+  TenderScreen        : boolean
+
+  constructor(private data: DataService) { }
   
   ngOnInit() {
-    this.data.currentScreen1.subscribe(message => this.Screen1 = message)
-    this.data.currentScreen2.subscribe(message => this.Screen2 = message)
-    this.data.currentScreen3.subscribe(message => this.Screen3 = message)
-    this.data.currentScreen4.subscribe(message => this.Screen4 = message)
-	this.data.currentScreen5.subscribe(message => this.Screen5 = message)
+    this.data.currentWelcomeScreen.subscribe(message => this.WelcomeScreen = message)
+    this.data.currentLogInScreen.subscribe(message => this.LogInScreen = message)
+    this.data.currentQuestionsScreen.subscribe(message => this.QuestionsScreen = message)
+    this.data.currentAnsweringScreen.subscribe(message => this.AnsweringScreen = message)
+    this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message)
+    this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message)
+    this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message)
+	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
   }
   
 }

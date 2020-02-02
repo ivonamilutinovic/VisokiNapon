@@ -1,8 +1,9 @@
-<form class="container">
+<div class="container">
+<form>
     
 	<div class = "form-group">
-		<label class="head-title"> SIGN IN </label>
-        <label for ="username">Username</label>
+		<label class="head-title"> Prijavi se </label>
+        <label for ="username">Korisničko ime</label>
         <input
             required
             minlength="5"
@@ -15,15 +16,15 @@
             #username = "ngModel"
             class = "form-control" #usernameparam >
             <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
-                <div *ngIf="username.errors.required">Korisnicko ime je obavezno...</div>
-                <div *ngIf="username.errors.minlength">Korisnicko ime mora imati minimum 5 karaktera...</div>
-                <div *ngIf="username.errors.pattern">Korisnicko ime mora poceti slovom ili brojem, 
-                    moze sadrzati - i _ kao separatore, i ne sme se zavrsiti istim. </div>
+                <div *ngIf="username.errors.required">Korisničko ime je obavezno...</div>
+                <div *ngIf="username.errors.minlength">Korisničko ime mora imati minimum 5 karaktera...</div>
+                <div *ngIf="username.errors.pattern">Korisničko ime mora poceti slovom ili brojem, 
+                    može sadržati - i _ kao separatore, i ne sme se završiti istim. </div>
 			</div>
 	</div>
     
 	<div class = "form-group">
-        <label for ="password">Password</label>
+        <label for ="password">Lozinka</label>
         <input
             ngModel
             required
@@ -31,25 +32,31 @@
             maxlength="18"
             name = "password"
             id = "password"
-            [type] = "s_h ? 'text' : 'password' " 
+            [type] = "showHide ? 'text' : 'password' " 
 			pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 			#password = "ngModel"			
             class = "form-control" #passwordparam>
 			<div class="alert alert-danger" *ngIf="password.touched && !password.valid">
-                <div *ngIf="password.errors.required">Pasvord je obavezan...</div>
-                <div *ngIf="password.errors.minlength">Pasvord mora sadrzati minimum 8 karaktera...</div>
-                <div *ngIf="password.errors.pattern">Pasvord se mora sastojati od malih i velikih slova, specijalnih karaktera
+                <div *ngIf="password.errors.required">Lozinka je obavezana...</div>
+                <div *ngIf="password.errors.minlength">Lozinka mora sadrzati minimum 8 karaktera...</div>
+                <div *ngIf="password.errors.pattern">Lozinka se mora sastojati od malih i velikih slova, specijalnih karaktera
 													i brojeva...</div>
 			</div>
-            <button (click)="s_h=!s_h"> {{!s_h ? "Show" : "Hide"}} password</button> 
-	</div>
+    </div>
+</form>    
+
+<button style="margin-bottom:15px" (click)="showHide=!showHide"> {{!showHide ? "Prikaži" : "Sakrij"}} lozinku</button>
+
+<form>
 	<div class = "form-group">
-    <button type ="button" class="button" [disabled]="!password.valid || !username.valid"  
-	(click)="checkLoginInfo(usernameparam.value, passwordparam.value)">Prijavi se</button> 
-	<div style= "color:red;"> {{message}}</div>
-	</div>
-	<div class = "form-group">
-	<button type ="button" class="button" (click)="changeToSignup()">Registruj se</button> 
+        <button type ="button" class="button" [disabled]="!password.valid || !username.valid"  
+        (click)="checkLoginInfo(usernameparam.value, passwordparam.value)">Prijavi se</button> 
+        <div style= "color:red;"> {{message}}</div>
+    </div>
+    
+    <div class = "form-group">
+	    <button type ="button" class="button" (click)="changeToSignup()">Registruj se</button> 
 	</div>
 </form>
-    
+
+</div>

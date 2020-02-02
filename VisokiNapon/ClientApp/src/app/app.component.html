@@ -1,11 +1,18 @@
-<div *ngIf="Screen1 && !Screen2 && !Screen3 && !Screen4 && !Screen5; then firstPage"></div>
-<div *ngIf="!Screen1 && Screen2 && !Screen3 && !Screen4 && !Screen5; then secondPage"></div>
-<div *ngIf="!Screen1 && !Screen2 && Screen3 && !Screen4 && !Screen5; then thirdPage"></div>
-<div *ngIf="!Screen1 && !Screen2 && !Screen3 && Screen4 && !Screen5; then fourthPage"></div>
-<div *ngIf="!Screen1 && !Screen2 && !Screen3 && !Screen4 && Screen5; then fifthPage"></div>
-<ng-template #firstPage><app-welcome></app-welcome></ng-template>
-<ng-template #secondPage><app-login></app-login></ng-template>
-<ng-template #thirdPage><app-table></app-table></ng-template>
-<ng-template #fourthPage><app-answer></app-answer></ng-template>
-<ng-template #fifthPage><app-signup></app-signup></ng-template>
+<div *ngIf="WelcomeScreen && !LogInScreen && !QuestionsScreen && !AnsweringScreen && !SignUpScreen && !TopListScreen && !ChooseModeScreen && !TenderScreen; then welcomePage"></div>
+<div *ngIf="!WelcomeScreen && LogInScreen && !QuestionsScreen && !AnsweringScreen && !SignUpScreen && !TopListScreen && !ChooseModeScreen && !TenderScreen; then loginPage"></div>
+<div *ngIf="!WelcomeScreen && !LogInScreen && QuestionsScreen && !AnsweringScreen && !SignUpScreen && !TopListScreen && !ChooseModeScreen && !TenderScreen; then tablePage"></div>
+<div *ngIf="!WelcomeScreen && !LogInScreen && !QuestionsScreen && AnsweringScreen && !SignUpScreen && !TopListScreen && !ChooseModeScreen && !TenderScreen; then answerPage"></div>
+<div *ngIf="!WelcomeScreen && !LogInScreen && !QuestionsScreen && !AnsweringScreen && SignUpScreen && !TopListScreen && !ChooseModeScreen && !TenderScreen; then signupPage"></div>
+<div *ngIf="!WelcomeScreen && !LogInScreen && !QuestionsScreen && !AnsweringScreen && !SignUpScreen && TopListScreen && !ChooseModeScreen && !TenderScreen; then toplistPage"></div>
+<div *ngIf="!WelcomeScreen && !LogInScreen && !QuestionsScreen && !AnsweringScreen && !SignUpScreen && !TopListScreen && ChooseModeScreen && !TenderScreen; then choosemodePage"></div>
+<div *ngIf="!WelcomeScreen && !LogInScreen && !QuestionsScreen && !AnsweringScreen && !SignUpScreen && !TopListScreen && !ChooseModeScreen && TenderScreen; then tenderPage"></div>
 
+
+<ng-template #welcomePage><app-welcome></app-welcome></ng-template>
+<ng-template #loginPage><app-login></app-login></ng-template>
+<ng-template #tablePage><app-table></app-table></ng-template>
+<ng-template #answerPage><app-answer></app-answer></ng-template>
+<ng-template #signupPage><app-signup></app-signup></ng-template>
+<ng-template #toplistPage><app-toplist></app-toplist></ng-template>
+<ng-template #choosemodePage><app-choosemode></app-choosemode></ng-template>
+<ng-template #tenderPage><app-tender></app-tender></ng-template>

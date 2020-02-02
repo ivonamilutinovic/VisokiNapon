@@ -15,8 +15,6 @@ Cilj igrača koji igraju Visoki napon jeste da osvoje što veću sumu. Pored št
 
 1. Pozicionirati se u folder *ClientApp* iz komandne linije i izvršiti komande
 <pre>npm install</pre>
-<pre>npm install ngx-countdown</pre>
-<pre>npm install @angular/youtube-player</pre>
 
 2. Pozicionirati se u glavni folder (na nivou gde je *.csproj* fajl) i izvršiti komandu
 <pre>dotnet restore</pre>

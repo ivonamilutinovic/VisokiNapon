@@ -1,11 +1,12 @@
-<form class="container2">
+<div class="container2">
+<form >
     <div class = "form-group">	
-		<label class="head-title"> SIGN UP </label>
+		<label class="head-title"> Registruj se </label>
         <label for ="email">Email</label>
         <input
             required
             ngModel
-            name ="email"
+			name ="email"
             id = "email"
             type = "text"
 			pattern = "[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"
@@ -23,7 +24,7 @@
             required
             maxlength="30"
             ngModel
-            name ="name"
+			name ="name"
             id = "name"
             type = "text"
             class = "form-control" #nameparam>
@@ -35,72 +36,76 @@
             required
             maxlength="30"
             ngModel
-            name ="surname"
+			name ="surname"
             id = "surname"
             type = "text"
             class = "form-control" #surnameparam>
 	</div>	
 			
 	<div class = "form-group">
-      <label for ="username">Username</label>
+      <label for ="username">Korisničko ime</label>
         <input
             required
             minlength="5"
             maxlength="24"
             ngModel
-            name ="newusername"
+			name ="newusername"
             id = "newusername"
             type = "text"
             pattern = "^[a-zA-Z0-9]+(?:[-_]?[a-zA-Z0-9]+)*$"
             #newusername = "ngModel"
             class = "form-control" #newusernameparam >
             <div class="alert alert-danger" *ngIf="newusername.touched && !newusername.valid">
-                <div *ngIf="newusername.errors.required">Korisnicko ime je obavezno...</div>
-                <div *ngIf="newusername.errors.minlength">Korisnicko ime mora imati minimum 5 karaktera...</div>
-                <div *ngIf="newusername.errors.pattern">Korisnicko ime mora poceti slovom ili brojem, 
-                    moze sadrzati - i _ kao separatore, i ne sme se zavrsiti istim. </div>
+                <div *ngIf="newusername.errors.required">Korisničko ime je obavezno...</div>
+                <div *ngIf="newusername.errors.minlength">Korisničko ime mora imati minimum 5 karaktera...</div>
+                <div *ngIf="newusername.errors.pattern">Korisničko ime mora početi slovom ili brojem, 
+                    može sadržati - i _ kao separatore, i ne sme se završiti istim. </div>
 			</div>
 	</div>	
 			
     <div class = "form-group">
-        <label for ="password">Password</label>
+        <label for ="password">Lozinka</label>
         <input
             ngModel
             required
             minlength="8"
             maxlength="18"
-            name = "newpassword"
+			name = "newpassword"
             id = "newpassword"
-            [type] = "s_h1 ? 'text' : 'password' " 
+            [type] = "showHide ? 'text' : 'password' " 
 			pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 			#newpassword = "ngModel"			
             class = "form-control" #newpasswordparam>
 			<div class="alert alert-danger" *ngIf="newpassword.touched && !newpassword.valid">
-                <div *ngIf="newpassword.errors.required">Pasvord je obavezan...</div>
-                <div *ngIf="newpassword.errors.minlength">Pasvord mora sadrzati minimum 8 karaktera...</div>
-                <div *ngIf="newpassword.errors.pattern">Pasvord se mora sastojati od malih i velikih slova, specijalnih karaktera
+                <div *ngIf="newpassword.errors.required">Lozinka je obavezna...</div>
+                <div *ngIf="newpassword.errors.minlength">Lozinka mora sadrzati minimum 8 karaktera...</div>
+                <div *ngIf="newpassword.errors.pattern">Lozinka se mora sastojati od malih i velikih slova, specijalnih karaktera
 													i brojeva...</div>
 			</div>
-            <button (click)="s_h1=!s_h1"> {{!s_h1 ? "Show" : "Hide"}} password</button> 
+             
     </div>
-    
+</form>
     <div class = "form-group">
-        <label for ="confirmpassword">Confirm Password</label>
+		<button  style="margin-bottom:15px" (click)="showHide=!showHide"> {{!showHide ? "Prikaži" : "Sakrij"}} lozinku</button>
+	 </div>
+<form>	 
+    <div class = "form-group">
+        <label for ="confirmpassword">Potvrdi lozinku</label>
         <input
             ngModel
             required
             #confirmpassword = "ngModel"
             minlength="8"
             maxlength="18"
-            name = "confirmpassword"
+			name = "confirmpassword"
             id = "confirmpassword"
             [type] = "s_h1 ? 'text' : 'password' "
             class = "form-control" #confirmpasswordparam>
-            <div class="alert alert-danger" *ngIf="confirmpassword.dirty && newpassword.value.length==0">Niste uneli pasvord...</div>
+            <div class="alert alert-danger" *ngIf="confirmpassword.dirty && newpassword.value.length==0">Niste uneli lozinku...</div>
             <div class="alert alert-danger" *ngIf="confirmpassword.dirty 
                 && (confirmpassword.value.length > newpassword.value.length || confirmpassword.value.length < newpassword.value.length
 				|| (confirmpassword.value != newpassword.value 
-                && confirmpassword.value.length == newpassword.value.length))">Pasvordi se ne poklapaju...</div>
+                && confirmpassword.value.length == newpassword.value.length))">Lozinke se ne poklapaju...</div>
 	</div>
 	<div class = "form-group">
 	<button type ="button" class="button" [disabled]="!newpassword.valid || !newusername.valid || !email.valid || 
@@ -113,6 +118,7 @@
 	</div>
 	<div class = "form-group">
 	<button type ="button" class="button" 
-	(click)="changeToLogin()">Cancel</button>
+	(click)="changeToLogin()">Otkaži</button>
 	</div>
 </form>
+</div>

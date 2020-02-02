@@ -1,0 +1,23 @@
+<div class="container">
+    <button class="button" type = "button" (click)="backToPriviousScreen()">
+        <img src="backArrow.png" width="105px" height= "30px">
+    </button>
+    <table *ngFor = "let round of BestCompetitorsArray; let i = index" align="center">
+        <tr>
+            <td>
+                <label class="label_order_number" *ngIf="BestCompetitorsArray[i].maxAmount > 0">
+                    {{i + 1}}.
+                </label>                    
+            </td>    
+            <td>
+                <label class="label_name" *ngIf="BestCompetitorsArray[i].maxAmount > 0">    
+                    {{BestCompetitorsArray[i].username}}
+                </label>
+            </td>
+            <td>
+                <label class="label_amount" *ngIf="BestCompetitorsArray[i].maxAmount > 0">
+                    {{BestCompetitorsArray[i].maxAmount}}
+                </label>                    
+            </td>
+    </table>
+</div>

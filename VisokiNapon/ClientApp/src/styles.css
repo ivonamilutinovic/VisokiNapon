@@ -15,11 +15,6 @@ code {
   border-color: #1861ac;
 }
 
-
-body{
-font-family: Arial, Helvetica, sans-serif;
-}
-
 html { 
   background: url("src/assets/images/questionsMatrixBackground.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;

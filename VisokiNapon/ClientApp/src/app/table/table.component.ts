@@ -10,41 +10,45 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class TableComponent implements OnInit {
   
-  Screen1                          : boolean
-  Screen2                          : boolean
-  Screen3                          : boolean
-  Screen4                          : boolean
-  Screen5                          : boolean
+  WelcomeScreen                       : boolean
+  LogInScreen                         : boolean
+  QuestionsScreen                     : boolean
+  AnsweringScreen                     : boolean
+  SignUpScreen                        : boolean
+  TopListScreen                       : boolean
+  ChooseModeScreen                    : boolean
+  TenderScreen                        : boolean
   
-  Number                           : number
-  CategoryArray                    : Array<number>
-  QTextArray                       : Array<string>
-  //QAnswerArray                   : Array<string>
-  IsDisabledArray                  : Array<boolean>
+  Number                              : number
+  CategoryArray                       : Array<number>
+  QTextArray                          : Array<string>
+  // QAnswerArray                     : Array<string>
+  IsDisabledArray                     : Array<boolean>
   
-  Indicator                        : boolean
-  Counter                          : number
-  flag                             : boolean = false
-  ValueOfQuestion                  : number
-  NumberOfQuestionPerRound         : number
-  Field                            : number
-  counterPerRound                  : number
-  case                             : number = 0
-  Correct                          : boolean
+  Indicator                           : boolean
+  Counter                             : number
+  flag                                : boolean = false
+  ValueOfQuestion                     : number
+  NumberOfQuestionPerRound            : number
+  Field                               : number
+  counterPerRound                     : number
+  Correct                             : boolean
 
-
-  constructor(private data : DataService) { }
+  constructor(private data : DataService) {}
   
   ngOnInit() {
-    this.data.currentScreen1.subscribe(message => this.Screen1 = message)
-    this.data.currentScreen2.subscribe(message => this.Screen2 = message)
-    this.data.currentScreen3.subscribe(message => this.Screen3 = message)
-    this.data.currentScreen4.subscribe(message => this.Screen4 = message)
-	  this.data.currentScreen5.subscribe(message => this.Screen5 = message)
+    this.data.currentWelcomeScreen.subscribe(message => this.WelcomeScreen = message)
+    this.data.currentLogInScreen.subscribe(message => this.LogInScreen = message)
+    this.data.currentQuestionsScreen.subscribe(message => this.QuestionsScreen = message)
+    this.data.currentAnsweringScreen.subscribe(message => this.AnsweringScreen = message)
+    this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message) 
+    this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
+    this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
+    this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
     this.data.currentQNumber.subscribe(message => this.Number = message)
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
-    //this.data.NizOdgovoraM.subscribe(message => this.Odgovori = message)
+    // this.data.NizOdgovoraM.subscribe(message => this.Odgovori = message)
     this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
     this.data.currentIndicator.subscribe(message => this.Indicator = message)
     this.data.currentCounter.subscribe(message => this.Counter = message)
@@ -57,7 +61,7 @@ export class TableComponent implements OnInit {
   
   processClick(i: number){
     
-    this.IsDisabledArray[i] = true                       // player clicked on button
+    this.IsDisabledArray[i] = true                    // player clicked on button
     this.data.changeIsDisabledArray(this.IsDisabledArray) 
 
     if(this.Indicator == true){                       // case when user choose to answer on question
@@ -78,8 +82,8 @@ export class TableComponent implements OnInit {
       
       this.flag = false                           
       
-      this.data.changeScreen3(false)
-      this.data.changeScreen4(true)  
+      this.data.showQuestionsScreen(false)
+      this.data.showAnsweringScreen(true)  
     }
 
     /* the player enters in new round */
