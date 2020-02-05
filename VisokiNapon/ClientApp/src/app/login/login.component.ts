@@ -21,16 +21,11 @@ export class LoginComponent implements OnInit {
   TopListScreen                       : boolean
   ChooseModeScreen                    : boolean
   TenderScreen                        : boolean
-  showHide                            : boolean = false
-  message                             : string = ""
-  signupmessage                       : string = ""
-  response                            : any
-  CategoryArray                       : Array<number>
-  QTextArray                          : Array<string>
-  questions                           : any[]  //$: Observable<QuestionM[]>;
-  ques                                : string[]
-  User                                : string
-
+  message                  : string = ""
+  signupmessage            : string = ""
+  response                 : any
+  User					   : string
+  
   constructor(private data : DataService, 
               private http : HttpClient,  
               private makeqService : MakeqService) { }
@@ -40,22 +35,18 @@ export class LoginComponent implements OnInit {
     this.data.currentLogInScreen.subscribe(message => this.LogInScreen = message)
     this.data.currentQuestionsScreen.subscribe(message => this.QuestionsScreen = message)
     this.data.currentAnsweringScreen.subscribe(message => this.AnsweringScreen = message)
-	  this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message) 
-		this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
+	this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message) 
+	this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
-	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-    this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
-    this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
-    this.data.currentUser.subscribe(message => this.User = message)
-    this.makeqService.getQuestions().subscribe(questions => this.questions = questions);
+	this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
+	this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
+	this.data.currentUser.subscribe(message => this.User = message)
+	
   }
 
 
   checkLoginInfo(username : string, password : string){
   
-    this.User = username
-    this.data.changeUser(this.User)
-
     var objLogin = {
       user : username,
       pass : password
@@ -70,29 +61,21 @@ export class LoginComponent implements OnInit {
     this.response = t
 
     if(this.response == true){
-      var i = 0
+
+      this.User = username
+	  this.data.changeUser(this.User)    
       
-   		for(const item of this.questions ){
-        this.CategoryArray[i] = item["category"]
-        //this.Ids[i]=item["id"]
-        this.QTextArray[i] = item["text"]
-        i++
-      }
-      
-      this.data.changeCategoryArray(this.CategoryArray)
-      this.data.changeQTextArray(this.QTextArray)
-    
-      this.data.showLogInScreen(false)
+	  this.data.showLogInScreen(false)
+      // ovde menjamo scenu na choose mode
       this.data.showChooseModeScreen(true)
     }
     else {
-      this.message = "Uneli ste pogrešnu lozinku ili korisničko ime. Pokušajte ponovo!"
+      this.message = "Uneli ste pogresan password ili username. Pokusajte ponovo!"
     }
   }) 
 
   }
 
-  
   changeToSignup(){
 		this.data.showLogInScreen(false)
 		this.data.showSignUpScreen(true)

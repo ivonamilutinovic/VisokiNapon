@@ -17,39 +17,33 @@
             class = "form-control" #usernameparam >
             <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
                 <div *ngIf="username.errors.required">Korisničko ime je obavezno...</div>
-                <div *ngIf="username.errors.minlength">Korisničko ime mora imati minimum 5 karaktera...</div>
-                <div *ngIf="username.errors.pattern">Korisničko ime mora poceti slovom ili brojem, 
-                    može sadržati - i _ kao separatore, i ne sme se završiti istim. </div>
+				<div *ngIf="username.errors.minlength || username.errors.pattern">Neispravno korisničko ime...</div>
 			</div>
 	</div>
     
 	<div class = "form-group">
-        <label for ="password">Lozinka</label>
-        <input
+		<label for ="password">Lozinka</label>
+		<show-hide-password  btnStyle="primary" [btnOutline]="false">
+		<input
             ngModel
             required
             minlength="8"
             maxlength="18"
             name = "password"
             id = "password"
-            [type] = "showHide ? 'text' : 'password' " 
+            type = "password" 
 			pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 			#password = "ngModel"			
             class = "form-control" #passwordparam>
-			<div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+			
+		</show-hide-password>
+		<div class="alert alert-danger" *ngIf="password.touched && !password.valid">
                 <div *ngIf="password.errors.required">Lozinka je obavezana...</div>
-                <div *ngIf="password.errors.minlength">Lozinka mora sadrzati minimum 8 karaktera...</div>
-                <div *ngIf="password.errors.pattern">Lozinka se mora sastojati od malih i velikih slova, specijalnih karaktera
-													i brojeva...</div>
-			</div>
+				<div *ngIf="password.errors.minlength || password.errors.pattern">Neispravna lozinka...</div>
+		</div>
     </div>
-</form>    
-
-<button style="margin-bottom:15px" (click)="showHide=!showHide"> {{!showHide ? "Prikaži" : "Sakrij"}} lozinku</button>
-
-<form>
 	<div class = "form-group">
-        <button type ="button" class="button" [disabled]="!password.valid || !username.valid"  
+        <button type ="submit" class="button" [disabled]="!password.valid || !username.valid"  
         (click)="checkLoginInfo(usernameparam.value, passwordparam.value)">Prijavi se</button> 
         <div style= "color:red;"> {{message}}</div>
     </div>

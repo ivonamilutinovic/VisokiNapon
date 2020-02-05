@@ -17,6 +17,7 @@ import { TenderComponent } from './tender/tender.component';
 import { MakeqService } from './makeq.service';
 import { CountdownModule } from 'ngx-countdown';
 import {YouTubePlayerModule} from '@angular/youtube-player';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 @NgModule({
   declarations: [
@@ -36,8 +37,9 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-	  CountdownModule,
-	  YouTubePlayerModule
+	CountdownModule,
+	YouTubePlayerModule,
+	ShowHidePasswordModule,
   ],
   providers: [DataService, MakeqService],
   bootstrap: [AppComponent]

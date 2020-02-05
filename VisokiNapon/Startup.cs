@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using VISOKI_NAPON.Persistence;
+using VISOKI_NAPON.Handlers;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,8 @@ namespace VISOKI_NAPON
             services.AddDbContext<VisokiNaponDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             
             services.AddControllersWithViews();
+			
+			services.AddScoped<IPlayerHandler, PlayerHandler>();
             
             services.AddSpaStaticFiles(configuration =>
             {

@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,12 +8,16 @@ namespace VISOKI_NAPON.Players
 {   
     [Table("Players")]
     public class Player
-    {   [KeyAttribute]
-        public string EmailId { get; set; }
+    {   
+        public string Email { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Username { get; set; }
-        public string Password {get; set; }
+		[KeyAttribute]
+        public string UsernameId { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
+		public string Verified {get; set;}
+		public DateTime DateAndTime {get; set; }
  
         public Player() {}
     }
