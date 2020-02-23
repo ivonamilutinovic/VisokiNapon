@@ -16,6 +16,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Logging;
+using VISOKI_NAPON.Hubs;
+
 namespace VISOKI_NAPON
 {
     public class Startup
@@ -25,12 +27,10 @@ namespace VISOKI_NAPON
             Configuration = configuration;
         }
 
-       
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
-       
+        {       
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<VisokiNaponDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             
@@ -42,9 +42,10 @@ namespace VISOKI_NAPON
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSignalR();
         }
 
-        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSpaStaticFiles();
@@ -74,10 +75,12 @@ namespace VISOKI_NAPON
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
+
             app.UseSpa(spa =>
             {
-
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())

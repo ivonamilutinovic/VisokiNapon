@@ -224,6 +224,13 @@ export class DataService {
     this.defaultusedReplaceQuestionHelp2.next(message)
   }
 
+  private defaultusedTenderHelpC : boolean = false
+  private defaultusedTenderHelp = new BehaviorSubject<boolean>(this.defaultusedTenderHelpC);
+  currentusedTenderHelp = this.defaultusedTenderHelp.asObservable();
+  changeusedTenderHelp(message: boolean) {
+    this.defaultusedTenderHelp.next(message)
+  }
+
   private GameOverC : boolean = true
   private defaultGameOver = new BehaviorSubject<boolean>(this.GameOverC);
   currentGameOver = this.defaultGameOver.asObservable();
@@ -244,5 +251,6 @@ export class DataService {
   changePracticeMode(message: boolean) {
     this.defaultPracticeMode.next(message)
   }
+
 }
 

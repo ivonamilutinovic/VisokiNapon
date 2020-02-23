@@ -4,6 +4,7 @@ import { DataService } from '../data.service';
 import { CountdownModule } from 'ngx-countdown';
 import {Observable} from 'rxjs';
 import { MakeqService } from '../makeq.service';
+import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from '@aspnet/signalr';
 
 // const HttpUploadOptions = {
 //   headers: new HttpHeaders({ "Accept": "application/json" })
@@ -60,6 +61,11 @@ export class AnswerComponent implements OnInit {
   TopList                              : any[]
   CurrentUser                          : string
 
+  hubConnection                        : HubConnection
+  TenderHelp                           : boolean = false
+  usedTenderHelp                       : boolean = false 
+
+
   constructor(private data: DataService, private http: HttpClient, private makeqService : MakeqService) { }
 
   async timer(delay: number) {
@@ -99,6 +105,18 @@ export class AnswerComponent implements OnInit {
     this.data.currentPracticeMode.subscribe(message => this.PracticeMode = message);
     this.data.currentUser.subscribe(message => this.CurrentUser = message);
 
+    this.TenderHelp = false
+    this.data.currentusedTenderHelp.subscribe(message => this.usedTenderHelp = message);
+
+    this.hubConnection = new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl("/chatHub", {
+      skipNegotiation: true,
+      transport: HttpTransportType.WebSockets
+    }).build();
+
+    this.hubConnection
+    .start()
+    .then(() => console.log("Connection Started!"))
+    .catch(err => console.log("Error while establishing a connection :( "));
 
     if (this.QTextArray[this.Number].indexOf("#!!#") >= 0) {
       const tag = document.createElement('script');
@@ -115,15 +133,15 @@ export class AnswerComponent implements OnInit {
         this.show = true;
         this.helps = false;
         this.timeBool = setTimeout(function () {
-          this.GameOver = false
-          this.data.changeGameOver(this.GameOver)
-          this.Sum = 0
-          this.data.changeSum(this.Sum)
+        this.GameOver = false
+        this.data.changeGameOver(this.GameOver)
+        this.Sum = 0
+        this.data.changeSum(this.Sum)
 
-          // After 5 seconds, player is returned to the homepage
-          this.infoBool = setTimeout(function () {
-            this.data.showAnsweringScreen(false)
-            this.data.showWelcomeScreen(true)
+        // After 5 seconds, player is returned to the homepage
+        this.infoBool = setTimeout(function () {
+          this.data.showAnsweringScreen(false)
+          this.data.showWelcomeScreen(true)
           }.bind(this), 5000);
         }.bind(this), 25000);
       }.bind(this), 40000);
@@ -207,11 +225,11 @@ export class AnswerComponent implements OnInit {
           this.Sum = this.Sum * 2
         else
           this.Sum = this.Sum + this.ValueOfQuestion
-        this.data.changeSum(this.Sum)
-        this.EndOfGame++
-        this.data.changeEndOfGame(this.EndOfGame)
-        this.Correct = false
-        this.data.changeCorrect(this.Correct)
+          this.data.changeSum(this.Sum)
+          this.EndOfGame++
+          this.data.changeEndOfGame(this.EndOfGame)
+          this.Correct = false
+          this.data.changeCorrect(this.Correct)
 
         /* Case when the competitor wins */
         if (this.EndOfGame == 16) {
@@ -365,7 +383,30 @@ export class AnswerComponent implements OnInit {
   }
 
   tender() {
-    
-  }
 
+    clearTimeout(this.infoBool)
+    clearTimeout(this.timeBool)
+
+    this.TenderHelp = true;
+    var questionMessage = (document.getElementById("questionId") as HTMLInputElement).innerText;
+    var questionValueMessage = (document.getElementById("questionValueId") as HTMLInputElement).innerText;
+    console.log("answer.ts: logovano: " + questionMessage + questionValueMessage)
+    this.hubConnection.invoke("SendMessageVN2Tender", this.CurrentUser, questionMessage, questionValueMessage).catch(function (err) {
+      return console.error(err.toString());
+    });
+
+    
+    var vnUser = this.CurrentUser
+    this.hubConnection.on("ReceiveMessageTender2VN", function (tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmount) {
+      var answerMsg = answerMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      
+      if(vnPlayerUsername === vnUser){
+        document.getElementById("tenderHelpUsernameArrivedId").innerHTML = tenderPlayerUsername;
+        document.getElementById("tenderHelpRequestedSumArrivedId").innerHTML = requestedAmount;
+      }
+    });
+
+    this.usedTenderHelp = true;
+    this.data.changeusedTenderHelp(this.usedTenderHelp);
+  }
 }

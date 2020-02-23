@@ -1,20 +1,20 @@
-<div *ngIf = "show">
+<div *ngIf = "show && !TenderHelp">
     <div class = "form-group">
         <label class = "feedback" [hidden]="GameOver">
             {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
         
-        <button class="tender" [disabled]="PracticeMode" (click)="tender()" *ngIf = "helps">T</button>        
-        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"  *ngIf = "helps"><img src="replaceSign.png" width="30px" height= "30px"></button>        
-        <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="replaceSign.png" width="30px" height= "30px"></button>   
+        <button class="tender" [disabled]="PracticeMode || usedTenderHelp" (click)="tender()" *ngIf = "helps">T</button>        
+        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>        
+        <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>   
         
         
-        <label class = "valueOfQuestion">Vrednost pitanja: {{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
+        <label class = "valueOfQuestion" id="questionValueId">Vrednost pitanja: {{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
 		
 		<label class = "timer" *ngIf = "(!helps1 && !helps2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		<label class = "timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		<label class = "timer" *ngIf = "help2" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		
-        <label for ="answer" class="question"> {{ youtube ? trimedQuestion : (QTextArray[Number] ? QTextArray[Number] : 'null')}}</label>
+        <label for ="answer" class="question" id="questionId"> {{ youtube ? trimedQuestion : (QTextArray[Number] ? QTextArray[Number] : 'null')}}</label>
         
         <input [disabled]="!GameOver"
                #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
@@ -30,16 +30,23 @@
     </div>    
 </div>
 
-<div *ngIf = "!show" class = "container">
-<p class = "inform"> POGLEDAJTE KLIP! USKORO DOBIJATE PITANJE NA TEMU IZ VIDEA! </p>
-<youtube-player
-  [videoId] = video_id
-  suggestedQuality="highres"
-  [height]="480"
-  [width]="848"
-  [startSeconds]="0"
-  [endSeconds]="60">
-</youtube-player>
+<div *ngIf = "!show && !TenderHelp" class = "container">
+    <p class = "inform"> POGLEDAJTE VIDEO KLIP! USKORO ĆE TE DOBITI PITANJE NA TEMU IZ VIDEA! </p>
+    <youtube-player
+        [videoId] = video_id
+        suggestedQuality="highres"
+        [height]="480"
+        [width]="848"
+        [startSeconds]="0"
+        [endSeconds]="60">
+    </youtube-player>
 </div>
+
+<div *ngIf="TenderHelp" class="container" id="tenderHelpDiv" style=background-color:#5d3c5d>
+    <b>Korisničko ime tender igrača:</b> &nbsp; <label id="tenderHelpUsernameArrivedId"></label><br>
+    <b>Ponuđen iznos:</b> &nbsp; <label id="tenderHelpRequestedSumArrivedId"></label><br>
+    <button id="sendButtonId2" (click)="acceptOffer()">Prihvatite ponudu</button>
+</div>
+
 
  

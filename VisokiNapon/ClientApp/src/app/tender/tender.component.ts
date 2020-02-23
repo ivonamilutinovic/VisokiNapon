@@ -4,6 +4,8 @@ import { MakeqService } from '../makeq.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
+import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from '@aspnet/signalr';
+
 
 // const httpOpt = {
 //   headers: new HttpHeaders({
@@ -21,6 +23,8 @@ import { Observable } from 'rxjs';
 
 export class TenderComponent implements OnInit {
    
+  hubConnection: HubConnection;
+
   WelcomeScreen                       : boolean
   LogInScreen                         : boolean
   QuestionsScreen                     : boolean
@@ -29,7 +33,9 @@ export class TenderComponent implements OnInit {
   TopListScreen                       : boolean
   ChooseModeScreen                    : boolean
   TenderScreen                        : boolean
-  
+  CurrentUser                         : string
+  EarnedAmount                        : number = 0
+
   constructor(private data: DataService, private http: HttpClient,  private makeqService : MakeqService) {}
   
   ngOnInit() {
@@ -41,6 +47,39 @@ export class TenderComponent implements OnInit {
     this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
     this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message) 
+    
+    this.data.currentUser.subscribe(message => this.CurrentUser = message);
+
+    this.hubConnection = new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl("/chatHub", {
+      skipNegotiation: true,
+      transport: HttpTransportType.WebSockets
+    }).build();
+
+    this.hubConnection
+    .start()
+    .then(() => console.log("Connection Started!"))
+    .catch(err => console.log("Error while establishing a connection :( "));
+
+    this.hubConnection.on("ReceiveMessageVN2Tender", function (user, questionMessage, questionValueMessage){
+      var questionMsg = questionMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      var valueMsg = questionValueMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      
+      document.getElementById("vnPlayerUsernameId").innerHTML = user;
+      document.getElementById("tenderHelpQuestionId").innerHTML = questionMsg;
+      document.getElementById("tenderHelpValueOfQuestionId").innerHTML = valueMsg;
+    });
+  
   }
 
+  // Tender player sends the answer and the offered amount to 'Visoki Napon' Player
+  sendAnswer(){
+    
+    var tenderPlayerUsername = this.CurrentUser;
+    var vnPlayerUsername = (document.getElementById("vnPlayerUsernameId") as HTMLInputElement).innerText;
+    var answerMessage = (document.getElementById("tenderHelpAnswerId") as HTMLInputElement).value;
+    var requestedAmount = (document.getElementById("tenderHelpRequestedAmountId") as HTMLInputElement).value;
+    this.hubConnection.invoke("SendMessageTender2VN", tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmount).catch(function (err) {
+      return console.error(err.toString());
+    });
+  }
 }
