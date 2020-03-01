@@ -1,3 +1,11 @@
+p{
+  border-radius: 2px;
+  border: 1px solid #d8dad7;
+  background-color: #c97dc9;
+  box-shadow: 2px 3px 3px #d8dad7;
+  padding: 3px 3px;
+}
+
 .feedback{
   width: 700px;
   height: 40px;
@@ -63,7 +71,6 @@ input[type=text], select {
   color: white;
 }
 
-
 .wonAmount{
   width: 300px;
   height: 50px;
@@ -78,6 +85,16 @@ input[type=text], select {
   line-height: 50px;
   font-size: 18px;
   border-radius: 4px;
+}
+
+.tender_container{
+  position: absolute;
+  top: 30px;
+  left: 100px;
+}
+
+.tenderHelpDiv{
+  display: flex;
 }
 
 .tender{
@@ -158,9 +175,9 @@ input[type=text], select {
 
 .container {
     position: absolute;
-	top: 50%;
+	  top: 50%;
     left: 50%;
-	width: 848px;
+	  width: 848px;
     margin-right: -50%;
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);

@@ -397,12 +397,49 @@ export class AnswerComponent implements OnInit {
 
     
     var vnUser = this.CurrentUser
+    var i = 1
     this.hubConnection.on("ReceiveMessageTender2VN", function (tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmount) {
       var answerMsg = answerMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      
       if(vnPlayerUsername === vnUser){
-        document.getElementById("tenderHelpUsernameArrivedId").innerHTML = tenderPlayerUsername;
-        document.getElementById("tenderHelpRequestedSumArrivedId").innerHTML = requestedAmount;
+        const br1 = document.createElement("br");
+        const br2 = document.createElement("br");
+
+        const span1 = document.createElement("span");
+        span1.innerHTML = "<b>Korisničko ime tender igrača:</b> &nbsp;"
+        const span2 = document.createElement("span");
+        span2.innerHTML = "<b>Ponuđen iznos:</b> &nbsp;"
+
+        var div = document.createElement("div");
+        div.setAttribute("id","div" + i);
+        div.setAttribute("class", "div_with_margins");
+
+        div.appendChild(span1);
+        var label1 = document.createElement("label");
+        label1.innerText = tenderPlayerUsername;
+        label1.id = "tenderHelpUsernameArrivedId";
+        div.appendChild(label1);
+        div.appendChild(br1);
+  
+        div.appendChild(span2);
+        var label2 = document.createElement("label");
+        label2 = document.createElement("label");
+        label2.innerText = requestedAmount;
+        label2.id = "tenderHelpRequestedSumArrivedId";
+        div.appendChild(label2);
+        div.appendChild(br2);
+        
+        var button = document.createElement("button");
+        button.id = "sendButtonId2";
+        button.innerText = "Prihvatite ponudu";
+        button.setAttribute("class", "tender_button");
+
+        button.addEventListener("click", function (event) {
+         console.log("will be imlemented");
+        });
+        div.appendChild(button);
+
+        document.getElementById("tenderHelpDivId").appendChild(div);
+        i++;
       }
     });
 

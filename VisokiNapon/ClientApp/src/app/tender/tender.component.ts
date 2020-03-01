@@ -7,14 +7,6 @@ import { Observable } from 'rxjs';
 import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from '@aspnet/signalr';
 
 
-// const httpOpt = {
-//   headers: new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json, text/plain'
-//   })
-// };
-
-
 @Component({
     selector:    'app-tender',
     templateUrl: './tender.component.html',
@@ -35,6 +27,7 @@ export class TenderComponent implements OnInit {
   TenderScreen                        : boolean
   CurrentUser                         : string
   EarnedAmount                        : number = 0
+  i                                   : number = 0
 
   constructor(private data: DataService, private http: HttpClient,  private makeqService : MakeqService) {}
   
@@ -60,26 +53,86 @@ export class TenderComponent implements OnInit {
     .then(() => console.log("Connection Started!"))
     .catch(err => console.log("Error while establishing a connection :( "));
 
+    var i = 1
+    var user = this.CurrentUser;
+    var connection = this.hubConnection
     this.hubConnection.on("ReceiveMessageVN2Tender", function (user, questionMessage, questionValueMessage){
       var questionMsg = questionMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       var valueMsg = questionValueMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const br1 = document.createElement("br");
+      const br2 = document.createElement("br");
+      const br3 = document.createElement("br");
+      const br4 = document.createElement("br");
+      const br5 = document.createElement("br");
       
-      document.getElementById("vnPlayerUsernameId").innerHTML = user;
-      document.getElementById("tenderHelpQuestionId").innerHTML = questionMsg;
-      document.getElementById("tenderHelpValueOfQuestionId").innerHTML = valueMsg;
-    });
-  
-  }
+      const span1 = document.createElement("span");
+      const span2 = document.createElement("span");
+      const span3 = document.createElement("span");
 
-  // Tender player sends the answer and the offered amount to 'Visoki Napon' Player
-  sendAnswer(){
-    
-    var tenderPlayerUsername = this.CurrentUser;
-    var vnPlayerUsername = (document.getElementById("vnPlayerUsernameId") as HTMLInputElement).innerText;
-    var answerMessage = (document.getElementById("tenderHelpAnswerId") as HTMLInputElement).value;
-    var requestedAmount = (document.getElementById("tenderHelpRequestedAmountId") as HTMLInputElement).value;
-    this.hubConnection.invoke("SendMessageTender2VN", tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmount).catch(function (err) {
-      return console.error(err.toString());
+      var div = document.createElement("div");
+      div.setAttribute("id","div" + i);
+      div.setAttribute("class", "div_with_margins");
+
+
+      span1.innerHTML = "<b>Korisničko ime:</b> &nbsp;"
+      div.appendChild(span1);
+      var label = document.createElement("label");
+      label.innerText = user;
+      label.id = "vnPlayerUsernameId";
+      div.appendChild(label);
+      div.appendChild(br1);
+
+      span2.innerHTML = "<b>Pitanje:</b> &nbsp;"
+      div.appendChild(span2);
+      label = document.createElement("label");
+      label.innerText = questionMsg;
+      label.id = "tenderHelpQuestionId";
+      div.appendChild(label);
+      div.appendChild(br2);
+
+      span3.innerHTML = "<b>Vrednost pitanja:</b> &nbsp;"
+      div.appendChild(span3);
+      label = document.createElement("label");
+      label.innerText = valueMsg;
+      label.id = "tenderHelpValueOfQuestionId";
+      div.appendChild(label);
+      div.appendChild(br3);
+
+      var input = document.createElement("input");
+      input.id = "tenderHelpAnswerId";
+      input.setAttribute("placeholder", "Unesite odgovor...");
+      input.setAttribute("type", "text");
+      input.setAttribute("class", "tender_input");
+      div.appendChild(input);
+      div.appendChild(br4);
+
+      input = document.createElement("input");
+      input.id = "tenderHelpRequestedAmountId";
+      input.setAttribute("placeholder", "Unesite traženu sumu...");
+      input.setAttribute("class", "tender_input");
+      input.setAttribute("type", "number");
+      div.appendChild(input);
+      div.appendChild(br5);
+
+      var button = document.createElement("button");
+      button.id = "sendButtonId1";
+      button.innerText = "Pošaljite odgovor";
+      button.setAttribute("class", "tender_button");
+      
+      // Tender player sends the answer and the offered amount to 'Visoki Napon' Player
+      button.addEventListener("click", function (event) {
+        var tenderPlayerUsername = user;
+        var vnPlayerUsername = (document.getElementById("vnPlayerUsernameId") as HTMLInputElement).innerText;
+        var answerMessage = (document.getElementById("tenderHelpAnswerId") as HTMLInputElement).value;
+        var requestedAmount = (document.getElementById("tenderHelpRequestedAmountId") as HTMLInputElement).value;
+        connection.invoke("SendMessageTender2VN", tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmount).catch(function (err) {
+          return console.error(err.toString());
+        });
+      });
+      div.appendChild(button);
+      document.getElementById("main_div").appendChild(div);
+
+      i++;
     });
   }
 }

@@ -8,7 +8,7 @@
         <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>   
         
         
-        <label class = "valueOfQuestion" id="questionValueId">Vrednost pitanja: {{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
+        <label class = "valueOfQuestion" id="questionValueId">{{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
 		
 		<label class = "timer" *ngIf = "(!helps1 && !helps2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
 		<label class = "timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
@@ -42,10 +42,11 @@
     </youtube-player>
 </div>
 
-<div *ngIf="TenderHelp" class="container" id="tenderHelpDiv" style=background-color:#5d3c5d>
-    <b>Korisničko ime tender igrača:</b> &nbsp; <label id="tenderHelpUsernameArrivedId"></label><br>
-    <b>Ponuđen iznos:</b> &nbsp; <label id="tenderHelpRequestedSumArrivedId"></label><br>
-    <button id="sendButtonId2" (click)="acceptOffer()">Prihvatite ponudu</button>
+<div *ngIf="TenderHelp" class="tender_container">
+    <p>
+        <b>Ponude tender igrača:</b>
+    </p>
+    <div id="tenderHelpDivId" class="tenderHelpDiv"></div>
 </div>
 
 

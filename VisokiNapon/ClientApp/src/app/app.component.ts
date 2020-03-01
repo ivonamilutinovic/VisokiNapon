@@ -30,6 +30,5 @@ export class AppComponent {
     this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message)
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message)
 	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-  }
-  
+  }  
 }

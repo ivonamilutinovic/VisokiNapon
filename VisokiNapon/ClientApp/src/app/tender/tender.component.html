@@ -1,24 +1,22 @@
 <div class="container">
     <div class="flex_display">
-        <b>Ime:</b> &nbsp; <label id="tenderPlayerUsernameId"> {{CurrentUser}} </label>
-        &nbsp;&nbsp;&nbsp;
-        <b>Ukupna osvojena suma:</b> &nbsp; <label> {{EarnedAmount}} </label>
-    </div>
-
-    <div id="main_div" class="flex_display" style=background-color:#5d3c5d>
         <span>
-            <b>Ime:</b> &nbsp; <label id="vnPlayerUsernameId"></label><br>
-            <b>Pitanje:</b> &nbsp; <label id="tenderHelpQuestionId"></label><br>
-            <b>Vrednost pitanja:</b> &nbsp; <label id="tenderHelpValueOfQuestionId"></label><br>
-            <input id ="tenderHelpAnswerId"
-                ngModel
-                type = "text"
-                placeholder="Unesite odgovor..."><br>
-            <input id ="tenderHelpRequestedAmountId"
-                ngModel
-                type = "number"
-                placeholder="Unesite traženu sumu..."><br>
-            <button id="sendButtonId1" (click)="sendAnswer()">Pošaljite odgovor</button>
+            &nbsp;
+            <b>Vaše korisničko ime:</b> 
+            &nbsp; 
+            <label id="tenderPlayerUsernameId"> {{CurrentUser}} </label>
+            &nbsp;
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>
+            &nbsp;
+            <b>Osvojena suma:</b> 
+            &nbsp; 
+            <label> {{EarnedAmount}} </label>
+            &nbsp;
         </span>
     </div>
+    <br>
+    <br>
+    <div id="main_div" class="flex_display"></div>
 </div>

@@ -1,13 +1,17 @@
 .button{
   width: 150px;
+  height: 50px;
+  line-height: 50px;
   background-color: #614e75;
   border: 2px solid #dad8d7;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  font-size: 16px;
+  margin: 8px 8px;
+  text-align: center;
   cursor: pointer;
   border: 1px solid #d8dad7;
   border-radius: 4px;
+  box-shadow: 2px 2px 2px #dad8d7;
 }
 
 .value{
@@ -44,8 +48,7 @@
   border-radius: 1px;
 }
 
-
-.button:hover {
+.button:hover{
   background-color: #4c3d5c;
   border: 1.25px solid #918b88;
   box-shadow: 0px 15px 15px #5d3c5d;
@@ -56,11 +59,9 @@
   opacity: 0.85;
 }
 
-
 .clicked{ 
   background-color: #33293d;
 }
-
 
 .container{
   position: absolute;

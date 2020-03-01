@@ -2,20 +2,23 @@ img {
   display: block;
   margin-top:3%;
 }
+
 .imgDiv{
   display: inline-block;
 }
+
 button{
   height: 170px;
-  width: 300px;
+  width: 298px;
   background-color: #5d3c5d;
   color: white;
   font-size: 19px;
   padding: 14px 40px;
-  margin: 8px 0;
+  margin: 8px 2px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  box-shadow: 1px 1px 1px #5d3c5d;
 }
 
 button:hover {

@@ -4,42 +4,14 @@
   left: 100px;
 }
 
-.button{
-  width: 150px;
-  background-color: #614e75;
-  border: 2px solid #dad8d7;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  cursor: pointer;
+span{
+  border-radius: 2px;
   border: 1px solid #d8dad7;
-  border-radius: 4px;
+  background-color: #c97dc9;
+  box-shadow: 2px 3px 3px #d8dad7;
+  text-align: center;
 }
 
-.label_name{
-  width: 300px;
-  height: 50px;
-  position: absolute;
-  background-color: #ccc2d6;
-  border: 2px solid #dad8d7;
-  color: white; 
-  text-align: center;
-  vertical-align: middle;
-  line-height: 50px;
-  font-size: 18px;
-  border-radius: 4px;
-}
-
-.label_amount{
-  width: 300px;
-  height: 50px;
-  position: absolute;
-  background-color: #ccc2d6;
-  border: 2px solid #dad8d7;
-  color: white; 
-  text-align: center;
-  vertical-align: middle;
-  line-height: 50px;
-  font-size: 18px;
-  border-radius: 4px;
+.flex_display{
+  display: flex;
 }
