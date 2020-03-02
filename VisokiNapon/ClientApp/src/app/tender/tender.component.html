@@ -7,16 +7,16 @@
             <label id="tenderPlayerUsernameId"> {{CurrentUser}} </label>
             &nbsp;
         </span>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span>
             &nbsp;
             <b>Osvojena suma:</b> 
             &nbsp; 
-            <label> {{EarnedAmount}} </label>
+            <label id="tenderAmountId">0</label>
             &nbsp;
         </span>
+        <button (click)="quitTenderGame()">
+            Napustite tender igru
+        </button>
     </div>
-    <br>
-    <br>
     <div id="main_div" class="flex_display"></div>
 </div>

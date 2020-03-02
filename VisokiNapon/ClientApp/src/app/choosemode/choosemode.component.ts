@@ -81,7 +81,8 @@ export class ChooseModeComponent implements OnInit {
 	this.data.changeEndOfGame(0)
 	this.data.changeCorrect(true)
 	this.data.changeusedReplaceQuestionHelp1(false)
-	this.data.changeusedReplaceQuestionHelp2(false)
+  this.data.changeusedReplaceQuestionHelp2(false)
+  this.data.changeusedTenderHelp(false)
 	this.data.changeGameOver(true)
 	  
     this.data.changeBackToChoosingModeBoolean(false)

@@ -6,15 +6,21 @@ code {
   color: #e01a76;
 }
 
-.container{
-  text-align: top;
-}
-
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.main_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
 
 .div_with_margins{
   margin-top: 15px;

@@ -9,7 +9,7 @@ img {
 
 button{
   height: 170px;
-  width: 298px;
+  width: 295px;
   background-color: #5d3c5d;
   color: white;
   font-size: 19px;
@@ -27,9 +27,4 @@ button:hover {
 .disabled {
   opacity: 0.8;
   cursor: not-allowed;
-}
-.container {
-    position: absolute;
-    top: 30px;
-    left: 225px;    
 }

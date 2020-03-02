@@ -1,18 +1,17 @@
 .container{
-  position: absolute;
-  top: 15px;
-  left: 100px;
+  position: relative;
+  top: -100%;
 }
 
 .button{
-  top: 40px;
-  left: 135px;
   width: 150px;
+  right: 152px;
+  top: 60px;
+  position: relative;
   background-color: #614e75;
   border: 2px solid #dad8d7;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
   cursor: pointer;
   border: 1px solid #d8dad7;
   border-radius: 4px;

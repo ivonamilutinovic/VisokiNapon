@@ -1,8 +1,8 @@
-<div class="container">
-        <label class = "value" [hidden]="CategoryArray.length == 7">Otvarate {{NumberOfQuestionPerRound - counterPerRound}} {{NumberOfQuestionPerRound - counterPerRound == 1 ? "polje" : "polja"}} </label>
-        
-        <label class = "feedback" [hidden]=Correct>Odgovor je tačan! Nastavljate igru!</label>
-        
+<div>
+        <div>
+            <label class = "number_of_questions" [hidden]="CategoryArray.length == 7">Otvarate {{NumberOfQuestionPerRound - counterPerRound}} {{NumberOfQuestionPerRound - counterPerRound == 1 ? "polje" : "polja"}} </label>    
+            <label class = "feedback" [hidden]=Correct>Odgovor je tačan! Nastavljate igru!</label>
+        </div>
         <table *ngFor = "let round of CategoryArray; let i = index" align="center">
             <tr *ngIf="CategoryArray.length % 2 == 0 && i % 2 == 0 && i < CategoryArray.length - 6">    
                 <td>
@@ -29,5 +29,5 @@
                                 (CategoryArray[i]==4 ? 'Visoki napon' : 10000 * CategoryArray[i]) : i + 1)}}</button> 
                 </td>
             </tr>
-        </table>    
-    </div>
+        </table>      
+</div>

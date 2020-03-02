@@ -1,53 +1,57 @@
-<div *ngIf = "show && !TenderHelp">
-    <div class = "form-group">
-        <label class = "feedback" [hidden]="GameOver">
-            {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
-        
-        <button class="tender" [disabled]="PracticeMode || usedTenderHelp" (click)="tender()" *ngIf = "helps">T</button>        
-        <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>        
-        <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>   
-        
-        
-        <label class = "valueOfQuestion" id="questionValueId">{{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
-		
-		<label class = "timer" *ngIf = "(!helps1 && !helps2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
-		<label class = "timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
-		<label class = "timer" *ngIf = "help2" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
-		
-        <label for ="answer" class="question" id="questionId"> {{ youtube ? trimedQuestion : (QTextArray[Number] ? QTextArray[Number] : 'null')}}</label>
-        
-        <input [disabled]="!GameOver"
-               #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
-               ngModel
-               name ="answer"
-               id = "answer"
-               type = "text"
-               placeholder="Unesite odgovor..."
-               class = "form-control">
-        
-        <label class = "wonAmount">Osvojeno: {{Sum}} </label>
-        
-    </div>    
-</div>
+<div class="co">
+    <div *ngIf = "show && !TenderHelp">
+        <div class = "form-group">
+            <label class = "feedback" [hidden]="GameOver">
+                {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
+            
+            <button class="tender" [disabled]="PracticeMode || usedTenderHelp" (click)="tender()" *ngIf = "helps">T</button>        
+            <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1' (click)="replaceQuestion1()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>        
+            <button class="replaceQuestion2" [disabled]='usedReplaceQuestionHelp2' (click)="replaceQuestion2()"  *ngIf = "helps"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>   
+            
+            
+            <label class = "value_of_question" id="questionValueId">{{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
+            
+            <label class="timer" *ngIf = "(!helps1 && !helps2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+            <label class="timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+            <label class="timer" *ngIf = "help2" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+            
+            <label for ="answer" class="question" id="questionId"> {{ youtube ? trimedQuestion : (QTextArray[Number] ? QTextArray[Number] : 'null')}}</label>
+            
+            <input [disabled]="!GameOver"
+                #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
+                ngModel
+                name ="answer"
+                id = "answer"
+                type = "text"
+                placeholder="Unesite odgovor..."
+                class = "form-control">
+            
+            <label class = "wonAmount">Osvojeno: {{Sum}} </label>
+            
+        </div>    
+    </div>
 
-<div *ngIf = "!show && !TenderHelp" class = "container">
-    <p class = "inform"> POGLEDAJTE VIDEO KLIP! USKORO ĆE TE DOBITI PITANJE NA TEMU IZ VIDEA! </p>
-    <youtube-player
-        [videoId] = video_id
-        suggestedQuality="highres"
-        [height]="480"
-        [width]="848"
-        [startSeconds]="0"
-        [endSeconds]="60">
-    </youtube-player>
-</div>
+    <div *ngIf = "!show && !TenderHelp" class = "container">
+        <p class = "inform"> POGLEDAJTE VIDEO KLIP! USKORO ĆE TE DOBITI PITANJE NA TEMU IZ VIDEA! </p>
+        <youtube-player
+            [videoId] = video_id
+            suggestedQuality="highres"
+            [height]="480"
+            [width]="848"
+            [startSeconds]="0"
+            [endSeconds]="60">
+        </youtube-player>
+    </div>
 
-<div *ngIf="TenderHelp" class="tender_container">
-    <p>
-        <b>Ponude tender igrača:</b>
-    </p>
-    <div id="tenderHelpDivId" class="tenderHelpDiv"></div>
-</div>
+    <div *ngIf="TenderHelp && !AcceptedOffer" class="tender_container">
+        <p>
+            <b>Ponude tender igrača:</b>
+        </p>
+        <div id="tenderHelpDivId" class="tenderHelpDiv"></div>
+    </div>
 
-
- 
+    <div *ngIf="TenderHelp && AcceptedOffer">
+        <label class ="tender_feedback" id="tenderFeedbackId"></label>
+        <label class="question" id="tenderAnswerId"></label>
+    </div>
+</div> 

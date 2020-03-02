@@ -10,8 +10,7 @@ p{
   width: 700px;
   height: 40px;
   position: absolute;
-  top: 8px;
-  left: 26%;
+  margin: 0px 30px 10px 30px;
   background-color: #35373b;
   border: 2px solid #dad8d7;
   color: white; 
@@ -22,12 +21,30 @@ p{
   border-radius: 4px;
 }
 
-.valueOfQuestion{
+.tender_feedback{
+  width: 500px;
+  height: 40px;
+  left: 70px;
+  margin: 0px 30px 10px 70px;
+  position: relative;
+  background-color: #35373b;
+  border: 2px solid #dad8d7;
+  color: white; 
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 4px;
+  margin: 35px 0px 10px 0px;
+  box-shadow: 5px 5px 5px #dad8d7;
+}
+
+.value_of_question{
   width: 300px;
   height: 50px;
-  position: absolute;
-  top: 50px;
-  left: 39%;
+  position: relative;
+  left: 150px;
+  right: 150px;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
   color: white; 
@@ -41,9 +58,8 @@ p{
 .question{
   width: 900px;
   height: 200px;
-  position: absolute;
-  top: 100px;
-  left: 17%;
+  position: relative;
+  top: 0px;
   background-color: #614e75;
   border: 2px solid #dad8d7;
   color: white;
@@ -74,9 +90,9 @@ input[type=text], select {
 .wonAmount{
   width: 300px;
   height: 50px;
-  position: absolute;
-  top: 360px;
-  left: 39%;
+  position: relative;
+  top: 100px;
+  left: 200px;
   background-color: #35373b;
   border: 2px solid #dad8d7;
   color: white;	
@@ -88,9 +104,9 @@ input[type=text], select {
 }
 
 .tender_container{
-  position: absolute;
-  top: 30px;
-  left: 100px;
+  position: relative;
+  top: -150px;
+  left: -200px;
 }
 
 .tenderHelpDiv{
@@ -100,8 +116,7 @@ input[type=text], select {
 .tender{
   width: 50px;
   height: 50px;
-  position: absolute;
-  top: 50px;
+  position: static;
   left: 232px;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
@@ -116,8 +131,7 @@ input[type=text], select {
 .tender:disabled{
   width: 50px;
   height: 50px;
-  position: absolute;
-  top: 50px;
+  position: static;
   left: 232px;
   background-color: #ffb3b3;
   border: 2px solid #ffb3b3;
@@ -132,8 +146,7 @@ input[type=text], select {
 .replaceQuestion1{
   width: 50px;
   height: 50px;
-  position: absolute;
-  top: 50px;
+  position: static;
   left: 282px;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
@@ -143,8 +156,7 @@ input[type=text], select {
 .replaceQuestion2{
   width: 50px;
   height: 50px;
-  position: absolute;
-  top: 50px;
+  position: static;
   left: 332px;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
@@ -162,26 +174,18 @@ input[type=text], select {
 .timer{
   width: 50px;
   height: 50px;
-  position: absolute;
-  top: 50px;
-  right: 232px;
+  position: relative;
+  left: 400px;
   text-align: center;
   color: white;
-  padding-top: 10px;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
   border-radius: 4px;
 }
 
-.container {
-    position: absolute;
-	  top: 50%;
-    left: 50%;
-	  width: 848px;
-    margin-right: -50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+.container{
+  position: relative;
+  top: -120px;
 }
 
 .inform {

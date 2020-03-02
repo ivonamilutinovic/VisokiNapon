@@ -16,7 +16,6 @@ import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from 
   styleUrls: ['./answer.component.css']
 })
 
-
 export class AnswerComponent implements OnInit {
 
   WelcomeScreen                        : boolean
@@ -63,8 +62,8 @@ export class AnswerComponent implements OnInit {
 
   hubConnection                        : HubConnection
   TenderHelp                           : boolean = false
-  usedTenderHelp                       : boolean = false 
-
+  usedTenderHelp                       : boolean
+  AcceptedOffer                        : boolean = false
 
   constructor(private data: DataService, private http: HttpClient, private makeqService : MakeqService) { }
 
@@ -89,6 +88,7 @@ export class AnswerComponent implements OnInit {
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
     // this.data.QAnswerArray.subscribe(message => this.QAnswerArray = message)
     this.data.currentSum.subscribe(message => this.Sum = message)
+    this.data.currentGameOver.subscribe(message => this.GameOver = message)
     this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
     this.data.currentValueOfQuestion.subscribe(message => this.ValueOfQuestion = message);
     this.data.currentcounterPerRound.subscribe(message => this.counterPerRound = message);
@@ -105,7 +105,6 @@ export class AnswerComponent implements OnInit {
     this.data.currentPracticeMode.subscribe(message => this.PracticeMode = message);
     this.data.currentUser.subscribe(message => this.CurrentUser = message);
 
-    this.TenderHelp = false
     this.data.currentusedTenderHelp.subscribe(message => this.usedTenderHelp = message);
 
     this.hubConnection = new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl("/chatHub", {
@@ -133,16 +132,16 @@ export class AnswerComponent implements OnInit {
         this.show = true;
         this.helps = false;
         this.timeBool = setTimeout(function () {
-        this.GameOver = false
-        this.data.changeGameOver(this.GameOver)
-        this.Sum = 0
-        this.data.changeSum(this.Sum)
+          this.GameOver = false
+          this.data.changeGameOver(this.GameOver)
+          this.Sum = 0
+          this.data.changeSum(this.Sum)
 
-        // After 5 seconds, player is returned to the homepage
-        this.infoBool = setTimeout(function () {
-          this.data.showAnsweringScreen(false)
-          this.data.showWelcomeScreen(true)
-          }.bind(this), 5000);
+          // After 5 seconds, player is returned to the homepage
+          this.infoBool = setTimeout(function () {
+            this.data.showAnsweringScreen(false)
+            this.data.showWelcomeScreen(true)
+            }.bind(this), 5000);
         }.bind(this), 25000);
       }.bind(this), 40000);
     }
@@ -168,75 +167,36 @@ export class AnswerComponent implements OnInit {
    * Arguments:
    *      value : string  -  text of question on which player answers
   ***/
-  checkAnswer(value: string): void {
+  checkAnswer(value: string){
     var obj = {
       tex: this.QTextArray[this.Number],
       ans: value
     }
-
     // const body = JSON.stringify(obj);
     const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
-
     this.http.post('/api/v3/answer/', obj, {
       headers: headerOptions
     }).subscribe(async t => {
-      console.log("solution ", t, " ", typeof (t))
-
       this.response = t
 
       // var obj = JSON.parse(this.response)
       // var bool_value = this.response == "true" ? true : false
       
       // this.cat = this.CategoryArray[this.Number]
-      // var formData: FormData = new FormData();
-      // formData.append('text', this.QTextArray[this.Number])
-      // formData.append('ans',this.ans)
-      // formData.set('cat', String(this.Number))
+      // var formthis.data: Formthis.data = new Formthis.data();
+      // formthis.data.append('text', this.QTextArray[this.Number])
+      // formthis.data.append('ans',this.ans)
+      // formthis.data.set('cat', String(this.Number))
 
       if (this.response == true) {
-        
-        for (var i = 0; i < this.Field; i++)
-          this.IsDisabledArray[i] = false;
-        this.data.changeIsDisabledArray(this.IsDisabledArray);
-
-        /* 
-         All questions on witch player has answerd are deleting from CategoryArray.  
-        */
-        if (this.counterPerRound == this.NumberOfQuestionPerRound) {  
-          for (var i = this.Field - 1; i >= 0; i--)
-            if (this.CategoryArray[i] < 0)
-              this.data.removeFromArray(i)
-          
-          /* 
-           If the number of the round became one, we are entering in one more round.
-          */
-          this.NumberOfQuestionPerRound--
-          this.data.changeNumberOfQuestionPerRound(this.NumberOfQuestionPerRound)
-          this.counterPerRound = 0
-          this.data.changecounterPerRound(this.counterPerRound)
-          if (this.NumberOfQuestionPerRound == 0)
-            this.NumberOfQuestionPerRound = 1
-        }
-
+        this._correctAnswerPart1()
         clearTimeout(this.infoBool)
         clearTimeout(this.timeBool)
-
-        if (this.QTextArray[this.Number].indexOf("#!!#") >= 0)
-          this.Sum = this.Sum * 2
-        else
-          this.Sum = this.Sum + this.ValueOfQuestion
-          this.data.changeSum(this.Sum)
-          this.EndOfGame++
-          this.data.changeEndOfGame(this.EndOfGame)
-          this.Correct = false
-          this.data.changeCorrect(this.Correct)
+        this._correctAnswerPart2()
 
         /* Case when the competitor wins */
         if (this.EndOfGame == 16) {
-          console.log("end of a game");
-          this.GameOver = false
-          this.GuaranteedSum = this.Sum
-          this.data.changeGameOver(this.GameOver)
+          this._gameWon()
           this.helps = false
           this.help1 = false
           this.help2 = false
@@ -247,43 +207,23 @@ export class AnswerComponent implements OnInit {
           await this.timer(3000);
           
           // showing the top list if the user is logged in and its new score is in the top list
-          if(!this.PracticeMode){
-            
-            this.http.post('/api/v3/updateTopList',{username: this.CurrentUser, maxAmount: this.GuaranteedSum}, {
-                    headers: headerOptions
-            }).subscribe(async t1 => {
-
-              if(t1 == true){
-                // we are showing the top list because the player is in the top 20
-                this.data.showAnsweringScreen(false)
-                this.data.showTopListScreen(true)
-              }else{
-                this.data.showAnsweringScreen(false)
-                this.data.showWelcomeScreen(true)
-              }
-            })
-            
-          }
+          if(!this.PracticeMode)            
+            this._topList()
           else{
             this.data.showAnsweringScreen(false)
             this.data.showWelcomeScreen(true)
           }
-          
         }else {
           this.data.showAnsweringScreen(false)
           this.data.showQuestionsScreen(true)
         }
-
         if (this.counterPerRound == 0) {
           this.GuaranteedSum = this.Sum
           this.data.changeGuaranteedSum(this.GuaranteedSum)
         }
       }
       else { /* case of wrong answer */
-        this.GameOver = false
-        this.data.changeGameOver(this.GameOver)
-        this.Sum = this.GuaranteedSum
-        this.data.changeSum(this.Sum)
+        this._wrongAnswer();
         this.helps = false
         this.help1 = false
         this.help2 = false
@@ -293,23 +233,9 @@ export class AnswerComponent implements OnInit {
         // Changing the screen after 3 seconds
         await this.timer(3000);
 
-        // showing the top list if the user is logged in and its new score is in the top list
-        if(!this.PracticeMode){
-          this.http.post('/api/v3/updateTopList', {username: this.CurrentUser, maxAmount: this.GuaranteedSum}, {
-                  headers: headerOptions
-          }).subscribe(async t2 => {
-
-            if(t2 == true){
-              // we are showing the top list because the player is in the top 20
-              this.data.showAnsweringScreen(false)
-              this.data.showTopListScreen(true)
-            }else{
-              this.data.showAnsweringScreen(false)
-              this.data.showWelcomeScreen(true)
-            }
-          })
-          
-        }
+        /**  showing the top list if the user is logged in and its new score needs to be in the top list */
+        if(!this.PracticeMode)
+          this._topList()
         else{
           this.data.showAnsweringScreen(false)
           this.data.showWelcomeScreen(true)
@@ -319,8 +245,74 @@ export class AnswerComponent implements OnInit {
   }
 
   /*** 
-   * When player clicks on button for first replace question help, this funcition is called 
+   * When player clicks on button for tender help, this funcition is called 
   ***/
+  tender() {
+
+    /** Stopping timing */
+    clearTimeout(this.infoBool)
+    clearTimeout(this.timeBool)
+    
+    /** Reading the question and its value */
+    this.TenderHelp = true;
+    var questionMessage = document.getElementById("questionId").innerText;
+    var questionValueMessage = document.getElementById("questionValueId").innerText;
+    
+    /** Sends it to the tender player */
+    this.hubConnection.invoke("SendMessageVN2Tender", this.CurrentUser, questionMessage, questionValueMessage).catch(function (err) {
+      return console.error(err.toString());
+    });
+
+    var i = 1 
+    /** Receiving the offer from tender player */
+    this.hubConnection.on("ReceiveMessageTender2VN", (tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmountMessage) => {
+      if(vnPlayerUsername === this.CurrentUser){
+        /* creating html elements */
+        const br1 = document.createElement("br");
+        const br2 = document.createElement("br");
+
+        const span1 = document.createElement("span");
+        span1.innerHTML = "<b>Korisničko ime tender igrača:</b> &nbsp;"
+        const span2 = document.createElement("span");
+        span2.innerHTML = "<b>Ponuđen iznos:</b> &nbsp;"
+
+        var div = document.createElement("div");
+        div.setAttribute("id","div" + i);
+        div.setAttribute("class", "div_with_margins");
+
+        div.appendChild(span1);
+        var label1 = document.createElement("label");
+        label1.innerText = tenderPlayerUsername;
+        label1.id = "tenderHelpUsernameArrivedId";
+        div.appendChild(label1);
+        div.appendChild(br1);
+  
+        div.appendChild(span2);
+        var label2 = document.createElement("label");
+        label2 = document.createElement("label");
+        label2.innerText = requestedAmountMessage;
+        label2.id = "tenderHelpRequestedSumArrivedId";
+        div.appendChild(label2);
+        div.appendChild(br2);
+        
+        var button = document.createElement("button");
+        button.id = "sendButtonId2";
+        button.innerText = "Prihvatite ponudu";
+        button.setAttribute("class", "tender_button");
+
+        button.addEventListener("click", event => {
+          this._AcceptOffer(answerMessage, requestedAmountMessage, tenderPlayerUsername);
+        });
+        div.appendChild(button);
+        
+        document.getElementById("tenderHelpDivId").appendChild(div);
+        i++;
+      }
+    });
+  }
+
+
+  /** When player clicks on button for first replace question help, this funcition is called */
   replaceQuestion1() {
 
     this.usedReplaceQuestionHelp1 = true
@@ -349,11 +341,11 @@ export class AnswerComponent implements OnInit {
       }.bind(this), 5000);
     }.bind(this), 25000);
   }
-
+    
   /*** 
    * When player clicks on button for second replace question help, this funcition is called 
   ***/
-  replaceQuestion2() {
+  replaceQuestion2(){
 
     this.usedReplaceQuestionHelp2 = true
     this.data.changeusedReplaceQuestionHelp2(this.usedReplaceQuestionHelp2)
@@ -382,68 +374,159 @@ export class AnswerComponent implements OnInit {
     }.bind(this), 25000);
   }
 
-  tender() {
-
-    clearTimeout(this.infoBool)
-    clearTimeout(this.timeBool)
-
-    this.TenderHelp = true;
-    var questionMessage = (document.getElementById("questionId") as HTMLInputElement).innerText;
-    var questionValueMessage = (document.getElementById("questionValueId") as HTMLInputElement).innerText;
-    console.log("answer.ts: logovano: " + questionMessage + questionValueMessage)
-    this.hubConnection.invoke("SendMessageVN2Tender", this.CurrentUser, questionMessage, questionValueMessage).catch(function (err) {
-      return console.error(err.toString());
-    });
-
+  _AcceptOffer(answerMessage: string, requestedAmountMessage: string, tenderPlayerUsername: string){
     
-    var vnUser = this.CurrentUser
-    var i = 1
-    this.hubConnection.on("ReceiveMessageTender2VN", function (tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmount) {
-      var answerMsg = answerMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      if(vnPlayerUsername === vnUser){
-        const br1 = document.createElement("br");
-        const br2 = document.createElement("br");
-
-        const span1 = document.createElement("span");
-        span1.innerHTML = "<b>Korisničko ime tender igrača:</b> &nbsp;"
-        const span2 = document.createElement("span");
-        span2.innerHTML = "<b>Ponuđen iznos:</b> &nbsp;"
-
-        var div = document.createElement("div");
-        div.setAttribute("id","div" + i);
-        div.setAttribute("class", "div_with_margins");
-
-        div.appendChild(span1);
-        var label1 = document.createElement("label");
-        label1.innerText = tenderPlayerUsername;
-        label1.id = "tenderHelpUsernameArrivedId";
-        div.appendChild(label1);
-        div.appendChild(br1);
-  
-        div.appendChild(span2);
-        var label2 = document.createElement("label");
-        label2 = document.createElement("label");
-        label2.innerText = requestedAmount;
-        label2.id = "tenderHelpRequestedSumArrivedId";
-        div.appendChild(label2);
-        div.appendChild(br2);
-        
-        var button = document.createElement("button");
-        button.id = "sendButtonId2";
-        button.innerText = "Prihvatite ponudu";
-        button.setAttribute("class", "tender_button");
-
-        button.addEventListener("click", function (event) {
-         console.log("will be imlemented");
-        });
-        div.appendChild(button);
-
-        document.getElementById("tenderHelpDivId").appendChild(div);
-        i++;
-      }
-    });
-
+    /** Setting parametars */
+    this.AcceptedOffer = true;    
     this.usedTenderHelp = true;
     this.data.changeusedTenderHelp(this.usedTenderHelp);
+
+    var answerMsg = answerMessage.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");    
+  
+    const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    var obj = {
+      tex: this.QTextArray[this.Number],
+      ans: answerMsg,
+    }
+
+    // Checking answer accuracy
+    this.http.post('/api/v3/answer/', obj, {
+      headers: headerOptions
+    }).subscribe(async t => {
+      this.response = t
+
+      if(this.response == true){
+        /** Setting html components */
+        var feedbackLabel = document.getElementById("tenderFeedbackId");
+        feedbackLabel.innerText = "Odgovor je tačan!";
+        
+        var tenderAnswerLabel = document.getElementById("tenderAnswerId");
+        tenderAnswerLabel.innerText = answerMsg; 
+        
+        await this.timer(3000);
+
+        /** Changing the value of question and sending information to tender user that his offer is accepted */ 
+        this.ValueOfQuestion = this.ValueOfQuestion - parseInt(requestedAmountMessage);
+        this.data.changeValueOfQuestion(this.ValueOfQuestion);
+        this.hubConnection.invoke("SendMessageChangeTenderSum", tenderPlayerUsername, requestedAmountMessage.toString()).catch(function (err) {
+          return console.error(err.toString());
+        });
+
+        for (var i = 0; i < this.Field; i++)
+          this.IsDisabledArray[i] = false;
+        this.data.changeIsDisabledArray(this.IsDisabledArray);
+
+        // All questions on witch player has answerd are deleting from CategoryArray.          
+        this._correctAnswerPart1();
+        this._correctAnswerPart2();
+        
+        /* Case when the competitor wins */
+        if (this.EndOfGame == 16) {
+          this._gameWon();
+          // Changing the screen after 3 seconds
+          await this.timer(3000);
+          
+          // showing the top list if the user is logged in and its new score is in the top list
+          if(!this.PracticeMode)            
+            this._topList();
+          else{
+            this.data.showAnsweringScreen(false)
+            this.data.showWelcomeScreen(true)
+          }     
+      }else {
+        this.data.showAnsweringScreen(false)
+        this.data.showQuestionsScreen(true)
+      }
+
+      if (this.counterPerRound == 0) {
+        this.GuaranteedSum = this.Sum
+        this.data.changeGuaranteedSum(this.GuaranteedSum)
+      }
+      
+      }else{/** Case when the tender player gave the wrong answer */
+        var feedbackLabel = document.getElementById("tenderFeedbackId");
+        feedbackLabel.innerText = "Odgovor je pogrešan!";
+        
+        var tenderAnswerLabel = document.getElementById("tenderAnswerId");
+        tenderAnswerLabel.innerText = answerMsg; 
+        
+        this._wrongAnswer();
+
+        // Changing the screen after 3 seconds
+        await this.timer(3000);
+        
+        // showing the top list if the user is logged in and its new score is in the top list
+        this._topList();
+      }
+    })
+
   }
+
+  _correctAnswerPart1(){
+    for (var i = 0; i < this.Field; i++)
+      this.IsDisabledArray[i] = false;
+    this.data.changeIsDisabledArray(this.IsDisabledArray);
+
+    /* 
+      All questions on witch player has answerd are deleting from CategoryArray.  
+    */
+    if (this.counterPerRound == this.NumberOfQuestionPerRound) {  
+      for (var i = this.Field - 1; i >= 0; i--)
+        if (this.CategoryArray[i] < 0)
+          this.data.removeFromArray(i)
+      
+      /** If the number of the round became one, we are entering in one more round. */
+      this.NumberOfQuestionPerRound--
+      this.data.changeNumberOfQuestionPerRound(this.NumberOfQuestionPerRound)
+      this.counterPerRound = 0
+      this.data.changecounterPerRound(this.counterPerRound)
+      if (this.NumberOfQuestionPerRound == 0)
+        this.NumberOfQuestionPerRound = 1
+    }
+  }
+
+  _correctAnswerPart2(){
+    if (this.QTextArray[this.Number].indexOf("#!!#") >= 0)
+    this.Sum = this.Sum * 2
+    else
+      this.Sum = this.Sum + this.ValueOfQuestion
+    this.data.changeSum(this.Sum)
+    this.EndOfGame++
+    this.data.changeEndOfGame(this.EndOfGame)
+    this.Correct = false
+    this.data.changeCorrect(this.Correct)
+  }
+
+  _wrongAnswer(){
+    this.GameOver = false
+    this.data.changeGameOver(this.GameOver)
+    this.Sum = this.GuaranteedSum
+    this.data.changeSum(this.Sum)
+  }
+
+  _gameWon(){
+    this.GameOver = false
+    this.data.changeGameOver(this.GameOver)
+    this.GuaranteedSum = this.Sum
+  }
+
+  _topList(){
+    const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // todo ovde kreirati headeropcije
+    this.http.post('/api/v3/updateTopList', {username: this.CurrentUser, maxAmount: this.GuaranteedSum}, {
+      headers: headerOptions
+    }).subscribe(async t2 => {
+
+    if(t2 == true){
+      // we are showing the top list because the player is in the top 20
+      this.data.showAnsweringScreen(false)
+      this.data.showTopListScreen(true)
+    }else{
+      this.data.showAnsweringScreen(false)
+      this.data.showWelcomeScreen(true)
+    }
+    })
+  }
+
 }
