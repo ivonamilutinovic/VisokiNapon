@@ -23,23 +23,40 @@ using SendGrid.Helpers.Mail;
 
 namespace VISOKI_NAPON.Handlers
 {
+
+	/// PlayerHandler Interface
     public interface IPlayerHandler
     {
-         Task<bool> Authenticate(string username, string password);
-		 Task<bool> Confirm(string username, string pin);
-         Task<bool> Create(string email, string username, string name, string surname, string password, string confirmpassword);
-		 void sendMail(string email, int number);
+		/// Log in function for player authentification 
+        Task<bool> Authenticate(string username, string password);
+		/// Function that checks players confirmation 
+		Task<bool> Confirm(string username, string pin);
+		/// Register function that creates and persists new player 
+        Task<bool> Create(string email, string username, string name, string surname, string password, string confirmpassword);
+		
+		/// Function for sending mail 
+		void sendMail(string email, int number);
     }
 
+	/// PlayerHandler class - contains functions for all player-related requests
     public class PlayerHandler : IPlayerHandler 
     {
+		/// DataBaseContext
         private readonly VisokiNaponDbContext context;
         
+		/// PlayerHandler Constructor
 		public PlayerHandler(VisokiNaponDbContext context)
         {
             this.context = context;
         }
 
+		/** ### Description 
+		*	Function that checks players confirmation <br>
+		* ### Arguments
+		* string username - Players username <br>
+		* string pin - confirmation pin players has recieved by email <br>
+		* ### Return value
+		* Task<boolean> - true in case of successfull confirmation, and false otherwise  */
 		public async Task<bool> Confirm(string username, string pin)
         {
 			
@@ -65,7 +82,13 @@ namespace VISOKI_NAPON.Handlers
 			}
 		}
 		
-		
+		/** ### Description
+		* Log in function - manages players authentification
+		* ### Arguments
+		* string username - Players username <br>
+		* string password - Players password <br>
+		* ### Return value
+		* Task<boolean> - true in case of successfull authentification and false otherwise */
         public async Task<bool>  Authenticate(string username, string password)
         {
 			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -100,30 +123,24 @@ namespace VISOKI_NAPON.Handlers
         }
 
 
+		/** ### Description
+		* Register function that creates and persists new player 
+		* ### Arguments
+		* string email - Players email <br>
+		* string username - Players username <br>
+		* string name - Players name <br>
+		* string surname - Players surname <br>
+		* string password - Players password <br>
+		* string confirmpassword - confrim password for password confirmation  <br>
+		* ### Return value
+		* Task<boolean> - true in case of successfull registration and false otherwise */
         public async Task<bool> Create(string email, string username, string name, string surname, string password, string confirmpassword)
         {
 			
-			/*
-            var players = await context.Players
-                                       .FromSqlRaw("SELECT Email, Name, Surname, UsernameId, PasswordHash, PasswordSalt, Verified, DateAndTime " +
-                                                   "FROM dbo.Players " +
-                                                   "Where Verified > 1 ").ToListAsync();
-												   
-			foreach (var player in players) {
-				if((DateTime.Now - player.DateAndTime).TotalMinutes > 3.0)
-					context.Players.Remove(player);
-			}
-			
-			context.SaveChanges();
-			*/
-			
-			/*
-            string emaddr = await Task.FromResult( context.Players.AsEnumerable()
-            .Where(que => que.UsernameId == username).Select(que=>que.Email).FirstOrDefault());
-			if( emaddr != null)
-				return false;	// vec postoji user sa datim usernameom
-			*/
-			
+			if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(username) ||
+				string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmpassword) )
+                return false;	
+
 			var player = await Task.FromResult(context.Players.AsEnumerable()
             .Where(que => que.UsernameId == username).FirstOrDefault());
 
@@ -148,16 +165,7 @@ namespace VISOKI_NAPON.Handlers
 			
 			if(player1!= null)
 				return false;	// vec postoji user sa datim usernameom
-			
-			/*
-			string usr = await Task.FromResult( context.Players.AsEnumerable()
-            .Where(que => que.Email == email).Select(que=>que.UsernameId).FirstOrDefault());
-			if(usr!=null)
-				return false; // vec postoji registrovani korisnik sa datim email-om
 
-			*/
-			
-			
 			// provera za mail adresu
 			if (!Regex.Match(email, @"[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}").Success)
 				return false;
@@ -195,6 +203,15 @@ namespace VISOKI_NAPON.Handlers
 
         // private helper methods
 
+
+		/** ### Description
+		* Function that creates password hash and password salt from players password <br>
+		* ### Arguments
+		* string password - Players password <br>
+		* out byte[] passwordHash - Players passwordHash which will be generated from password <br>
+		* out byte[] passwordSalt - Players passwordSalt which will be generated from password <br>
+		* ### Return value
+		* Boolean - true in case of successfull creation of password hash and salt, and false otherwise */
         private static bool CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
 			passwordSalt = null;
@@ -212,6 +229,14 @@ namespace VISOKI_NAPON.Handlers
 			return true;
         }
 
+		/** ### Description
+		* Function for password verification - checks if forwarded password hash and salt correspond to password
+		* ### Arguments
+		* string password - Players password <br>
+		* byte[] passwordHash - Players passwordHash <br>
+		* byte[] passwordSalt - Players passwordSalt <br>
+		* ### Return value
+		* Boolean - true in case of successfull password verification, and false otherwise */
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null) return false;
@@ -230,6 +255,11 @@ namespace VISOKI_NAPON.Handlers
             return true;
         }	   
 
+		/** ### Description
+		* Function for sending Player contirmation mail
+		* ### Arguments
+		* string email - email address to which the mail will be sent <br>
+		* int number - Players confirmation pin <br> */
 		public async void sendMail(string email, int number){
 		
 			var apiKey = Environment.GetEnvironmentVariable("SENDGRID_KEY");
@@ -250,6 +280,7 @@ namespace VISOKI_NAPON.Handlers
 			var response = await client.SendEmailAsync(msg);	
 		}
 	
+		/// Function that generates random number used for players confirmation pin
 		private int RandomNumber()    
 		{    
 			Random random = new Random();    

@@ -21,22 +21,30 @@ using System.Data.SqlClient;
 namespace VISOKI_NAPON.Controllers
 {   
     
+     /// TopList of Players Controller - manages TopList requests
     public class PlayersTopListController : Controller
     {   
         private readonly IMapper mapper;
         private readonly VisokiNaponDbContext context;
         
+
+        /// TopList of Players Controller constructor
         public PlayersTopListController(VisokiNaponDbContext context, IMapper mapper)
         {
             this.mapper = mapper;
             this.context = context;
         }
         
+        /// adjuntive class containing unsername and amount won of player
         public class topListObj {
             public string username { get; set; }
             public int maxAmount { get; set; }
         }
         
+        /** ### Desctiption
+        * Function that gets players from top list, i.e. all data from TopList table 
+        * ### Return value
+        * Task<IEnumerable<TopListResource>> - list of players */
         [HttpGet("/api/v3/toplist")]
         public async Task<IEnumerable<TopListResource>> getTopList(){
             var toplist = await context.PlayersTopList
@@ -48,6 +56,13 @@ namespace VISOKI_NAPON.Controllers
             return mapper.Map<List<TopList>, List<TopListResource>>(toplist);
         }
         
+
+        /** ### Desctiption
+        * Function which updates TopList depending on the results player acomplished 
+        * ### Arguments
+        * [FromBody]topLIstObj obj - frombody object contains Players username and amount won
+        * ### Return value
+        * Task<IActionResult> - positive IActionResult in case the player is added to the top list and negative otherwise */
         [HttpPost("/api/v3/updateTopList")]
         public async Task<IActionResult> updateTopList([FromBody]topListObj obj){
             

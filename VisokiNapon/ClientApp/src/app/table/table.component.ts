@@ -10,28 +10,48 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class TableComponent implements OnInit {
   
-  WelcomeScreen                       : boolean
-  LogInScreen                         : boolean
-  QuestionsScreen                     : boolean
-  AnsweringScreen                     : boolean
-  SignUpScreen                        : boolean
-  TopListScreen                       : boolean
-  ChooseModeScreen                    : boolean
-  TenderScreen                        : boolean
+  /** Indicator of WelcomeComponent activity */
+  WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
+  LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
+  QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
+  AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
+  SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
+  TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
+  ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
+  TenderScreen                         : boolean
   
-  Number                              : number
-  CategoryArray                       : Array<number>
-  QTextArray                          : Array<string>
+  Number                               : number              
+  /** Array which elements indicates whether the question is opend or not */
+  IsDisabledArray                      : Array<boolean>       
+  /** Array with categories which questions belong */
+  CategoryArray                        : Array<number> 
+  /** Array with text of questions */       
+  QTextArray                           : Array<string>  
+
   // QAnswerArray                     : Array<string>
-  IsDisabledArray                     : Array<boolean>
   
+  /** Indicator wheather the question is choosen or not */
   Indicator                           : boolean
+  /** Number of opened questions */
   Counter                             : number
+  /** Indicator for showing question fields */
   flag                                : boolean = false
+  /** Value of question */
   ValueOfQuestion                     : number
+  /** Contains information about number of questions per current round */ 
   NumberOfQuestionPerRound            : number
+
   Field                               : number
+  /** Counts how much questions has the player opened in current round */
   counterPerRound                     : number
+  /** Tells whether to hide label in html or not */ 
   Correct                             : boolean
 
   constructor(private data : DataService) {}
@@ -59,6 +79,7 @@ export class TableComponent implements OnInit {
     this.data.currentCorrect.subscribe(message => this.Correct = message);
   }
   
+  /** Function that manages choosing queston action */
   processClick(i: number){
     
     this.IsDisabledArray[i] = true                    // player clicked on button

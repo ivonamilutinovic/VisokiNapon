@@ -15,16 +15,26 @@ import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from 
 
 export class TenderComponent implements OnInit {
    
+  /** HubConnection for SignalR */
   hubConnection: HubConnection;
 
-  WelcomeScreen                       : boolean
-  LogInScreen                         : boolean
-  QuestionsScreen                     : boolean
-  AnsweringScreen                     : boolean
-  SignUpScreen                        : boolean
-  TopListScreen                       : boolean
-  ChooseModeScreen                    : boolean
-  TenderScreen                        : boolean
+  /** Indicator of WelcomeComponent activity */
+  WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
+  LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
+  QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
+  AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
+  SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
+  TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
+  ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
+  TenderScreen                         : boolean
+  /** Current player */
   CurrentUser                         : string
 
   constructor(private data: DataService, private http: HttpClient,  private makeqService : MakeqService) {}
@@ -160,6 +170,7 @@ export class TenderComponent implements OnInit {
     });
   }
 
+  /** Function which quits tender mode and redirects player to choose game mode  */
   quitTenderGame(){
     this.data.showTenderScreen(false);
     this.data.showChooseModeScreen(true);

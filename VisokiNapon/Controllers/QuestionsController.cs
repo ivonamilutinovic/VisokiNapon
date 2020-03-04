@@ -22,23 +22,31 @@ using System.Data.SqlClient;
 namespace VISOKI_NAPON.Controllers
 {   
     
+    /// QuestionController Class - manages question-related requests
     public class QuestionsController : Controller
     {   
         
         private readonly IMapper mapper;
         private readonly VisokiNaponDbContext context;
         
+
+        /// Constructor of QuestionsController
         public QuestionsController(VisokiNaponDbContext context, IMapper mapper)
         {
             this.mapper = mapper;
             this.context = context;
         }
         
+        /// adjuntive class containing text and answer of question
         public class obj {
             public string tex {get; set;}
             public string ans {get; set;}
         }
         
+        /** ### Desctiption
+        * Function that gets questions for one game and questions for help of replacing question
+        * ### Return value
+        * Task<IEnumerable<QuestionResource>> - list of questions */
         [HttpGet("/api/v3/questions")]
         public async Task<IEnumerable<QuestionResource>> GetQuestions(){
             var questions = await context.Questions
@@ -96,6 +104,11 @@ namespace VISOKI_NAPON.Controllers
             return "initialize....";
         }*/
         
+
+        /** ### Desctiption
+        * Function for checking forwarded answer 
+        * ### Return value
+        * Task<IActionResult> - positive IActionResult for corret answer and negative otherwise */
         [HttpPost("/api/v3/answer")]
         public async Task<IActionResult> TestName([FromBody]obj obj){
             string ques = await Task.FromResult(context.Questions.AsEnumerable()

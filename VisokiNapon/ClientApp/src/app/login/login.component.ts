@@ -13,17 +13,30 @@ import { Observable } from 'rxjs';
 
 export class LoginComponent implements OnInit {
   
-  WelcomeScreen                       : boolean
-  LogInScreen                         : boolean
-  QuestionsScreen                     : boolean
-  AnsweringScreen                     : boolean
-  SignUpScreen                        : boolean
-  TopListScreen                       : boolean
-  ChooseModeScreen                    : boolean
-  TenderScreen                        : boolean
+  /** Indicator of WelcomeComponent activity */
+  WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
+  LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
+  QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
+  AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
+  SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
+  TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
+  ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
+  TenderScreen                         : boolean
+
+  /** Message which will be shown to player */
   message                  : string = ""
+  /** Message which will be shown to player */
   signupmessage            : string = ""
+  /** Servers response on players log in request */
   response                 : any
+  /** Current user */
   User					   : string
   
   constructor(private data : DataService, 
@@ -35,16 +48,16 @@ export class LoginComponent implements OnInit {
     this.data.currentLogInScreen.subscribe(message => this.LogInScreen = message)
     this.data.currentQuestionsScreen.subscribe(message => this.QuestionsScreen = message)
     this.data.currentAnsweringScreen.subscribe(message => this.AnsweringScreen = message)
-	this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message) 
-	this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
+	  this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message) 
+  	this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
-	this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-	this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-	this.data.currentUser.subscribe(message => this.User = message)
+	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
+  	this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
+  	this.data.currentUser.subscribe(message => this.User = message)
 	
   }
 
-
+  /** Function which checks players log in data */
   checkLoginInfo(username : string, password : string){
   
     var objLogin = {
@@ -63,9 +76,9 @@ export class LoginComponent implements OnInit {
     if(this.response == true){
 
       this.User = username
-	  this.data.changeUser(this.User)    
+	    this.data.changeUser(this.User)    
       
-	  this.data.showLogInScreen(false)
+	    this.data.showLogInScreen(false)
       // ovde menjamo scenu na choose mode
       this.data.showChooseModeScreen(true)
     }
@@ -76,6 +89,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+  /** Function which redirect player to register */
   changeToSignup(){
 		this.data.showLogInScreen(false)
 		this.data.showSignUpScreen(true)

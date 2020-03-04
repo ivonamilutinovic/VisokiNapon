@@ -9,15 +9,24 @@ import { DataService } from './data.service';
 })
 
 export class AppComponent {
+  /** Title of application */
   title = 'Visoki Napon';
-  WelcomeScreen       : boolean
-  LogInScreen         : boolean
-  QuestionsScreen     : boolean
-  AnsweringScreen     : boolean
-  SignUpScreen        : boolean
-  TopListScreen       : boolean
-  ChooseModeScreen    : boolean
-  TenderScreen        : boolean
+  /** Indicator of WelcomeComponent activity */
+  WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
+  LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
+  QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
+  AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
+  SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
+  TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
+  ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
+  TenderScreen                         : boolean
 
   constructor(private data: DataService) { }
   
@@ -29,6 +38,7 @@ export class AppComponent {
     this.data.currentSignUpScreen.subscribe(message => this.SignUpScreen = message)
     this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message)
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message)
-	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-  }  
+	this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
+  }
+  
 }

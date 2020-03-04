@@ -16,8 +16,11 @@ import { Observable } from 'rxjs';
 //   }
 // }
 
+/** Auxiliary structure for generating top list */
 interface topListStruct{
+  /** Players username */
   username : string;
+  /** Players max amount won */
   maxAmount: number;
 }
 
@@ -30,21 +33,32 @@ interface topListStruct{
 
 export class ToplistComponent implements OnInit {
     
-  /**
+  /*
    * :BackToChoosingModeBoolean: only two ways to enter in TopListScreen: after the game is over or from button from ChoosingModeScreen.
    *    This variable is talling us from witch screen we came so we can return back to that screen.
    */
 
-	WelcomeScreen                       : boolean
-	LogInScreen                         : boolean
-	QuestionsScreen                     : boolean
-	AnsweringScreen                     : boolean
-	SignUpScreen                        : boolean
-	TopListScreen                       : boolean
-	ChooseModeScreen                    : boolean
-	TenderScreen                        : boolean
+  /** Indicator of WelcomeComponent activity */
+  WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
+  LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
+  QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
+  AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
+  SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
+  TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
+  ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
+  TenderScreen                         : boolean
+  /** Indicator of redirecting screen */
   BackToChoosingModeBoolean   	    	: boolean = true 
+  /** Servers answer on get top list request */
   TopList                             : any
+  /** Array of players in top list */
   BestCompetitorsArray                : Array<topListStruct>
   
   
@@ -73,6 +87,7 @@ export class ToplistComponent implements OnInit {
     this.GetTopList();
   }
 
+  /** Function that get top list from server */
   GetTopList(){
     
     this.http.get('/api/v3/toplist').subscribe(result => {this.TopList = result
@@ -86,6 +101,7 @@ export class ToplistComponent implements OnInit {
     })    
   }
 
+  /** Function that redirects to appropriate screen (component) */
   backToPriviousScreen(){
     if(this.data.currentBackToChoosingModeBoolean){
       this.data.showTopListScreen(false)

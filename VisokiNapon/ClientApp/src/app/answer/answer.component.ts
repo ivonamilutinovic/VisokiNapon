@@ -18,51 +18,93 @@ import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from 
 
 export class AnswerComponent implements OnInit {
 
+  /** Indicator of WelcomeComponent activity */
   WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
   LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
   QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
   AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
   SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
   TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
   ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
   TenderScreen                         : boolean
 
-  Number                               : number               /*** Number - ****/
-  IsDisabledArray                      : Array<boolean>       /*** IsDisabledArray - array which elements indicates whether the question is opend or not ****/
-  CategoryArray                        : Array<number>        /*** CategoryArray - array with categories which questions belong ****/
-  QTextArray                           : Array<string>        /*** QTextArray - array with text of questions ***/
-  // QAnswerArray                      : Array<string>        /*** ***/
-  ValueOfQuestion                      : number
-  Sum                                  : number               /*** Sum - how much money did player earn ***/
-  GameOver                             : boolean = true       /*** indicates whether the player can write in the text field for ansewer ***/
-  usedReplaceQuestionHelp1             : boolean              /*** indicates whether the player used the first replace question help ***/
-  usedReplaceQuestionHelp2             : boolean              /*** indicates whether the player used the second replace question help ***/
-  NumberOfQuestionPerRound             : number               /***  ***/
-  Field                                : number               /***  ***/
-  counterPerRound                      : number               /*** counts how much questions has the player opend in current round ***/
-  GuaranteedSum                        : number               /***  ***/
-  EndOfGame                            : number               /*** when EndOfGame becomes 16 it means that player answers on all questions ***/
-  Correct                              : boolean              /*** tells whether to hide label in html or not ***/
+  Number                               : number              
+  /** Array which elements indicates whether the question is opend or not */
+  IsDisabledArray                      : Array<boolean>       
+  /** Array with categories which questions belong */
+  CategoryArray                        : Array<number> 
+  /** Array with text of questions */       
+  QTextArray                           : Array<string>   
 
+  // QAnswerArray                      : Array<string>  
+
+   /** Contains information how much money did player earn */
+  ValueOfQuestion                      : number
+  /** Contains information how much money did player earn */
+  Sum                                  : number   
+  /** Indicates whether the player can write in the text field for ansewer */            
+  GameOver                             : boolean = true     
+  /** Indicates whether the player used the first replace question help */ 
+  usedReplaceQuestionHelp1             : boolean    
+  /** Indicates whether the player used the second replace question help */
+  usedReplaceQuestionHelp2             : boolean  
+  /** Contains information about number of questions per current round */            
+  NumberOfQuestionPerRound             : number               
+  
+  Field                                : number               
+  /** Counts how much questions has the player opened in current round */
+  counterPerRound                      : number               
+  /** Guaranteed sum that player will get */
+  GuaranteedSum                        : number    
+  /** When EndOfGame becomes 16 it means that player answers on all questions */           
+  EndOfGame                            : number 
+  /** Tells whether to hide label in html or not */              
+  Correct                              : boolean             
+
+  /** Contains servers response */   
   response                             : any
 
-  helps                                : boolean = true       /*** ability of using helps ***/
-  timeBool                             : any				          /*** boolean for operations with time and action on time ***/
-  infoBool                             : any	        			  /*** boolean for operations with time and action on time ***/
-  help1                                : boolean = false      /*** tells whether timer to use in combination with help1  ***/
-  help2                                : boolean = false      /*** tells whether timer to use in combination with help2  ***/
-  video_id                             : string			      	  /*** youtube video id ***/
-  trimedQuestion                       : string     				  /*** Text of question when Visoki Napon field is choosen ***/
-  public show                          : boolean = true   	  /*** tells whether to show youtube clip in html or not ***/
-  youtube                              : boolean = false      /*** tells whether Visoki napon field was choosen  ***/
+  /** Ability of using helps */
+  helps                                : boolean = true      
   
-  PracticeMode                         : boolean
+  /** Boolean for operations with time and action on time */
+  timeBool                             : any	
+  /** Boolean for operations with time and action on time */			          
+  infoBool                             : any	        
+  /** Tells whether timer to use in combination with help1 */			  
+  help1                                : boolean = false
+  /** Tells whether timer to use in combination with help2 */      
+  help2                                : boolean = false  
+  /** Contains youtube video id */    
+  video_id                             : string	
+  /** Text of question when Visoki Napon field is choosen */		      	  
+  trimedQuestion                       : string     	
+  /** Tells whether to show youtube clip in html or not */			  
+  public show                          : boolean = true  
+  /** Tells whether Visoki napon field was choosen */ 	  
+  youtube                              : boolean = false      
+  
+  /** Indicator whether PractiseMode is choosen or not */
+  PracticeMode
+  /** Servers response on players get top list request */
   TopList                              : any[]
+  /** Current loged user */
   CurrentUser                          : string
 
+  /** Hub conection for SignalR */
   hubConnection                        : HubConnection
+  /** Tells whether the tender help has been used or not */
   TenderHelp                           : boolean = false
+  /** Indicator whether the tender help has been used or not */
   usedTenderHelp                       : boolean
+  /** Indicator whether the tender offer has been used or not */
   AcceptedOffer                        : boolean = false
 
   constructor(private data: DataService, private http: HttpClient, private makeqService : MakeqService) { }
@@ -162,11 +204,8 @@ export class AnswerComponent implements OnInit {
     }
   }
 
-  /*** 
-   * When player enters his answer this funcition is called
-   * Arguments:
-   *      value : string  -  text of question on which player answers
-  ***/
+  /** Function for checking players answer on server side - 
+  * when player enters his answer this funcition is called */
   checkAnswer(value: string){
     var obj = {
       tex: this.QTextArray[this.Number],
@@ -233,7 +272,7 @@ export class AnswerComponent implements OnInit {
         // Changing the screen after 3 seconds
         await this.timer(3000);
 
-        /**  showing the top list if the user is logged in and its new score needs to be in the top list */
+        /*  showing the top list if the user is logged in and its new score needs to be in the top list */
         if(!this.PracticeMode)
           this._topList()
         else{
@@ -244,27 +283,25 @@ export class AnswerComponent implements OnInit {
     })
   }
 
-  /*** 
-   * When player clicks on button for tender help, this funcition is called 
-  ***/
+  /** Function that manages players tender help request */
   tender() {
 
-    /** Stopping timing */
+    /* Stopping timing */
     clearTimeout(this.infoBool)
     clearTimeout(this.timeBool)
     
-    /** Reading the question and its value */
+    /* Reading the question and its value */
     this.TenderHelp = true;
     var questionMessage = document.getElementById("questionId").innerText;
     var questionValueMessage = document.getElementById("questionValueId").innerText;
     
-    /** Sends it to the tender player */
+    /* Sends it to the tender player */
     this.hubConnection.invoke("SendMessageVN2Tender", this.CurrentUser, questionMessage, questionValueMessage).catch(function (err) {
       return console.error(err.toString());
     });
 
     var i = 1 
-    /** Receiving the offer from tender player */
+    /* Receiving the offer from tender player */
     this.hubConnection.on("ReceiveMessageTender2VN", (tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmountMessage) => {
       if(vnPlayerUsername === this.CurrentUser){
         /* creating html elements */
@@ -312,13 +349,15 @@ export class AnswerComponent implements OnInit {
   }
 
 
-  /** When player clicks on button for first replace question help, this funcition is called */
+  /** Function which manages first replace question help - 
+  * when player clicks on button for first replace question help, this funcition is called  */
   replaceQuestion1() {
 
     this.usedReplaceQuestionHelp1 = true
     this.data.changeusedReplaceQuestionHelp1(this.usedReplaceQuestionHelp1)
 
     this.help1 = true
+	  this.help2 = false
 
     var category = this.CategoryArray[this.Number]
     this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category - 1]
@@ -342,15 +381,15 @@ export class AnswerComponent implements OnInit {
     }.bind(this), 25000);
   }
     
-  /*** 
-   * When player clicks on button for second replace question help, this funcition is called 
-  ***/
+  /** Function which manages first replace question help - 
+   * when player clicks on button for second replace question help, this funcition is called  */
   replaceQuestion2(){
 
     this.usedReplaceQuestionHelp2 = true
     this.data.changeusedReplaceQuestionHelp2(this.usedReplaceQuestionHelp2)
 
     this.help2 = true
+	  this.help1 = false
 
     var category = this.CategoryArray[this.Number]
     this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category]
@@ -374,9 +413,10 @@ export class AnswerComponent implements OnInit {
     }.bind(this), 25000);
   }
 
+   /** Function which manages actions when player accepts tender-players offer  */
   _AcceptOffer(answerMessage: string, requestedAmountMessage: string, tenderPlayerUsername: string){
     
-    /** Setting parametars */
+    /* Setting parametars */
     this.AcceptedOffer = true;    
     this.usedTenderHelp = true;
     this.data.changeusedTenderHelp(this.usedTenderHelp);
@@ -406,7 +446,7 @@ export class AnswerComponent implements OnInit {
         
         await this.timer(3000);
 
-        /** Changing the value of question and sending information to tender user that his offer is accepted */ 
+        /* Changing the value of question and sending information to tender user that his offer is accepted */ 
         this.ValueOfQuestion = this.ValueOfQuestion - parseInt(requestedAmountMessage);
         this.data.changeValueOfQuestion(this.ValueOfQuestion);
         this.hubConnection.invoke("SendMessageChangeTenderSum", tenderPlayerUsername, requestedAmountMessage.toString()).catch(function (err) {
@@ -444,7 +484,7 @@ export class AnswerComponent implements OnInit {
         this.data.changeGuaranteedSum(this.GuaranteedSum)
       }
       
-      }else{/** Case when the tender player gave the wrong answer */
+      }else{/* Case when the tender player gave the wrong answer */
         var feedbackLabel = document.getElementById("tenderFeedbackId");
         feedbackLabel.innerText = "Odgovor je pogrešan!";
         
@@ -463,6 +503,7 @@ export class AnswerComponent implements OnInit {
 
   }
 
+  /** Function that applies first set of acctions when players answer is correct */
   _correctAnswerPart1(){
     for (var i = 0; i < this.Field; i++)
       this.IsDisabledArray[i] = false;
@@ -476,7 +517,7 @@ export class AnswerComponent implements OnInit {
         if (this.CategoryArray[i] < 0)
           this.data.removeFromArray(i)
       
-      /** If the number of the round became one, we are entering in one more round. */
+      /* If the number of the round became one, we are entering in one more round. */
       this.NumberOfQuestionPerRound--
       this.data.changeNumberOfQuestionPerRound(this.NumberOfQuestionPerRound)
       this.counterPerRound = 0
@@ -486,6 +527,7 @@ export class AnswerComponent implements OnInit {
     }
   }
 
+  /** Function that applies second set of acctions when players answer is correct */
   _correctAnswerPart2(){
     if (this.QTextArray[this.Number].indexOf("#!!#") >= 0)
     this.Sum = this.Sum * 2
@@ -498,6 +540,7 @@ export class AnswerComponent implements OnInit {
     this.data.changeCorrect(this.Correct)
   }
 
+  /** Function that applies set of acctions when players answer is wrong */
   _wrongAnswer(){
     this.GameOver = false
     this.data.changeGameOver(this.GameOver)
@@ -505,12 +548,14 @@ export class AnswerComponent implements OnInit {
     this.data.changeSum(this.Sum)
   }
 
+  /** Function that applies set of acctions when player won the game, i.e. player has answered on all questions correct */
   _gameWon(){
     this.GameOver = false
     this.data.changeGameOver(this.GameOver)
     this.GuaranteedSum = this.Sum
   }
 
+  /** Function that get top-list players from server on players request */
   _topList(){
     const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
     // todo ovde kreirati headeropcije

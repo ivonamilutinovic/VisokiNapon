@@ -11,7 +11,7 @@
             
             <label class = "value_of_question" id="questionValueId">{{ youtube ? 'Visoki Napon' : ValueOfQuestion}} </label>
             
-            <label class="timer" *ngIf = "(!helps1 && !helps2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
+            <label class="timer" *ngIf = "(!help1 && !help2 && helps) || youtube" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
             <label class="timer" *ngIf = "help1" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
             <label class="timer" *ngIf = "help2" > <countdown [config]="{ leftTime: 25, format: 's' }"></countdown> </label>
             
