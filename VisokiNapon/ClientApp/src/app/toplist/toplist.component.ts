@@ -33,11 +33,6 @@ interface topListStruct{
 
 export class ToplistComponent implements OnInit {
     
-  /*
-   * :BackToChoosingModeBoolean: only two ways to enter in TopListScreen: after the game is over or from button from ChoosingModeScreen.
-   *    This variable is talling us from witch screen we came so we can return back to that screen.
-   */
-
   /** Indicator of WelcomeComponent activity */
   WelcomeScreen                        : boolean
   /** Indicator of LogInComponent activity */
@@ -54,11 +49,15 @@ export class ToplistComponent implements OnInit {
   ChooseModeScreen                     : boolean
   /** Indicator of TenderComponent activity */
   TenderScreen                         : boolean
-  /** Indicator of redirecting screen */
+  /** Indicator for redirecting user to the screen from which he came. 
+   *  Explanation: There are only two ways to enter to the TopList screen -
+   *  after the game is over and user's score is placed in the
+   *  top list or from button 'Top lista' from ChoosingMode screen.
+  */
   BackToChoosingModeBoolean   	    	: boolean = true 
-  /** Servers answer on get top list request */
+  /** Server's answer on request for getting top list */
   TopList                             : any
-  /** Array of players in top list */
+  /** Array of players from the top list */
   BestCompetitorsArray                : Array<topListStruct>
   
   
@@ -87,7 +86,7 @@ export class ToplistComponent implements OnInit {
     this.GetTopList();
   }
 
-  /** Function that get top list from server */
+  /** Function gets top list of players from server */
   GetTopList(){
     
     this.http.get('/api/v3/toplist').subscribe(result => {this.TopList = result
@@ -101,7 +100,7 @@ export class ToplistComponent implements OnInit {
     })    
   }
 
-  /** Function that redirects to appropriate screen (component) */
+  /** Function redirects player to appropriate screen (component) */
   backToPriviousScreen(){
     if(this.data.currentBackToChoosingModeBoolean){
       this.data.showTopListScreen(false)

@@ -17,19 +17,18 @@ using System.Threading;
 using VISOKI_NAPON.Controllers.Resources;
 using AutoMapper;
 using System.Data.SqlClient;
-//using Microsoft.Data.SqlClient;
-//using System.Data.SqlClient;
+// using Microsoft.Data.SqlClient;
+// using System.Data.SqlClient;
+
 namespace VISOKI_NAPON.Controllers
 {   
     
     /// QuestionController Class - manages question-related requests
     public class QuestionsController : Controller
     {   
-        
         private readonly IMapper mapper;
         private readonly VisokiNaponDbContext context;
         
-
         /// Constructor of QuestionsController
         public QuestionsController(VisokiNaponDbContext context, IMapper mapper)
         {
@@ -37,14 +36,14 @@ namespace VISOKI_NAPON.Controllers
             this.context = context;
         }
         
-        /// adjuntive class containing text and answer of question
+        /// Adjunctive class containing text and answer of question
         public class obj {
             public string tex {get; set;}
             public string ans {get; set;}
         }
         
         /** ### Desctiption
-        * Function that gets questions for one game and questions for help of replacing question
+        * Function that gets questions for one game and questions for replace question help
         * ### Return value
         * Task<IEnumerable<QuestionResource>> - list of questions */
         [HttpGet("/api/v3/questions")]
@@ -92,17 +91,17 @@ namespace VISOKI_NAPON.Controllers
             return mapper.Map<List<Question>, List<QuestionResource>>(questions.Concat(replacementQuestions).ToList());
         }
         
-        /*[HttpGet("/api/crash_rep")]
-        /*[HttpGet("/api/crash_rep")]
-        public async Task<IEnumerable<any>> GetCrR(){
-             var crashMid = await "goran".ToListAsync();
-             return crashMid;
-        }*/
+        // [HttpGet("/api/crash_rep")]
+        // [HttpGet("/api/crash_rep")]
+        // public async Task<IEnumerable<any>> GetCrR(){
+        //      var crashMid = await "goran".ToListAsync();
+        //      return crashMid;
+        // }
 
-        /*[HttpGet("/api/v3/answer")]
-        public string v(){
-            return "initialize....";
-        }*/
+        // [HttpGet("/api/v3/answer")]
+        // public string v(){
+        //     return "initialize....";
+        // }
         
 
         /** ### Desctiption
@@ -119,12 +118,12 @@ namespace VISOKI_NAPON.Controllers
                 return Json(false);
         }
                 
-        //logic
-        //var query = from w in context.Questions where w.Text == text select w.Answer;
-        /* 
-     /* [HttpPost("/api/ex/par")]
-        public UsersError Post([FromBody] string par ){
-        return par;
-        }*/
+        // logic
+        // var query = from w in context.Questions where w.Text == text select w.Answer;
+        
+        // [HttpPost("/api/ex/par")]
+        // public UsersError Post([FromBody] string par ){
+        // return par;
+        // }
     }
 }

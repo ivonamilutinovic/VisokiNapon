@@ -6,6 +6,12 @@ code {
   color: #e01a76;
 }
 
+.center{
+  left: 380px;
+  top: 235px;
+  position: absolute;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -14,8 +20,11 @@ code {
 
 .main_container {
   position: absolute;
+  width: 900px;
+  height: 531px;
   top: 50%;
   left: 50%;
+  margin-right: -50%;
   -moz-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);

@@ -22,7 +22,7 @@ export class MakeqService {
     // this.myAppUrl = environment.appUrl;
   }
   
-  /** Function which get questions for player from server */
+  /** Function which gets questions for player from server */
   getQuestions() : Observable<any> {
     return this.http.get('/api/v3/questions')// .map(res => res.json())
     // .subscribe(result => log.result);

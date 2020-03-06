@@ -42,11 +42,11 @@ export class WelcomeComponent implements OnInit {
   QTextArray                          : Array<string>
   /** Contains list of questions got from server */
   questions                           : any[]  //$: Observable<QuestionM[]>;
-  ques                                : string[]
+  // ques                                : string[]
 
   /** Array of indicators whether question is opened or not */
   IsDisabledArray                     : Array<boolean> 
-  /** Current user */
+  /** Username of current user */
   User								  : string
   
   // private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -55,7 +55,7 @@ export class WelcomeComponent implements OnInit {
   // }
   
   constructor(private data : DataService, private makeqService : MakeqService) {
-    //this.http.post('/api/v1/answer', JSON.stringify('log'), httpOpt).toPromise().then(data=>{console.log(data);
+   // this.http.post('/api/v1/answer', JSON.stringify('log'), httpOpt).toPromise().then(data=>{console.log(data);
    // })
   }
 
@@ -76,7 +76,7 @@ export class WelcomeComponent implements OnInit {
     // this.makeqService.postAnswer().subscribe(response => console.log("response from POST", response));
   }
   
-  /** Function that redirect player in practise mode */
+  /** Function that redirect player to practise mode */
   practice(){
     // this.makeqService.validate_user(...).subscribe(res => console.log(res))
     this.data.changePracticeMode(true)

@@ -42,7 +42,7 @@ namespace VISOKI_NAPON.Controllers
         }
         
         /** ### Desctiption
-        * Function that gets players from top list, i.e. all data from TopList table 
+        * Function that gets all players from top list 
         * ### Return value
         * Task<IEnumerable<TopListResource>> - list of players */
         [HttpGet("/api/v3/toplist")]
@@ -58,9 +58,9 @@ namespace VISOKI_NAPON.Controllers
         
 
         /** ### Desctiption
-        * Function which updates TopList depending on the results player acomplished 
+        * Function which updates TopList depending on the results that player accomplished 
         * ### Arguments
-        * [FromBody]topLIstObj obj - frombody object contains Players username and amount won
+        * [FromBody]topLIstObj obj - frombody object containing player's username and won amount
         * ### Return value
         * Task<IActionResult> - positive IActionResult in case the player is added to the top list and negative otherwise */
         [HttpPost("/api/v3/updateTopList")]

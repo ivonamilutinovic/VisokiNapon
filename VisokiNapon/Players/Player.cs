@@ -6,26 +6,26 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace VISOKI_NAPON.Players
 {   
-    /// Class containing informations about player
+    /// Class contains informations about player
     [Table("Players")]
     public class Player
     {   
-        /// Email address - unique players identifier 
+        /// Email address - unique player identifier 
         public string Email { get; set; }
-        /// Players name 
+        /// Player's name 
         public string Name { get; set; }
-        /// Players surname 
+        /// Player's surname 
         public string Surname { get; set; }
-		/// Players username - unique players identifier
+		/// Player's username - unique player identifier
         [KeyAttribute]
         public string UsernameId { get; set; }
-        /// Players password hash generated from players password
+        /// Player's password hash generated from player's password
         public byte[] PasswordHash { get; set; }
-        /// Players password salt generated from players password
+        /// Player's password salt generated from player's password
         public byte[] PasswordSalt { get; set; }
         /// Contains information whether the player has been verified
 		public string Verified {get; set;}
-        /// Date and time of players registration
+        /// Date and time of player registration
 		public DateTime DateAndTime {get; set; }
  
         /// Constructor

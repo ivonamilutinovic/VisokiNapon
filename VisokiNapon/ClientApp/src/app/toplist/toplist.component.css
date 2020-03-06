@@ -1,13 +1,10 @@
-.container{
-  position: relative;
-  top: -100%;
-}
-
 .button{
   width: 150px;
+  height: 58px;
   right: 152px;
-  top: 60px;
-  position: relative;
+  top: 0px;
+  left: -10px;
+  position: absolute;
   background-color: #614e75;
   border: 2px solid #dad8d7;
   color: white;

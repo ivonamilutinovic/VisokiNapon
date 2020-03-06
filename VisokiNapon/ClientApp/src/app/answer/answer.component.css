@@ -1,15 +1,42 @@
-p{
+.tender_p{
   border-radius: 2px;
   border: 1px solid #d8dad7;
   background-color: #c97dc9;
-  box-shadow: 2px 3px 3px #d8dad7;
+  box-shadow: 2px 3px 3px #e2e2e2;
   padding: 3px 3px;
+  width: 40%;
+}
+
+.inform {
+  border-radius: 2px;
+  border: 1px solid #d8dad7;
+  background-color: #c97dc9;
+  box-shadow: 2px 3px 3px #e2e2e2;
+	color : white;
+	font-size: 150%;
+	font-weight: bold; 
+	width: 848px;
+	text-align: center;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 848px;
+  margin-right: -50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .feedback{
   width: 700px;
   height: 40px;
-  position: absolute;
+  top: -40px;
+  left: 100px;
+  right: 100px;
+  position: relative;
   margin: 0px 30px 10px 30px;
   background-color: #35373b;
   border: 2px solid #dad8d7;
@@ -24,7 +51,8 @@ p{
 .tender_feedback{
   width: 500px;
   height: 40px;
-  left: 70px;
+  left: 200px;
+  right: 200px;
   margin: 0px 30px 10px 70px;
   position: relative;
   background-color: #35373b;
@@ -32,7 +60,7 @@ p{
   color: white; 
   text-align: center;
   vertical-align: middle;
-  line-height: 50px;
+  line-height: 40px;
   font-size: 18px;
   border-radius: 4px;
   margin: 35px 0px 10px 0px;
@@ -42,9 +70,9 @@ p{
 .value_of_question{
   width: 300px;
   height: 50px;
-  position: relative;
-  left: 150px;
-  right: 150px;
+  position: absolute;
+  right: 300px;
+  left: 300px;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
   color: white; 
@@ -59,7 +87,7 @@ p{
   width: 900px;
   height: 200px;
   position: relative;
-  top: 0px;
+  top: 2px;
   background-color: #614e75;
   border: 2px solid #dad8d7;
   color: white;
@@ -80,9 +108,9 @@ input[type=text], select {
   border-radius: 4px;
   box-sizing: border-box;
   background-color:#ccc2d6;
-  position: absolute;
-  top: 295px;
-  left: 37%;
+  position: relative;
+  left: 270px;
+  right: 270px;
   background-color: #ccc2d6;
   color: white;
 }
@@ -90,9 +118,10 @@ input[type=text], select {
 .wonAmount{
   width: 300px;
   height: 50px;
-  position: relative;
-  top: 100px;
-  left: 200px;
+  left: 300px;
+  right: 300px;
+  bottom: 120px;
+  position: absolute;
   background-color: #35373b;
   border: 2px solid #dad8d7;
   color: white;	
@@ -105,8 +134,7 @@ input[type=text], select {
 
 .tender_container{
   position: relative;
-  top: -150px;
-  left: -200px;
+  left: -20%;
 }
 
 .tenderHelpDiv{
@@ -175,29 +203,10 @@ input[type=text], select {
   width: 50px;
   height: 50px;
   position: absolute;
-  left: 800px;
+  right: 0px;
   text-align: center;
   color: white;
   background-color: #ccc2d6;
   border: 2px solid #dad8d7;
   border-radius: 4px;
-}
-
-.container {
-    position: absolute;
-	top: 50%;
-    left: 50%;
-	width: 848px;
-    margin-right: -50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-}
-
-.inform {
-	color : white;
-	font-size: 150%;
-	font-weight: bold; 
-	width: 848px;
-	text-align: center;
 }

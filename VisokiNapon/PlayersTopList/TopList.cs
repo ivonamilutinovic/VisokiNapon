@@ -5,16 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VISOKI_NAPON.PlayersTopList
 {   
-    /// Class contain information about player in TopList
+    /// Class contains information about player from TopList table
     [Table("PlayersTopList")]
     public class TopList
     {   
-        /// Id of player in TopList database table     
+        /// Player id in TopList table     
         [KeyAttribute]
         public int Id { get; set; }
-        /// Players username
+        /// Player's username
         public string Username { get; set; }
-        /// Amount the player has won 
+        /// Max amount that the player has won 
         public int MaxAmount { get; set; }
 
         /// Constructor

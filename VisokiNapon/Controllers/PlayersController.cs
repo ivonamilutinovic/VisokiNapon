@@ -19,7 +19,7 @@ using VISOKI_NAPON.Handlers;
 
 namespace VISOKI_NAPON.Controllers
 {   
-    /// PlayersController class - manages log in/sign up-related requests
+    /// PlayersController class - manages log in/sign up related requests
     public class PlayersController : Controller
     {   
     
@@ -32,13 +32,13 @@ namespace VISOKI_NAPON.Controllers
             this.playerHandler = playerHandler;
         }
 
-        /// adjuntive class containing log in informations of player
+        /// Adjunctive class containing log in informations of player
         public class objLogin {
             public string user {get;set;}
             public string pass {get;set;}
         }
 
-        /// adjuntive class containing infromations about player
+        /// Adjunctive class containing infromations about player
         public class signUpObj {
             public string email {get;set;}
             public string name {get;set;}
@@ -49,11 +49,11 @@ namespace VISOKI_NAPON.Controllers
         }
      
         /** ### Desctiption
-        *  Log In Function - manages Players log in request 
+        *  Log In Function - manages player's log in request 
         * ### Arguments
-        * [FromBody]objLogin obj - frombody object contains Players username and password
+        * [FromBody]objLogin obj - frombody object containing player's username and password
         * ### Return value
-        * IActionResult - Returns positive IActionResult in case of successfull log in and negative otherwise */
+        * IActionResult - returns positive IActionResult in case of successful log in and negative otherwise */
         [HttpPost("/api/v3/login")]
         public IActionResult login([FromBody]objLogin obj){
 			
@@ -65,12 +65,12 @@ namespace VISOKI_NAPON.Controllers
         }
 
         /** ### Desctiption
-        *  Function for players registration - manages Players register request 
+        *  Function for player registration - manages player register requests 
         * ### Arguments
-        * [FromBody]signUpObj obj - frombody object contains all Players data 
+        * [FromBody]signUpObj obj - frombody object containing all player's data 
         * ### Return value
-        * IActionResult - Returns positive IActionResult in case of successfull registration that later has to 
-        * be confirmed, and negative otherwise */
+        * IActionResult - returns positive IActionResult in case of successful registration that later has to 
+        * be confirmed and negative otherwise */
         [HttpPost("/api/v3/register")]
         public IActionResult register([FromBody]signUpObj obj){
 			
@@ -82,11 +82,11 @@ namespace VISOKI_NAPON.Controllers
         }
 		
         /** ### Desctiption
-        *  Function for registration confirmation - manages Players confirm registration request
+        *  Function for confirmation of registration - manages player confirm registration requests
         * ### Arguments
-        * [FromBody]objLogin obj - frombody object contains Players username and confirmation pin 
+        * [FromBody]objLogin obj - frombody object containing player's username and confirmation pin 
         * ### Return value
-        * IActionResult - Returns positive IActionResult in case of successfull confirmation and negative otherwise */
+        * IActionResult - Returns positive IActionResult in case of successful confirmation and negative otherwise */
 		[HttpPost("/api/v3/confirm")]
         public IActionResult confirm([FromBody]objLogin obj){
 			

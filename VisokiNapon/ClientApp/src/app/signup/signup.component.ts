@@ -33,14 +33,14 @@ export class SignupComponent implements OnInit {
   message                  : string = ""
   /** Message which will be shown to player */
   signupmessage            : string = ""
-  /** Servers response on players log in request */
+  /** Server's response on player log in request */
   response                 : any
 
   /** Indicator whether field is disabled or not */
   disabledField		  : boolean = false
   /** Indicator whether to show confirm registration screen or not */
   codeConfirmation    : boolean = false	
-  /** Current user */
+  /** Username of current user */
   user				  : string = "" 
   /** Indicator whether the confirm registration request is sent  */
   requestSent		  : boolean = false
@@ -49,10 +49,8 @@ export class SignupComponent implements OnInit {
   /**  Boolean for operations with time and action on time */
   infoBool                             : any	        
 
-  
   constructor(private data : DataService, private http: HttpClient,  private makeqService : MakeqService) { }
   
-
   ngOnInit() {
     this.data.currentWelcomeScreen.subscribe(message => this.WelcomeScreen = message)
     this.data.currentLogInScreen.subscribe(message => this.LogInScreen = message)
@@ -62,16 +60,15 @@ export class SignupComponent implements OnInit {
   	this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
 	  this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-
   }
 
-  /** Function which redirect player to log in */
+  /** Function which redirects player to log in screen */
   changeToLogin(){
 		this.data.showSignUpScreen(false)
 		this.data.showLogInScreen(true)
   }
 
-  /** Function which manages players register request */
+  /** Function which manages player's register request */
   checkSignUpInfo(uemail: string, uname: string, usurname: string, usr: string, pass : string , confpass : string){
 	  
     var objSignup = {
@@ -82,7 +79,6 @@ export class SignupComponent implements OnInit {
       password          : pass,
       confirmpassword   : confpass
     }  
-    
 	
   	this.disabledField=true
 	
@@ -120,7 +116,6 @@ export class SignupComponent implements OnInit {
         }.bind(this), 4000);
       }.bind(this), 180000);
 		
-		
     }
     else {
 		  this.signupmessage = "Email adresa je vec registrovana ili je uneti username zauzet. " +  
@@ -130,7 +125,7 @@ export class SignupComponent implements OnInit {
     }) 	
   }
   
-  /** Function which manages players confirm registration request */
+  /** Function which manages player's confirm registration request */
 	confirmCode(code : string){
 	
 	  clearTimeout(this.infoBool)

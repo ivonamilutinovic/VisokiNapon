@@ -9,14 +9,14 @@ namespace VISOKI_NAPON.Questions
     [Table("Questions")]
     public class Question
     {
-        /// Questions id in table of questions
+        /// Question's id in table of questions
         public int Id { get; set; }
         /// Text of the question
         public string Text { get; set; }
-        /// Answer of question
+        /// Answer on question
         //[NotMapped]
         public string Answer { get; set; }
-        /// Category of question (1,5,10, or 4 for VisokiNapon Field)
+        /// Category of question (1, 5, 10, or 4 for VisokiNapon Field)
         public int Category { get; set; }
 
         /// Constructor

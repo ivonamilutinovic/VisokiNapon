@@ -7,71 +7,74 @@ export class DataService {
 
   constructor() {}
 
-  /** Default showing indicator value for welocme component */
+  /** BehaviorSubject */
   private defaultWelcomeScreen = new BehaviorSubject<boolean>(true);
-  /** Current showing indicator value for welcome component */
+  /** Observable of defaultWelcomeScreen */
   currentWelcomeScreen = this.defaultWelcomeScreen.asObservable();
-  /** Function which changes showing indicator value for welocme component */
+  /** Function changes the current value of defaultWelcomeScreen variable to value given as argument */
   showWelcomeScreen(message: boolean) {
     this.defaultWelcomeScreen.next(message)
   }
 
-  /** Default showing indicator value for log in component */
+  /** BehaviorSubject */
   private defaultLogInScreen = new BehaviorSubject<boolean>(false);
-  /** Current showing indicator value for log in component */
+  /** Observable of defaultLogInScreen */
   currentLogInScreen = this.defaultLogInScreen.asObservable();
-  /** Function which changes showing indicator value for log in component */
+  /** Function changes the current value of defaultLogInScreen variable to value given as argument */
   showLogInScreen(message: boolean) {
     this.defaultLogInScreen.next(message)
   }
 
-  /** Default showing indicator value for table component */
+  /** BehaviorSubject */
   private defaultQuestionsScreen = new BehaviorSubject<boolean>(false);
-  /** Current showing indicator value for table component */
+  /** Observable of defaultQuestionsScreen */
   currentQuestionsScreen = this.defaultQuestionsScreen.asObservable();
-  /** Function which changes showing indicator value for table component */
+  /** Function changes the current value of defaultQuestionsScreen variable to value given as argument */
   showQuestionsScreen(message: boolean) {
     this.defaultQuestionsScreen.next(message)
   }
 
-  /** Default showing indicator value for answer component */
+  /** BehaviorSubject */
   private defaultAnsweringScreen = new BehaviorSubject<boolean>(false);
-  /** Current showing indicator value for answer component */
+  /** Observable of defaultAnsweringScreen */
   currentAnsweringScreen = this.defaultAnsweringScreen.asObservable();
-  /** Function which changes showing indicator value for answer component */
+  /** Function changes the current value of defaultAnsweringScreen variable to value given as argument */
   showAnsweringScreen(message: boolean) {
     this.defaultAnsweringScreen.next(message)
   }
 
-  /** Default showing indicator value for sign up component */
+  /** BehaviorSubject */
   private defaultSignUpScreen = new BehaviorSubject<boolean>(false);
-  /** Current showing indicator value for sign up component */
+  /** Observable of defaultSignUpScreen */
   currentSignUpScreen = this.defaultSignUpScreen.asObservable();
-  /** Function which changes showing indicator value for sign up component */
+  /** Function changes the current value of defaultSignUpScreen variable to value given as argument */
   showSignUpScreen(message: boolean) {
     this.defaultSignUpScreen.next(message)
   }
   
-  /** Default showing indicator value for toplist component */
+  /** BehaviorSubject */
   private defaultTopListScreen = new BehaviorSubject<boolean>(false);
-  /** Current showing indicator value for toplist component */
+  /** Observable of defaultTopListScreen */
   currentTopListScreen = this.defaultTopListScreen.asObservable();
-  /** Function which changes showing indicator value for toplist component */
+  /** Function changes the current value of defaultTopListScreen variable to value given as argument */
   showTopListScreen(message: boolean) {
     this.defaultTopListScreen.next(message)
   }
 
-  /** Default showing indicator value for choosemode component */
+  /** BehaviorSubject */
   private defaultChooseModeScreen = new BehaviorSubject<boolean>(false);
-  /** Current showing indicator value for choosemode component */
+  /** Observable of defaultChooseModeScreen */
   currentChooseModeScreen = this.defaultChooseModeScreen.asObservable();
-  /** Function which changes showing indicator value for choosemode component */
+  /** Function changes the current value of defaultChooseModeScreen variable to value given as argument */
   showChooseModeScreen(message: boolean) {
     this.defaultChooseModeScreen.next(message)
   }
 
+  /** BehaviorSubject */
   private defaultTenderScreen = new BehaviorSubject<boolean>(false);
+  /** Observable of defaultTenderScreen */
   currentTenderScreen = this.defaultTenderScreen.asObservable();
+  /** Function changes the current value of defaultTenderScreen variable to value given as argument */
   showTenderScreen(message: boolean) {
     this.defaultTenderScreen.next(message)
   }
@@ -88,23 +91,23 @@ export class DataService {
   //     this.arrayNumbersS[this.i - 1] = k;
   // }
 
-  /** Default initialised array of Question category */
+  /** The initial value for defaultCategoryArray array */
   private defaultCategoryArrayC : Array<number> = [0, 0, 0, 0, 
                                                    0, 0, 0, 0,
                                                    0, 0, 0, 0,
                                                    0, 0, 0, 0,
                                                    0, 0, 0, 0,
                                                    0, 0];
-  /** Default array of question category */
+  /** BehaviorSubject */
   private defaultCategoryArray = new BehaviorSubject<Array<number>>(this.defaultCategoryArrayC)
-  /** Current array of question category  */
+  /** Observable of defaultCategoryArray */
   currentCategoryArray = this.defaultCategoryArray.asObservable();
-  /** Function which changes current array of question category */
+  /** Function changes the current value of defaultCategoryArray array to value given as argument */
   changeCategoryArray(message: Array<number>){
     this.defaultCategoryArray.next(message)
   }
 
-  /** Function which manages all data for answered and available questions */
+  /** Function removes all data for answered question */
   removeFromArray(message: number) {
     this.defaultCategoryArrayC.splice(message, 1);
     this.defaultCategoryArray.next(this.defaultCategoryArrayC)
@@ -112,25 +115,25 @@ export class DataService {
     this.defaultQTextArrayC.splice(message, 1);
     this.defaultQTextArray.next(this.defaultQTextArrayC)
     
-    //this.defaultQAnswerArrayC.splice(message, 1);
-    //this.defaultQAnswerArray.next(this.defaultQAnswerArrayC)
+    // this.defaultQAnswerArrayC.splice(message, 1);
+    // this.defaultQAnswerArray.next(this.defaultQAnswerArrayC)
     
     this.defaultIsDisabledArrayC.splice(message, 1);
     this.defaultIsDisabledArray.next(this.defaultIsDisabledArrayC)
   }
   
-  /** Default initialised array of text of questions */
+  /** The initial value for defaultQTextArray array */
   private defaultQTextArrayC =["?","?","?","?",
                                "?","?","?","?",
                                "?","?","?","?",
                                "?","?","?","?",
                                "?","?","?","?",
                                "?","?"]
-  /** Default array of text of questions */
+  /** BehaviorSubject */
   private defaultQTextArray = new BehaviorSubject<Array<string>>(this.defaultQTextArrayC)
-  /** Current array of text of questions  */ 
+  /** Observable of defaultQTextArray */ 
   currentQTextArray = this.defaultQTextArray.asObservable();
-  /** Function which changes current array of text of questions */
+  /** Function changes the current value of defaultQTextArray array to value given as argument */
   changeQTextArray(message: Array<string>){
     this.defaultQTextArray.next(message)
   }
@@ -142,216 +145,216 @@ export class DataService {
   //   this.defaultQAnswerArray.next(message)
   // }
 
-  /** Default initialised array of indicator wheather the question is choosen or not */
+  /** The initial value for defaultIsDisabledArray array */
   private defaultIsDisabledArrayC : Array<boolean> = [false, false, false, false, 
                                                       false, false, false, false,
                                                       false, false, false, false,
                                                       false, false, false, false,
                                                       false, false, false, false,
                                                       false, false];
-  /** Default array of indicator wheather the question is choosen or not */             
+  /** BehaviorSubject */
   private defaultIsDisabledArray = new BehaviorSubject<Array<boolean>>(this.defaultIsDisabledArrayC)
-  /** Current array of indicator wheather the question is choosen or not  */ 
+  /** Observable of defaultIsDisabledArray  */ 
   currentIsDisabledArray = this.defaultIsDisabledArray.asObservable();
-  /** Function which changes current array of indicator wheather the question is choosen or not */
+  /** Function changes the current value of defaultIsDisabledArray array to value given as argument */
   changeIsDisabledArray(message: Array<boolean>){
     this.defaultIsDisabledArray.next(message)
   }
 
-  /** Default initialised counter */
+  /** The initial value for defaultCounter variable */
   private defaultCounterC: number = 0;
-  /** Default counter */
+  /** BehaviorSubject */
   private defaultCounter = new BehaviorSubject<number>(this.defaultCounterC)
-  /** Current conuter */
+  /** Observable of defaultCounter */
   currentCounter = this.defaultCounter.asObservable();
-  /** Function which changes current counter */
+  /** Function changes the current value of defaultCounter variable to value given as argument */
   changeCounter(message: number){
    this.defaultCounter.next(message)
   }
 
-  /** Default initialised user */
+  /** The initial value for defaultUser variable */
   private defaultUserC: string = "";
-  /** Default user */
+  /** BehaviorSubject */
   private defaultUser = new BehaviorSubject<string>(this.defaultUserC)
-  /** Current user */
+  /** Observable of defaultUser */
   currentUser = this.defaultUser.asObservable();
-  /** Function which changes current user */
+  /** Function changes the current value of defaultUser variable to value given as argument */
   changeUser(message: string){
    this.defaultUser.next(message)
   }
 
-  /** Default initialised indicator */
+  /** The initial value for defaultIndicator variable */
   private defaultIndicatorC: boolean = false;
-  /** Default indicator */
+  /** BehaviorSubject */
   private defaultIndicator = new BehaviorSubject<boolean>(this.defaultIndicatorC)
-  /** Current indicator */
+  /** Observable of defaultIndicator */
   currentIndicator = this.defaultIndicator.asObservable();
-  /** Function which changes current indicator */
+  /** Function changes the current value of defaultIndicator variable to value given as argument */
   changeIndicator(message: boolean){
     this.defaultIndicator.next(message)
   }
 
-  /** Default initialised number of question */
+  /** The initial value for defaultQNumber variable */
   private defaultQNumberC: number = -1
-  /** Default number of question */
+  /** BehaviorSubject */
   private defaultQNumber = new BehaviorSubject<number>(this.defaultQNumberC);
-  /** Current number of question */
+  /** Observable of defaultQNumber */
   currentQNumber = this.defaultQNumber.asObservable();
-  /** Function which changes current number of question */
+  /** Function changes the current value of defaultQNumber variable to value given as argument */
   changeQNumber(message: number) {
     this.defaultQNumber.next(message)
   }
 
-  /** Default initialised amount player has won */
+  /** The initial value for defaultSum variable */
   private defaultSumC: number = 0
-  /** Default amount player has won */
+  /** BehaviorSubject */
   private defaultSum = new BehaviorSubject<number>(this.defaultSumC);
-  /** Current amount player has won */
+  /** Observable of defaultSum */
   currentSum = this.defaultSum.asObservable();
-  /** Function which changes current amount player has won */
+  /** Function changes the current value of defaultSum variable to value given as argument */
   changeSum(message: number) {
     this.defaultSum.next(message)
   }
 
-  /** Default initialised value of question */
+  /** The initial value for defaultValueOfQuestion variable */
   private defaultValueOfQuestionC: number = 0
-  /** Default value of question */
+  /** BehaviorSubject */
   private defaultValueOfQuestion = new BehaviorSubject<number>(this.defaultValueOfQuestionC);
-  /** Current value of question */
+  /** Observable of defaultValueOfQuestion */
   currentValueOfQuestion = this.defaultValueOfQuestion.asObservable();
-  /** Function which changes current value of question */
+  /** Function changes the current value of defaultValueOfQuestion variable to value given as argument */
   changeValueOfQuestion(message: number) {
     this.defaultValueOfQuestion.next(message)
   }
 
-  /** Default initialised number of questions per round */
+  /** The initial value for defaultNumberOfQuestionPerRound variable */
   private defaultNumberOfQuestionPerRoundC: number = 5
-  /** Default number of questions per round */
+  /** BehaviorSubject */
   private defaultNumberOfQuestionPerRound = new BehaviorSubject<number>(this.defaultNumberOfQuestionPerRoundC);
-  /** Current number of questions per round */
+  /** Observable of defaultNumberOfQuestionPerRound */
   currentNumberOfQuestionPerRound = this.defaultNumberOfQuestionPerRound.asObservable();
-  /** Function which changes current number of questions per round */
+  /** Function changes the current value of defaultNumberOfQuestionPerRound variable to value given as argument */
   changeNumberOfQuestionPerRound(message: number) {
     this.defaultNumberOfQuestionPerRound.next(message)
   }
 
-  /** Default initialised number of fields in choosing question table */
+  /** The initial value for defaultField variable */
   private defaultFieldC: number = 16
-  /** Default number of fields in choosing question table */
+  /** BehaviorSubject */
   private defaultField = new BehaviorSubject<number>(this.defaultFieldC);
-  /** Current number of fields in choosing question table */
+  /** Observable of defaultField */
   currentField = this.defaultField.asObservable();
-  /** Function which changes current number of questions per round */
+  /** Function changes the current value of defaultField variable to value given as argument */
   changeField(message: number) {
     this.defaultField.next(message)
   }
 
-  /** Default initialised counter of questions per round */
+  /** The initial value for defaultcounterPerRound variable */
   private defaultcounterPerRoundC: number = 0
-  /** Default counter of questions per round */
+  /** BehaviorSubject */
   private defaultcounterPerRound = new BehaviorSubject<number>(this.defaultcounterPerRoundC);
-  /** Current counter of questions per round */
+  /** Observable of defaultcounterPerRound */
   currentcounterPerRound = this.defaultcounterPerRound.asObservable();
-  /** Function which changes current counter of questions per round */
+  /** Function changes the current value of defaultcounterPerRound variable to value given as argument */
   changecounterPerRound(message: number) {
     this.defaultcounterPerRound.next(message)
   }
 
-  /** Default initialised guaranteed sum player has won */
+  /** The initial value for defaultGuaranteedSum variable */
   private defaultGuaranteedSumC: number = 0
-  /** Default guaranteed sum player has won */
+  /** BehaviorSubject */
   private defaultGuaranteedSum = new BehaviorSubject<number>(this.defaultGuaranteedSumC);
-  /** Current guaranteed sum player has won */
+  /** Observable of defaultGuaranteedSum */
   currentGuaranteedSum = this.defaultGuaranteedSum.asObservable();
-  /** Function which changes current guaranteed sum player has won */
+  /** Function changes the current value of defaultGuaranteedSum variable to value given as argument */
   changeGuaranteedSum(message: number) {
     this.defaultGuaranteedSum.next(message)
   }
 
-  /** Default initialised number which initialise end of the game */
+  /** The initial value for defaultEndOfGame variable */
   private defaultEndOfGameC: number = 0
-  /** Default number which initialise end of the game */
+  /** BehaviorSubject */
   private defaultEndOfGame = new BehaviorSubject<number>(this.defaultEndOfGameC);
-  /** Current number which initialise end of the game */
+  /** Observable of defaultEndOfGame */
   currentEndOfGame = this.defaultEndOfGame.asObservable();
-  /** Function which changes current number which initialise end of the game */
+  /** Function changes the current value of defaultEndOfGame variable to value given as argument */
   changeEndOfGame(message: number) {
     this.defaultEndOfGame.next(message)
   }
 
-  /** Default initialised indicator wheather the answer is correct or not */
+  /** The initial value for defaultCorrect variable */
   private defaultCorrectC: boolean = true
-  /** Default indicator wheather the answer is correct or not */
+  /** BehaviorSubject */
   private defaultCorrect = new BehaviorSubject<boolean>(this.defaultCorrectC);
-  /** Current indicator wheather the answer is correct or not */
+  /** Observable of defaultCorrect */
   currentCorrect = this.defaultCorrect.asObservable();
-  /** Function which changes current indicator wheather the answer is correct or not */
+  /** Function changes the current value of defaultCorrect variable to value given as argument */
   changeCorrect(message: boolean) {
     this.defaultCorrect.next(message)
   }
 
-  /** Default initialised indicator wheather the first replace question help has been used or not */
+  /** The initial value for defaultusedReplaceQuestionHelp1 variable */
   private defaultusedReplaceQuestionHelp1C: boolean = false
-  /** Default indicator wheather the first replace question help has been used or not */
+  /** BehaviorSubject */
   private defaultusedReplaceQuestionHelp1 = new BehaviorSubject<boolean>(this.defaultusedReplaceQuestionHelp1C);
- /** Current indicator wheather the first replace question help has been used or not */
+  /** Observable of defaultusedReplaceQuestionHelp1 */
   currentusedReplaceQuestionHelp1 = this.defaultusedReplaceQuestionHelp1.asObservable();
-  /** Function which changes current indicator wheather the first replace question help has been used or not */
+  /** Function changes the current value of defaultusedReplaceQuestionHelp1 variable to value given as argument */
   changeusedReplaceQuestionHelp1(message: boolean) {
     this.defaultusedReplaceQuestionHelp1.next(message)
   }
 
-  /** Default initialised indicator wheather the second replace question help has been used or not */
+  /** The initial value for defaultusedReplaceQuestionHelp2 variable */
   private defaultusedReplaceQuestionHelp2C : boolean = false
-  /** Default indicator wheather the second replace question help has been used or not */
+  /** BehaviorSubject */
   private defaultusedReplaceQuestionHelp2 = new BehaviorSubject<boolean>(this.defaultusedReplaceQuestionHelp2C);
-  /** Current indicator wheather the second replace question help has been used or not */
+  /** Observable of defaultusedReplaceQuestionHelp2 */
   currentusedReplaceQuestionHelp2 = this.defaultusedReplaceQuestionHelp2.asObservable();
-  /** Function which changes current indicator wheather the second replace question help has been used or not */
+  /** Function changes the current value of defaultusedReplaceQuestionHelp2 variable to value given as argument */
   changeusedReplaceQuestionHelp2(message: boolean) {
     this.defaultusedReplaceQuestionHelp2.next(message)
   }
 
-  /** Default initialised indicator wheather the tender help has been used or not */
+  /** The initial value for defaultusedTenderHelp variable */
   private defaultusedTenderHelpC : boolean = false
-  /** Default indicator wheather the tender help has been used or not */
+  /** BehaviorSubject */
   private defaultusedTenderHelp = new BehaviorSubject<boolean>(this.defaultusedTenderHelpC);
-  /** Current indicator wheather the tender help has been used or not */
+  /** Observable of defaultusedTenderHelp */
   currentusedTenderHelp = this.defaultusedTenderHelp.asObservable();
-  /** Function which changes current indicator wheather the tender help has been used or not */
+  /** Function changes the current value of defaultusedTenderHelp variable to value given as argument */
   changeusedTenderHelp(message: boolean) {
     this.defaultusedTenderHelp.next(message)
   }
   
-  /** Default initialised indicator wheather the game is over or not */
+  /** The initial value for defaultGameOver variable */
   private GameOverC : boolean = true
-  /** Default indicator wheather the game is over or not */
+  /** BehaviorSubject */
   private defaultGameOver = new BehaviorSubject<boolean>(this.GameOverC);
-  /** Current indicator wheather the game is over or not */
+  /** Observable of defaultGameOver */
   currentGameOver = this.defaultGameOver.asObservable();
-  /** Function which changes current indicator wheather the game is over or not */
+  /** Function changes the current value of defaultGameOver variable to value given as argument */
   changeGameOver(message: boolean) {
     this.defaultGameOver.next(message)
   }
   
-  /** Default initialised indicator wheather to redirect player to choosing mode of game */
+  /** The initial value for defaultBackToChoosingModeBoolean variable */
   private BackToChoosingModeBooleanC : boolean = false
-  /** Default indicator wheather to redirect player to choosing mode of game */
+  /** BehaviorSubject */
   private defaultBackToChoosingModeBoolean = new BehaviorSubject<boolean>(this.BackToChoosingModeBooleanC);
-  /** Current indicator wheather to redirect player to choosing mode of game */
+  /** Observable of defaultBackToChoosingModeBoolean */
   currentBackToChoosingModeBoolean = this.defaultBackToChoosingModeBoolean.asObservable();
-  /** Function which changes current indicator wheather to redirect player to choosing mode of game */
+  /** Function changes the current value of defaultBackToChoosingModeBoolean variable to value given as argument */
   changeBackToChoosingModeBoolean(message: boolean) {
     this.defaultBackToChoosingModeBoolean.next(message)
   }
 
-  /** Default initialised indicator wheather the player is in pratice mode or not */
+  /** The initial value for defaultPracticeMode object */
   private PracticeModeC : boolean = false
-  /** Default indicator wheather the player is in pratice mode or not */
+  /** BehaviorSubject */
   private defaultPracticeMode = new BehaviorSubject<boolean>(this.PracticeModeC);
-  /** Current indicator wheather the player is in pratice mode or not */
+  /** Observable of defaultPracticeMode */
   currentPracticeMode = this.defaultPracticeMode.asObservable();
-  /** Function which changes current indicator wheather the player is in pratice mode or not */
+  /** Function changes the current value of defaultPracticeMode variable to value given as argument */
   changePracticeMode(message: boolean) {
     this.defaultPracticeMode.next(message)
   }

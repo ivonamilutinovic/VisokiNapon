@@ -34,7 +34,7 @@ export class TenderComponent implements OnInit {
   ChooseModeScreen                     : boolean
   /** Indicator of TenderComponent activity */
   TenderScreen                         : boolean
-  /** Current player */
+  /** Username of the current player */
   CurrentUser                         : string
 
   constructor(private data: DataService, private http: HttpClient,  private makeqService : MakeqService) {}
@@ -139,10 +139,10 @@ export class TenderComponent implements OnInit {
         var requestedAmountMessage = requestedAmountElement.value;
         
         if(answerMessage == "" || requestedAmountMessage ==""){
-          alert("Both inputs are required")
+          alert("Oba polja su obavezna.")
         }
         else if(parseInt(requestedAmountMessage) < parseInt(requestedAmountElement.min) || parseInt(requestedAmountMessage) > parseInt(requestedAmountElement.max)){
-          alert("Amount must be between " + requestedAmountElement.min + " and " + requestedAmountElement.max)
+          alert("Iznos mora biti između " + requestedAmountElement.min + " i " + requestedAmountElement.max + ".")
         }
         else{
           var div = document.getElementById(divId);
@@ -159,14 +159,12 @@ export class TenderComponent implements OnInit {
       i++;
     });
 
-    // This also means that the help is accepted so we can delete div component related to help to that user
     this.hubConnection.on("ReceiveMessageChangeTenderSum", (user, TenderAmountMessage) => {
       if(user == this.CurrentUser){
         var amountLabel = document.getElementById("tenderAmountId");
         var amount = parseInt(amountLabel.innerText) + parseInt(TenderAmountMessage);
         amountLabel.innerText = amount.toString();
       }
-
     });
   }
 

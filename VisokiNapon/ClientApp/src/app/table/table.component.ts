@@ -34,9 +34,7 @@ export class TableComponent implements OnInit {
   CategoryArray                        : Array<number> 
   /** Array with text of questions */       
   QTextArray                           : Array<string>  
-
   // QAnswerArray                     : Array<string>
-  
   /** Indicator wheather the question is choosen or not */
   Indicator                           : boolean
   /** Number of opened questions */
@@ -49,9 +47,9 @@ export class TableComponent implements OnInit {
   NumberOfQuestionPerRound            : number
 
   Field                               : number
-  /** Counts how much questions has the player opened in current round */
+  /** Counts number of questions the player has opened in the current round */
   counterPerRound                     : number
-  /** Tells whether to hide label in html or not */ 
+  /** Indicates whether to hide label from html or not */ 
   Correct                             : boolean
 
   constructor(private data : DataService) {}
@@ -79,7 +77,7 @@ export class TableComponent implements OnInit {
     this.data.currentCorrect.subscribe(message => this.Correct = message);
   }
   
-  /** Function that manages choosing queston action */
+  /** Function manages choosing queston actions */
   processClick(i: number){
     
     this.IsDisabledArray[i] = true                    // player clicked on button

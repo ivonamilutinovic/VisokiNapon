@@ -15,6 +15,9 @@
 }
 
 .number_of_questions{
+  position: absolute;
+  top: 7px;
+  left: 30px;
   width: 200px;
   height: 50px;
   background-color: #35373b;
@@ -28,6 +31,9 @@
 }
 
 .feedback{
+  position: absolute;
+  top: 65px;
+  left: -20px;
   width: 300px;
   height: 50px;
   background-color: #35373b;
@@ -55,9 +61,4 @@
 
 .clicked{ 
   background-color: #33293d;
-}
-
-.container{
-  width: 1100px;
-  height: 50px;
 }

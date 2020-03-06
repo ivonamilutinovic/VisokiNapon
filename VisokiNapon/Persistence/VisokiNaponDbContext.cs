@@ -20,7 +20,7 @@ namespace VISOKI_NAPON.Persistence
         public DbSet<Question> Questions {get; set;}
         /// DbSet of registrated players
 		public DbSet<Player> Players {get; set;}
-        /// DbSet of TopList players
+        /// DbSet of TopList of players
 		public DbSet<TopList> PlayersTopList {get; set;}
     }
 }

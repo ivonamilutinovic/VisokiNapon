@@ -29,12 +29,12 @@ namespace VISOKI_NAPON.Handlers
     {
 		/// Log in function for player authentification 
         Task<bool> Authenticate(string username, string password);
-		/// Function that checks players confirmation 
+		/// Function that checks player confirmation
 		Task<bool> Confirm(string username, string pin);
 		/// Register function that creates and persists new player 
         Task<bool> Create(string email, string username, string name, string surname, string password, string confirmpassword);
 		
-		/// Function for sending mail 
+		/// Function for sending mail
 		void sendMail(string email, int number);
     }
 
@@ -51,15 +51,14 @@ namespace VISOKI_NAPON.Handlers
         }
 
 		/** ### Description 
-		*	Function that checks players confirmation <br>
+		*	Function that checks player confirmation <br>
 		* ### Arguments
-		* string username - Players username <br>
-		* string pin - confirmation pin players has recieved by email <br>
+		* string username - player's username <br>
+		* string pin - confirmation pin that player has recieved by email <br>
 		* ### Return value
-		* Task<boolean> - true in case of successfull confirmation, and false otherwise  */
+		* Task<boolean> - true in case of successful confirmation, false otherwise  */
 		public async Task<bool> Confirm(string username, string pin)
-        {
-			
+        {	
 			if (string.IsNullOrEmpty(username))
                 return false;
 			
@@ -83,12 +82,12 @@ namespace VISOKI_NAPON.Handlers
 		}
 		
 		/** ### Description
-		* Log in function - manages players authentification
-		* ### Arguments
-		* string username - Players username <br>
-		* string password - Players password <br>
-		* ### Return value
-		* Task<boolean> - true in case of successfull authentification and false otherwise */
+        * Log in function - manages player authentification
+        * ### Arguments
+        * string username - player's username <br>
+        * string password - player's password <br>
+        * ### Return value
+        * Task<boolean> - true in case of successful authentification, false otherwise */
         public async Task<bool>  Authenticate(string username, string password)
         {
 			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -104,36 +103,36 @@ namespace VISOKI_NAPON.Handlers
 				context.Players.Remove(player);
 				context.SaveChanges();
 				return false;
-			}	// postoji player sa datim username-om koji nije verifikovan, brisemo ga
+			}	// player with given username exists, but it's not verified -> deleted
 
 			if( player!= null && (DateTime.Now -player.DateAndTime).TotalMinutes < 3.0 && !(player.Verified == "1")){
 				return false;
-			}	// postoji player sa datim username-om koji nije verifikovan u vremenu od 3 min, ne pustamo ga dok se ne verifikuje
+			}	// player with given username exists, but it's not verified within 3 minutes -> do not release him until he is verified
 			
-		   // check if username exists
+		   // checking if the username exists
             if (player.PasswordHash == null || player.PasswordSalt == null)
                 return false;
 			
-            // check if password is correct
+            // checking if the password exists
             if (!VerifyPasswordHash(password, player.PasswordHash, player.PasswordSalt))
                 return false;
 
-            // authentication successful
+            // authentication succeeded
             return true;
         }
 
 
 		/** ### Description
-		* Register function that creates and persists new player 
+		* Register function that creates and persists the new player 
 		* ### Arguments
-		* string email - Players email <br>
-		* string username - Players username <br>
-		* string name - Players name <br>
-		* string surname - Players surname <br>
-		* string password - Players password <br>
-		* string confirmpassword - confrim password for password confirmation  <br>
+		* string email - player's email <br>
+		* string username - player's username <br>
+		* string name - player's name <br>
+		* string surname - player's surname <br>
+		* string password - player's password <br>
+		* string confirmpassword - confirm password for password confirmation  <br>
 		* ### Return value
-		* Task<boolean> - true in case of successfull registration and false otherwise */
+		* Task<boolean> - true in case of successfull registration, false otherwise */
         public async Task<bool> Create(string email, string username, string name, string surname, string password, string confirmpassword)
         {
 			
@@ -161,27 +160,26 @@ namespace VISOKI_NAPON.Handlers
 				context.Players.Remove(player1);
 				context.SaveChanges();
 				player1=null;
-			}	// postoji player sa datim email-om koji nije verifikovan, brisemo ga
+			}	// player with given username exists, but it's not verified -> deleted
 			
 			if(player1!= null)
-				return false;	// vec postoji user sa datim usernameom
+				return false;	// player with given username already exists
 
-			// provera za mail adresu
+			// checking for email adress
 			if (!Regex.Match(email, @"[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}").Success)
 				return false;
 			
-			// provera za username
+			// checking for username
 			if (!Regex.Match(username, @"^[a-zA-Z0-9]+(?:[-_]?[a-zA-Z0-9]+)*$").Success || username.Length < 5 || username.Length > 24)
 				return false;
 			
-			// provera za password
+			// checking for password
 			if (!Regex.Match(password, @"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}").Success || password.Length < 8 || password.Length > 18)
 				return false;
 			
-			// provera za confirmpassword same as password
+			// checking for confirmpassword - is it the same as password
 			if (confirmpassword==null || !confirmpassword.Equals(password, StringComparison.CurrentCultureIgnoreCase))
 				return false;
-			
 			
             byte[] passwordHash, passwordSalt;
             if(!CreatePasswordHash(password, out passwordHash, out passwordSalt))
@@ -205,13 +203,13 @@ namespace VISOKI_NAPON.Handlers
 
 
 		/** ### Description
-		* Function that creates password hash and password salt from players password <br>
+		* Function that creates password hash and password salt from player's password <br>
 		* ### Arguments
-		* string password - Players password <br>
-		* out byte[] passwordHash - Players passwordHash which will be generated from password <br>
-		* out byte[] passwordSalt - Players passwordSalt which will be generated from password <br>
+		* string password - player's password <br>
+		* out byte[] passwordHash - player's passwordHash which will be generated from password <br>
+		* out byte[] passwordSalt - player's passwordSalt which will be generated from password <br>
 		* ### Return value
-		* Boolean - true in case of successfull creation of password hash and salt, and false otherwise */
+		* Boolean - true in case of successful creation of password hash and salt, false otherwise */
         private static bool CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
 			passwordSalt = null;
@@ -230,13 +228,13 @@ namespace VISOKI_NAPON.Handlers
         }
 
 		/** ### Description
-		* Function for password verification - checks if forwarded password hash and salt correspond to password
+		* Function for password verification - checks if forwarded password hash and salt correspond to the password
 		* ### Arguments
-		* string password - Players password <br>
-		* byte[] passwordHash - Players passwordHash <br>
-		* byte[] passwordSalt - Players passwordSalt <br>
+		* string password - player's password <br>
+		* byte[] passwordHash - player's passwordHash <br>
+		* byte[] passwordSalt - player's passwordSalt <br>
 		* ### Return value
-		* Boolean - true in case of successfull password verification, and false otherwise */
+		* Boolean - true in case of successfull password verification, false otherwise */
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             if (password == null) return false;
@@ -256,10 +254,10 @@ namespace VISOKI_NAPON.Handlers
         }	   
 
 		/** ### Description
-		* Function for sending Player contirmation mail
+		* Function for sending contirmation mail to the player
 		* ### Arguments
 		* string email - email address to which the mail will be sent <br>
-		* int number - Players confirmation pin <br> */
+		* int number - player confirmation pin <br> */
 		public async void sendMail(string email, int number){
 		
 			var apiKey = Environment.GetEnvironmentVariable("SENDGRID_KEY");
@@ -280,7 +278,7 @@ namespace VISOKI_NAPON.Handlers
 			var response = await client.SendEmailAsync(msg);	
 		}
 	
-		/// Function that generates random number used for players confirmation pin
+		/// Function that generates random number used for player confirmation pin
 		private int RandomNumber()    
 		{    
 			Random random = new Random();    
