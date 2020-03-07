@@ -88,7 +88,6 @@ export class WelcomeComponent implements OnInit {
       this.QTextArray[i] = item["text"]
       this.IsDisabledArray[i]= false
 	    i++
-	  
     }
 
   	this.data.changeIsDisabledArray(this.IsDisabledArray)
@@ -108,7 +107,7 @@ export class WelcomeComponent implements OnInit {
 	  this.data.changeCorrect(true)
 	  this.data.changeusedReplaceQuestionHelp1(false)
 	  this.data.changeusedReplaceQuestionHelp2(false)
-  	this.data.changeGameOver(true)
+  	this.data.changeGameNotOver(true)
 	
     this.data.showWelcomeScreen(false)
     this.data.showQuestionsScreen(true)

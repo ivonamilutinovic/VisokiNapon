@@ -88,7 +88,7 @@ namespace VISOKI_NAPON.Controllers
                 var minAmount = await Task.FromResult(context.PlayersTopList.AsEnumerable()
                 .Min(q => q.MaxAmount));
             
-                if(obj.maxAmount >= minAmount){
+                if(obj.maxAmount > minAmount){
                     var playerWithMinSum = await Task.FromResult(context.PlayersTopList.AsEnumerable()
                     .Where(que => que.MaxAmount == minAmount).FirstOrDefault());
 

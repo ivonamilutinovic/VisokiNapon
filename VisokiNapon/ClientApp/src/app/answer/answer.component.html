@@ -1,7 +1,7 @@
 <div *ngIf = "show && !TenderHelp">
     <div class = "form-group">
-        <label class = "feedback" [hidden]="GameOver">
-            {{ EndOfGame == 16 ? "ČESTITAMO!" : "POGREŠAN ODGOVOR :-("}} Osvojeno: {{GuaranteedSum}}</label>
+        <label class = "feedback" [hidden]="GameNotOver">
+            {{ EndOfGame == 16 ? "Čestitamo!" : "Odgovor je pogrešan."}} Osvojeno: {{GuaranteedSum}}</label>
         
         <button class="tender" [disabled]="PracticeMode || usedTenderHelp || youtubeTime" (click)="tender()" *ngIf = "helps || youtubeTime">T</button>        
         <button class="replaceQuestion1" [disabled]='usedReplaceQuestionHelp1 || youtubeTime' (click)="replaceQuestion1()"  *ngIf = "helps || youtubeTime"><img src="/images/replaceSign.png" width="30px" height= "30px"></button>        
@@ -15,7 +15,7 @@
         
         <label for ="answer" class="question" id="questionId"> {{ youtube ? trimedQuestion : (QTextArray[Number] ? QTextArray[Number] : 'null')}}</label>
         
-        <input [disabled]="!GameOver"
+        <input [disabled]="!GameNotOver"
             #inputstring (keydown.enter)="checkAnswer(inputstring.value)"
             ngModel
             name ="answer"

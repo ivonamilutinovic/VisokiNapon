@@ -39,7 +39,7 @@ export class ChooseModeComponent implements OnInit {
   QTextArray                           : Array<string>
   /** Contains list of questions got from server */
   questions                            : any[]  //$: Observable<QuestionM[]>;
-  // ques                                 : string[]
+  // ques                              : string[]
 
   /** Array of indicators whether question is opened or not */
   IsDisabledArray		   : Array<boolean>
@@ -99,7 +99,7 @@ export class ChooseModeComponent implements OnInit {
     this.data.changeusedReplaceQuestionHelp1(false)
     this.data.changeusedReplaceQuestionHelp2(false)
     this.data.changeusedTenderHelp(false)
-    this.data.changeGameOver(true)
+    this.data.changeGameNotOver(true)
     this.data.changeBackToChoosingModeBoolean(false)
     this.data.showChooseModeScreen(false)
     this.data.showQuestionsScreen(true)

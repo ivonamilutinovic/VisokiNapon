@@ -45,7 +45,7 @@ export class TableComponent implements OnInit {
   ValueOfQuestion                     : number
   /** Contains information about number of questions per current round */ 
   NumberOfQuestionPerRound            : number
-
+  /** Number of fields */
   Field                               : number
   /** Counts number of questions the player has opened in the current round */
   counterPerRound                     : number

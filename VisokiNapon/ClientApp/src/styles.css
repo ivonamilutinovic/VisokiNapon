@@ -12,6 +12,12 @@ code {
   position: absolute;
 }
 
+.tender_label{
+  width: 300px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;

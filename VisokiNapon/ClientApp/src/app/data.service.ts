@@ -326,15 +326,15 @@ export class DataService {
     this.defaultusedTenderHelp.next(message)
   }
   
-  /** The initial value for defaultGameOver variable */
-  private GameOverC : boolean = true
+  /** The initial value for defaultGameNotOver variable */
+  private GameNotOverC : boolean = false
   /** BehaviorSubject */
-  private defaultGameOver = new BehaviorSubject<boolean>(this.GameOverC);
-  /** Observable of defaultGameOver */
-  currentGameOver = this.defaultGameOver.asObservable();
-  /** Function changes the current value of defaultGameOver variable to value given as argument */
-  changeGameOver(message: boolean) {
-    this.defaultGameOver.next(message)
+  private defaultGameNotOver = new BehaviorSubject<boolean>(this.GameNotOverC);
+  /** Observable of defaultGameNotOver */
+  currentGameNotOver = this.defaultGameNotOver.asObservable();
+  /** Function changes the current value of defaultGameNotOver variable to value given as argument */
+  changeGameNotOver(message: boolean) {
+    this.defaultGameNotOver.next(message)
   }
   
   /** The initial value for defaultBackToChoosingModeBoolean variable */

@@ -26,7 +26,6 @@ namespace VISOKI_NAPON.Hubs
 		* string questionMessage - text of the question <br>
 		* string questionValueMessage - value of question */
         public async Task SendMessageVN2Tender(string user, string questionMessage, string questionValueMessage)
-
         {
             await Clients.All.SendAsync("ReceiveMessageVN2Tender", user, questionMessage, questionValueMessage);
         }

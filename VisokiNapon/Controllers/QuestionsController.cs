@@ -63,6 +63,7 @@ namespace VISOKI_NAPON.Controllers
                                                         "SELECT TOP 1 * " +
                                                         "FROM dbo.Questions " +
                                                         "Where Category = 4 " +
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
                                                         "UNION ALL " +
                                                         "SELECT TOP 5 * " +
                                                         "FROM dbo.Questions " +
@@ -85,8 +86,7 @@ namespace VISOKI_NAPON.Controllers
                                                         "SELECT TOP 2 * " +
                                                         "FROM dbo.Questions " +
                                                         "Where Category = 3 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND())) T " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) ;").ToListAsync();           
+                                                        "ORDER BY RAND(CHECKSUM(*) * RAND())) T ;").ToListAsync();           
 
             return mapper.Map<List<Question>, List<QuestionResource>>(questions.Concat(replacementQuestions).ToList());
         }

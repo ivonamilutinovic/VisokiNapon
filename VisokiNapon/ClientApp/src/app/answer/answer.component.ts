@@ -34,6 +34,7 @@ export class AnswerComponent implements OnInit {
   ChooseModeScreen                     : boolean
   /** Indicator of TenderComponent activity */
   TenderScreen                         : boolean
+  /** Index of current chosen question */
   Number                               : number              
   /** Array which elements indicating whether the question is opend or not */
   IsDisabledArray                      : Array<boolean>       
@@ -46,15 +47,15 @@ export class AnswerComponent implements OnInit {
   ValueOfQuestion                      : number
   /** Contains information how much money did player earn */
   Sum                                  : number   
-  /** Indicates whether the player can write in the text field for ansewer */            
-  GameOver                             : boolean = true     
+  /** Indicates whether the game is over */            
+  GameNotOver                             : boolean = true     
   /** Indicates whether the player has used the first replace question help */ 
   usedReplaceQuestionHelp1             : boolean    
   /** Indicates whether the player has used the second replace question help */
   usedReplaceQuestionHelp2             : boolean  
   /** Contains information about number of questions in current round */            
   NumberOfQuestionPerRound             : number               
-  
+  /** Number of fields */
   Field                                : number               
   /** Counts how much questions has the player opened in current round */
   counterPerRound                      : number               
@@ -106,7 +107,9 @@ export class AnswerComponent implements OnInit {
   usedTenderHelp                       : boolean
   /** Indicates which div from html is shown */
   AcceptedOffer                        : boolean = false
-
+  /** Indicates divs of tender player offers */
+  DivIndex                             : number  = 1 
+  
   constructor(private data: DataService, private http: HttpClient, private makeqService : MakeqService) { }
 
   async timer(delay: number) {
@@ -130,7 +133,7 @@ export class AnswerComponent implements OnInit {
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
     // this.data.QAnswerArray.subscribe(message => this.QAnswerArray = message)
     this.data.currentSum.subscribe(message => this.Sum = message)
-    this.data.currentGameOver.subscribe(message => this.GameOver = message)
+    this.data.currentGameNotOver.subscribe(message => this.GameNotOver = message)
     this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
     this.data.currentValueOfQuestion.subscribe(message => this.ValueOfQuestion = message);
     this.data.currentcounterPerRound.subscribe(message => this.counterPerRound = message);
@@ -174,8 +177,8 @@ export class AnswerComponent implements OnInit {
         this.helps = false;
         this.timeBool = setTimeout(function () {
           this.youtubeTime = false;
-          this.GameOver = false
-          this.data.changeGameOver(this.GameOver)
+          this.GameNotOver = false
+          this.data.changeGameNotOver(this.GameNotOver)
           this.Sum = 0
           this.data.changeSum(this.Sum)
 
@@ -185,12 +188,12 @@ export class AnswerComponent implements OnInit {
             this.data.showWelcomeScreen(true)
             }.bind(this), 5000);
         }.bind(this), 25000);
-      }.bind(this), 4000);
+      }.bind(this), 40000);
     }
     else {
       this.timeBool = setTimeout(function () {
-        this.GameOver = false
-        this.data.changeGameOver(this.GameOver)
+        this.GameNotOver = false
+        this.data.changeGameNotOver(this.GameNotOver)
         this.Sum = 0
         this.data.changeSum(this.Sum)
         this.helps = false;
@@ -290,8 +293,7 @@ export class AnswerComponent implements OnInit {
     /* Stopping timing */
     clearTimeout(this.infoBool)
     clearTimeout(this.timeBool)
-    
-    /* Reading the question and its value */
+
     this.TenderHelp = true;
     var questionMessage = document.getElementById("questionId").innerText;
     var questionValueMessage = document.getElementById("questionValueId").innerText;
@@ -301,7 +303,6 @@ export class AnswerComponent implements OnInit {
       return console.error(err.toString());
     });
 
-    var i = 1 
     /* Receiving the offer from tender player */
     this.hubConnection.on("ReceiveMessageTender2VN", (tenderPlayerUsername, vnPlayerUsername, answerMessage, requestedAmountMessage) => {
       if(vnPlayerUsername === this.CurrentUser){
@@ -315,7 +316,7 @@ export class AnswerComponent implements OnInit {
         span2.innerHTML = "<b>Ponuđen iznos:</b> &nbsp;"
 
         var div = document.createElement("div");
-        div.setAttribute("id","div" + i);
+        div.setAttribute("id","div" + this.DivIndex);
         div.setAttribute("class", "div_with_margins");
 
         div.appendChild(span1);
@@ -338,15 +339,17 @@ export class AnswerComponent implements OnInit {
         button.innerText = "Prihvatite ponudu";
         button.setAttribute("class", "tender_button");
 
-        button.addEventListener("click", event => {
+        button.addEventListener("click", event => {          
           this._AcceptOffer(answerMessage, requestedAmountMessage, tenderPlayerUsername);
+          event.preventDefault();
         });
         div.appendChild(button);
         
         document.getElementById("tenderHelpDivId").appendChild(div);
-        i++;
+        this.DivIndex++;
       }
     });
+    
   }
 
 
@@ -368,8 +371,8 @@ export class AnswerComponent implements OnInit {
     clearTimeout(this.timeBool)
 
     this.timeBool = setTimeout(function () {
-      this.GameOver = false
-      this.data.changeGameOver(this.GameOver)
+      this.GameNotOver = false
+      this.data.changeGameNotOver(this.GameNotOver)
       this.Sum = 0
       this.data.changeSum(this.Sum)
       this.helps = false;
@@ -400,8 +403,8 @@ export class AnswerComponent implements OnInit {
     clearTimeout(this.timeBool)
 
     this.timeBool = setTimeout(function () {
-      this.GameOver = false
-      this.data.changeGameOver(this.GameOver)
+      this.GameNotOver = false
+      this.data.changeGameNotOver(this.GameNotOver)
       this.Sum = 0
       this.data.changeSum(this.Sum)
       this.helps = false;
@@ -417,8 +420,8 @@ export class AnswerComponent implements OnInit {
    /** Function which manages actions when player accepts tender-players offer  */
   _AcceptOffer(answerMessage: string, requestedAmountMessage: string, tenderPlayerUsername: string){
     
-    /* Setting parametars */
-    this.AcceptedOffer = true;    
+    // Setting parametars 
+    this.AcceptedOffer = true; 
     this.usedTenderHelp = true;
     this.data.changeusedTenderHelp(this.usedTenderHelp);
 
@@ -450,7 +453,8 @@ export class AnswerComponent implements OnInit {
         /* Changing the value of question and sending information to tender user that his offer is accepted */ 
         this.ValueOfQuestion = this.ValueOfQuestion - parseInt(requestedAmountMessage);
         this.data.changeValueOfQuestion(this.ValueOfQuestion);
-        this.hubConnection.invoke("SendMessageChangeTenderSum", tenderPlayerUsername, requestedAmountMessage.toString()).catch(function (err) {
+        this.hubConnection.invoke("SendMessageChangeTenderSum", tenderPlayerUsername,
+         requestedAmountMessage.toString()).then(() => {this.hubConnection.stop().then(() => console.log("Connection Stopped!"))}).catch(function (err) {
           return console.error(err.toString());
         });
 
@@ -475,17 +479,16 @@ export class AnswerComponent implements OnInit {
             this.data.showAnsweringScreen(false)
             this.data.showWelcomeScreen(true)
           }     
-      }else {
-        this.data.showAnsweringScreen(false)
-        this.data.showQuestionsScreen(true)
-      }
+        }else {
+          this.data.showAnsweringScreen(false)
+          this.data.showQuestionsScreen(true)
+        }
 
-      if (this.counterPerRound == 0) {
-        this.GuaranteedSum = this.Sum
-        this.data.changeGuaranteedSum(this.GuaranteedSum)
-      }
-      
-      }else{/* Case when the tender player gave the wrong answer */
+        if (this.counterPerRound == 0) {
+          this.GuaranteedSum = this.Sum
+          this.data.changeGuaranteedSum(this.GuaranteedSum)
+        }   
+    }else{/* Case when the tender player gave the wrong answer */
         var feedbackLabel = document.getElementById("tenderFeedbackId");
         feedbackLabel.innerText = "Odgovor je pogrešan!";
         
@@ -499,9 +502,12 @@ export class AnswerComponent implements OnInit {
         
         // showing the top list if the user is logged in and its new score is in the top list
         this._topList();
+
+        this.hubConnection.stop().then(() => console.log("Connection Stopped!")).catch(function (err) {
+          return console.error(err.toString());
+        });
       }
     })
-
   }
 
   /** Function that applies first set of actions when player's answer is correct */
@@ -541,16 +547,22 @@ export class AnswerComponent implements OnInit {
 
   /** Function that applies set of actions when player's answer is wrong */
   _wrongAnswer(){
-    this.GameOver = false
-    this.data.changeGameOver(this.GameOver)
-    this.Sum = this.GuaranteedSum
+    if (this.QTextArray[this.Number].indexOf("#!!#") >= 0){
+      this.Sum = 0
+      this.GuaranteedSum = 0
+      this.data.changeGuaranteedSum(this.GuaranteedSum)  
+    }else{
+      this.Sum = this.GuaranteedSum
+    }
     this.data.changeSum(this.Sum)
+    this.GameNotOver = false
+    this.data.changeGameNotOver(this.GameNotOver)
   }
 
   /** Function that applies set of actions when player won the game, i.e. player has answered correct on all questions */
   _gameWon(){
-    this.GameOver = false
-    this.data.changeGameOver(this.GameOver)
+    this.GameNotOver = false
+    this.data.changeGameNotOver(this.GameNotOver)
     this.GuaranteedSum = this.Sum
   }
 

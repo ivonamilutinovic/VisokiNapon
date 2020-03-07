@@ -58,8 +58,8 @@ export class TenderComponent implements OnInit {
 
     this.hubConnection
     .start()
-    .then(() => console.log("Connection Started!"))
-    .catch(err => console.log("Error while establishing a connection :( "));
+    .then(() => console.log("Connection started!"))
+    .catch(err => console.log("An error occured while establishing a connection."));
 
     var i = 1
     this.hubConnection.on("ReceiveMessageVN2Tender", (user, questionMessage, questionValueMessage) => {
@@ -88,9 +88,10 @@ export class TenderComponent implements OnInit {
       div.appendChild(label);
       div.appendChild(br1);
 
-      span2.innerHTML = "<b>Pitanje:</b> &nbsp;"
+      span2.innerHTML = "<b>Pitanje:</b> &nbsp;<br>"
       div.appendChild(span2);
       label = document.createElement("label");
+      label.setAttribute("class", "tender_label");
       label.innerText = questionMsg;
       label.id = "tenderHelpQuestionId" + i;
       div.appendChild(label);
@@ -138,7 +139,7 @@ export class TenderComponent implements OnInit {
         var requestedAmountElement = (document.getElementById("tenderHelprequestedAmountMessageId" + index) as HTMLInputElement);
         var requestedAmountMessage = requestedAmountElement.value;
         
-        if(answerMessage == "" || requestedAmountMessage ==""){
+        if(answerMessage === "" || requestedAmountMessage === ""){
           alert("Oba polja su obavezna.")
         }
         else if(parseInt(requestedAmountMessage) < parseInt(requestedAmountElement.min) || parseInt(requestedAmountMessage) > parseInt(requestedAmountElement.max)){
@@ -151,7 +152,8 @@ export class TenderComponent implements OnInit {
           this.hubConnection.invoke("SendMessageTender2VN", this.CurrentUser, vnPlayerUsername, answerMessage, requestedAmountMessage.toString()).catch(function (err) {
             return console.error(err.toString());
         });  
-        }    
+        }
+        event.preventDefault();    
       });
       div.appendChild(button);
       document.getElementById("main_div").appendChild(div);
@@ -160,11 +162,12 @@ export class TenderComponent implements OnInit {
     });
 
     this.hubConnection.on("ReceiveMessageChangeTenderSum", (user, TenderAmountMessage) => {
-      if(user == this.CurrentUser){
+      if(user === this.CurrentUser){
         var amountLabel = document.getElementById("tenderAmountId");
         var amount = parseInt(amountLabel.innerText) + parseInt(TenderAmountMessage);
         amountLabel.innerText = amount.toString();
       }
+
     });
   }
 
@@ -172,5 +175,8 @@ export class TenderComponent implements OnInit {
   quitTenderGame(){
     this.data.showTenderScreen(false);
     this.data.showChooseModeScreen(true);
+    this.hubConnection.stop().then(() => console.log("Connection Stopped!")).catch(function (err) {
+      return console.error(err.toString());
+    });
   }
 }
