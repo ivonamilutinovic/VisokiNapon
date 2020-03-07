@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
   message                  : string = ""
   /** Message which will be shown to player */
   signupmessage            : string = ""
-  /** Servers response on players log in request */
+  /** Server's response on player's log in request */
   response                 : any
-  /** Current user */
+  /** Username of current user */
   User					   : string
   
   constructor(private data : DataService, 
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 	
   }
 
-  /** Function which checks players log in data */
+  /** Function which checks player's log in data */
   checkLoginInfo(username : string, password : string){
   
     var objLogin = {
@@ -79,19 +79,37 @@ export class LoginComponent implements OnInit {
 	    this.data.changeUser(this.User)    
       
 	    this.data.showLogInScreen(false)
-      // ovde menjamo scenu na choose mode
       this.data.showChooseModeScreen(true)
     }
     else {
-      this.message = "Uneli ste pogresan password ili username. Pokusajte ponovo!"
+      this.invalidRequest()
     }
   }) 
 
   }
 
-  /** Function which redirect player to register */
+  /** Function which redirects player to register */
   changeToSignup(){
 		this.data.showLogInScreen(false)
 		this.data.showSignUpScreen(true)
   }
+
+  /** Function which informs player about invalid log in request */
+  invalidRequest(){
+    this.message = "Pogrešno korisničko ime ili lozinka. Pokušajte ponovo."
+  }
+
+  /** Function which informs player that he didn't fill all the fields */
+  requiredFields(){
+    this.message = "Oba polja su obavezna."
+  }
+
+  /** Function which checks whether or not the player has entered his information */
+  checkData(username : string, password : string){
+      if(username=="" || password=="")
+        return false
+      else
+        return true
+  }
+
 }

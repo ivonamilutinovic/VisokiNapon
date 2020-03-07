@@ -148,10 +148,10 @@ namespace VISOKI_NAPON.Handlers
 				context.Players.Remove(player);
 				context.SaveChanges();
 				player=null;
-			}	// postoji player sa datim username-om koji nije verifikovan, brisemo ga
+			}	// player with given username exists, but it's not verified -> deleted
 			
 			if(player!= null)
-				return false;	// vec postoji user sa datim usernameom
+				return false;	// player with given username exists
 			
 			var player1 = await Task.FromResult(context.Players.AsEnumerable()
             .Where(que => que.Email == email).FirstOrDefault());
@@ -160,10 +160,10 @@ namespace VISOKI_NAPON.Handlers
 				context.Players.Remove(player1);
 				context.SaveChanges();
 				player1=null;
-			}	// player with given username exists, but it's not verified -> deleted
+			}	// player with given email exists, but it's not verified -> deleted
 			
 			if(player1!= null)
-				return false;	// player with given username already exists
+				return false;	// player with given email already exists
 
 			// checking for email adress
 			if (!Regex.Match(email, @"[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}").Success)
@@ -198,9 +198,6 @@ namespace VISOKI_NAPON.Handlers
 			
             return true;
         }
-
-        // private helper methods
-
 
 		/** ### Description
 		* Function that creates password hash and password salt from player's password <br>
@@ -269,11 +266,6 @@ namespace VISOKI_NAPON.Handlers
 			+  number.ToString() + ".\n\n" + " Regards,\n" + "Visoki Napon support team.";
 			var htmlContent = "Hi there!\n\n<br><br>" + "Thank you for signing up. Your confirmation code is <strong>"
 			+  number.ToString() + "</strong>.\n\n<br><br>" + " Regards,\n<br>" + "Visoki Napon support team.";
-			
-			/*
-			var plainTextContent = "Your confirmation id is " + number.ToString() + ".";
-			var htmlContent = "Your confirmation id is <strong>" + number.ToString() + "</strong>.";
-			*/
 			var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
 			var response = await client.SendEmailAsync(msg);	
 		}

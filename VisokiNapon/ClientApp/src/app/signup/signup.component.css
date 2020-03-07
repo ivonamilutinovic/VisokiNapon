@@ -45,7 +45,7 @@ button:hover{
 .container2{
   position: absolute;
   width: 400px;
-  top: 70%;
+  top: 80%;
   left: 50%;
   -moz-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);

@@ -34,20 +34,19 @@ export class AnswerComponent implements OnInit {
   ChooseModeScreen                     : boolean
   /** Indicator of TenderComponent activity */
   TenderScreen                         : boolean
-  /** Index of current opened question */
   Number                               : number              
   /** Array which elements indicating whether the question is opend or not */
   IsDisabledArray                      : Array<boolean>       
-  /** Array with categories of questions */
+  /** Array with questions categories */
   CategoryArray                        : Array<number> 
   /** Array with text of questions */       
   QTextArray                           : Array<string>   
   // QAnswerArray                      : Array<string>  
-  /** Value of current opened question */
+  /** Contains information about value of question */
   ValueOfQuestion                      : number
   /** Contains information how much money did player earn */
   Sum                                  : number   
-  /** Indicates whether the player can write in the text field for ansewer */      
+  /** Indicates whether the player can write in the text field for ansewer */            
   GameOver                             : boolean = true     
   /** Indicates whether the player has used the first replace question help */ 
   usedReplaceQuestionHelp1             : boolean    
@@ -87,11 +86,14 @@ export class AnswerComponent implements OnInit {
   /** Indicates which div from html is shown */			  
   show                                 : boolean = true  
   /** Tells whether Visoki napon field was choosen */ 	  
-  youtube                              : boolean = false      
+  youtube                              : boolean = false     
+
+  /** Tells whether timer for Visoki napon field is active or not */ 	  
+  youtubeTime                          : boolean = false      
   
   /** Indicator whether PractiseMode is choosen or not */
   PracticeMode                         : boolean
-  /** Server's answer on request for getting top list */
+  /** Server's response on players get top list request */
   TopList                              : any[]
   /** Username of current logged user */
   CurrentUser                          : string
@@ -167,9 +169,11 @@ export class AnswerComponent implements OnInit {
       this.youtube = true;
 
       setTimeout(function () {
+        this.youtubeTime = true;
         this.show = true;
         this.helps = false;
         this.timeBool = setTimeout(function () {
+          this.youtubeTime = false;
           this.GameOver = false
           this.data.changeGameOver(this.GameOver)
           this.Sum = 0
@@ -181,7 +185,7 @@ export class AnswerComponent implements OnInit {
             this.data.showWelcomeScreen(true)
             }.bind(this), 5000);
         }.bind(this), 25000);
-      }.bind(this), 40000);
+      }.bind(this), 4000);
     }
     else {
       this.timeBool = setTimeout(function () {
@@ -203,6 +207,8 @@ export class AnswerComponent implements OnInit {
   /** Function for checking player's answer on server side - 
   * when player enters his answer, this funcition is called */
   checkAnswer(value: string){
+    this.youtubeTime = false;  
+
     var obj = {
       tex: this.QTextArray[this.Number],
       ans: value
@@ -279,7 +285,7 @@ export class AnswerComponent implements OnInit {
     })
   }
 
-  /** Function activates when player request for tender help */
+  /** Function that manages players tender help request */
   tender() {
     /* Stopping timing */
     clearTimeout(this.infoBool)
@@ -332,7 +338,7 @@ export class AnswerComponent implements OnInit {
         button.innerText = "Prihvatite ponudu";
         button.setAttribute("class", "tender_button");
 
-        button.addEventListener("click", event => {          
+        button.addEventListener("click", event => {
           this._AcceptOffer(answerMessage, requestedAmountMessage, tenderPlayerUsername);
         });
         div.appendChild(button);
@@ -344,7 +350,7 @@ export class AnswerComponent implements OnInit {
   }
 
 
-  /** Function manages first replace question help - 
+  /** Function which manages first replace question help - 
   * when player clicks on button for first replace question help, this funcition is called  */
   replaceQuestion1() {
 
@@ -376,7 +382,7 @@ export class AnswerComponent implements OnInit {
     }.bind(this), 25000);
   }
     
-  /** Function manages first replace question help - 
+  /** Function which manages first replace question help - 
    * when player clicks on button for second replace question help, this funcition is called  */
   replaceQuestion2(){
 
@@ -408,7 +414,7 @@ export class AnswerComponent implements OnInit {
     }.bind(this), 25000);
   }
 
-   /** Function manages actions when player accepts offer from tender player */
+   /** Function which manages actions when player accepts tender-players offer  */
   _AcceptOffer(answerMessage: string, requestedAmountMessage: string, tenderPlayerUsername: string){
     
     /* Setting parametars */
@@ -498,7 +504,7 @@ export class AnswerComponent implements OnInit {
 
   }
 
-  /** Function applies first set of actions when player's answer is correct */
+  /** Function that applies first set of actions when player's answer is correct */
   _correctAnswerPart1(){
     for (var i = 0; i < this.Field; i++)
       this.IsDisabledArray[i] = false;
@@ -520,7 +526,7 @@ export class AnswerComponent implements OnInit {
     }
   }
 
-  /** Function applies first set of actions when player's answer is correct */
+  /** Function that applies second set of actions when player's answer is correct */
   _correctAnswerPart2(){
     if (this.QTextArray[this.Number].indexOf("#!!#") >= 0)
     this.Sum = this.Sum * 2
@@ -533,7 +539,7 @@ export class AnswerComponent implements OnInit {
     this.data.changeCorrect(this.Correct)
   }
 
-  /** Function activates when player's answer is wrong */
+  /** Function that applies set of actions when player's answer is wrong */
   _wrongAnswer(){
     this.GameOver = false
     this.data.changeGameOver(this.GameOver)
@@ -541,14 +547,14 @@ export class AnswerComponent implements OnInit {
     this.data.changeSum(this.Sum)
   }
 
-  /** Function applies set of actions when player won the game, i.e. player has answered correct on all questions */
+  /** Function that applies set of actions when player won the game, i.e. player has answered correct on all questions */
   _gameWon(){
     this.GameOver = false
     this.data.changeGameOver(this.GameOver)
     this.GuaranteedSum = this.Sum
   }
 
-  /** Function gets top list of players from server */
+  /** Function which gets top-list of players from server on player's request */
   _topList(){
     const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
     // todo ovde kreirati headeropcije
@@ -566,4 +572,5 @@ export class AnswerComponent implements OnInit {
     }
     })
   }
+
 }

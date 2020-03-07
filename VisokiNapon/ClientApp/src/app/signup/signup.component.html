@@ -1,8 +1,8 @@
 <div class="container2" *ngIf = "!codeConfirmation">
 <form >
     <div class = "form-group">	
-		<label class="head-title"> Registrruj se </label>
-        <label for ="email">Email</label>
+		<label class="head-title"> Registrujte se </label>
+        <label for ="email" style="font-weight: 500;">Email</label>
         <input
             required
             ngModel
@@ -19,7 +19,7 @@
 	</div>
 	
 	<div class = "form-group">
-        <label for ="name">Ime</label>
+        <label for ="name" style="font-weight: 500;">Ime</label>
         <input
             required
             maxlength="30"
@@ -31,7 +31,7 @@
 	</div>	
 	
 	<div class = "form-group">
-        <label for ="surname">Prezime</label>
+        <label for ="surname" style="font-weight: 500;">Prezime</label>
         <input
             required
             maxlength="30"
@@ -43,7 +43,7 @@
 	</div>	
 			
 	<div class = "form-group">
-      <label for ="username">Korisničko ime</label>
+      <label for ="username" style="font-weight: 500;">Korisničko ime</label>
         <input
             required
             minlength="5"
@@ -64,7 +64,7 @@
 	</div>	
 	
 	<div class = "form-group">
-		<label for ="password">Lozinka</label>
+		<label for ="password" style="font-weight: 500;">Lozinka</label>
 		<show-hide-password  btnStyle="primary" [btnOutline]="false">
 		  <input
             ngModel
@@ -81,7 +81,7 @@
 		</show-hide-password>
 		<div class="alert alert-danger" *ngIf="newpassword.touched && !newpassword.valid">
                 <div *ngIf="newpassword.errors.required">Lozinka je obavezna...</div>
-                <div *ngIf="newpassword.errors.minlength">Lozinka mora sadrzati minimum 8 karaktera...</div>
+                <div *ngIf="newpassword.errors.minlength">Lozinka mora sadržati minimum 8 karaktera...</div>
                 <div *ngIf="newpassword.errors.pattern">Lozinka se mora sastojati od malih i velikih slova, specijalnih karaktera
 													i brojeva...</div>
 		</div>
@@ -90,7 +90,7 @@
 
 	
     <div class = "form-group">
-        <label for ="confirmpassword">Potvrdi lozinku</label>
+        <label for ="confirmpassword" style="font-weight: 500;">Potvrdite lozinku</label>
         <input
             ngModel
             required
@@ -102,16 +102,20 @@
             type = "password"
             class = "form-control" #confirmpasswordparam>
             <div class="alert alert-danger" *ngIf="confirmpassword.dirty && newpassword.value.length==0">Niste uneli lozinku...</div>
-            <div class="alert alert-danger" *ngIf="confirmpassword.dirty 
+            <div class="alert alert-danger" *ngIf="confirmpassword.dirty && newpassword.value.length!=0
                 && (confirmpassword.value.length > newpassword.value.length || confirmpassword.value.length < newpassword.value.length
 				|| (confirmpassword.value != newpassword.value 
-                && confirmpassword.value.length == newpassword.value.length))">Lozinke se ne poklapaju...</div>
+                && confirmpassword.value.length == newpassword.value.length) )">Lozinke se ne poklapaju...</div>
 	</div>
 	<div class = "form-group">
-	<button type ="submit" class="button" [disabled]="!newpassword.valid || !newusername.valid || !email.valid || 
-													  !(confirmpassword.value== newpassword.value)|| disabledField" 
-	(click)="checkSignUpInfo(emailparam.value, nameparam.value, surnameparam.value, newusernameparam.value, newpasswordparam.value, confirmpasswordparam.value)">Registruj se</button>   
-	<div style= "color:red;"> {{signupmessage}}</div>
+    <button type ="submit" class="button" [disabled]="disabledField" 
+    (click)=" ! (!newpassword.valid || !newusername.valid || !email.valid || 
+    !(confirmpassword.value== newpassword.value)) ?
+    checkSignUpInfo(emailparam.value, nameparam.value, surnameparam.value, newusernameparam.value, 
+    newpasswordparam.value, confirmpasswordparam.value) : 
+    info(emailparam.value, newusernameparam.value, 
+    newpasswordparam.value, confirmpasswordparam.value)">Registrujte se</button>   
+    <div style= "color:red;"><b>{{signupmessage}}</b></div>
 	</div>
 	<div class = "form-group">
 	<button type ="button" class="button" 
@@ -123,8 +127,8 @@
 <div class="container1" *ngIf = "codeConfirmation">
 	<form >
 		<div class = "form-group">	
-			<label class="head-title"> Potvrdi registraciju </label>
-			<label for ="email">Verifikacioni kod </label>
+			<label class="head-title"> Potvrdite registraciju </label>
+			<label for ="answer" style="font-weight: 500;">Verifikacioni kod </label>
 			<input [disabled]="requestSent"
                #inputstring (keydown.enter)="confirmCode(inputstring.value)"
                ngModel
@@ -133,7 +137,7 @@
                type = "text"
                placeholder="Verifikacioni kod..."
                class = "form-control">
-			<div style= "color:red;"> {{signupmessage}}</div>
+			<div style= "color:red;"><b>{{signupmessage}}</b></div>
 		</div>
 	</form>
 </div>

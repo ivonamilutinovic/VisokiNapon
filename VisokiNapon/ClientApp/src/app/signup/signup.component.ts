@@ -91,10 +91,10 @@ export class SignupComponent implements OnInit {
     if(this.response== true){
 		  this.user = usr
 	  	this.codeConfirmation = true
-		  this.signupmessage = "Unesite kod koji vam je stigao na uneti email."
+		  this.signupmessage = "Unesite kod koji Vam je stigao na uneti email."
 		
 		  this.timeBool = setTimeout(function () {
-      this.signupmessage = "Isteklo je vreme za verifikaciju! Pokušajte da se registrujete ponovo!"
+      this.signupmessage = "Isteklo je vreme za verifikaciju. Pokušajte da se registrujete ponovo."
 		  this.requestSent = true	
 		  
 		  var objLogin = {
@@ -118,8 +118,8 @@ export class SignupComponent implements OnInit {
 		
     }
     else {
-		  this.signupmessage = "Email adresa je vec registrovana ili je uneti username zauzet. " +  
-						                "Pokušajte ponovo!"
+		  this.signupmessage = "Email adresa je vec registrovana ili je uneto korisničko ime zauzeto. " +  
+						                "Pokušajte ponovo."
 		  this.disabledField=false;
     }
     }) 	
@@ -144,7 +144,7 @@ export class SignupComponent implements OnInit {
       this.response =t
 
     if(this.response== true){
-		  this.signupmessage = "Uneli ste isptavan kod! Registracija uspela!"
+		  this.signupmessage = "Uneli ste ispravan kod. Registracija uspela."
 		  setTimeout(function () {
 			  this.data.showSignUpScreen(false)
 			  this.data.showLogInScreen(true)
@@ -152,13 +152,22 @@ export class SignupComponent implements OnInit {
 		
     }
     else {
-		  this.signupmessage = "Uneli ste pogrešan kod. Probajte opet da se registrujete!"
+		  this.signupmessage = "Uneli ste pogrešan kod. Probajte opet da se registrujete."
 		  setTimeout(function () {
 			  this.data.showSignUpScreen(false)
 			  this.data.showWelcomeScreen(true)
 		  }.bind(this), 3000);
     }
     })  
-	}
+  }
 
+  /** Function which informs player that he didn't fill all the fields or that he didn't 
+   *  comply with all requirements
+   */
+  info(email: string, username: string, password : string , confirmpassword : string){
+    if( email=="" || password=="" || username=="" || confirmpassword=="")
+      this.signupmessage = "Email, Lozinka, Korisničko ime i Potvrdite lozinku su obavezna polja."
+    else
+      this.signupmessage = "Niste ispunili zahteve svih polja. Pokušajte ponovo."
+  }
 }
