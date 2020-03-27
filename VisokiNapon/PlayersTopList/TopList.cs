@@ -16,7 +16,6 @@ namespace VISOKI_NAPON.PlayersTopList
         public string Username { get; set; }
         /// Max amount that the player has won 
         public int MaxAmount { get; set; }
-
         /// Constructor
         public TopList() {}
     }

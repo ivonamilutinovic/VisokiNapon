@@ -75,7 +75,6 @@ export class ChooseModeComponent implements OnInit {
       
    	for(const item of this.questions ){
       this.CategoryArray[i] = item["category"]
-      // this.Ids[i]=item["id"]
       this.QTextArray[i] = item["text"]
 	    this.IsDisabledArray[i] = false
       i++ 
@@ -84,7 +83,6 @@ export class ChooseModeComponent implements OnInit {
     this.data.changeCategoryArray(this.CategoryArray)
     this.data.changeQTextArray(this.QTextArray)	
     this.data.changeIsDisabledArray(this.IsDisabledArray)
-
     this.data.changeCounter(0)
     this.data.changeIndicator(false)
     this.data.changeQNumber(-1)

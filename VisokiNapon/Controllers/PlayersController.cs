@@ -38,7 +38,7 @@ namespace VISOKI_NAPON.Controllers
             public string pass {get;set;}
         }
 
-        /// Adjunctive class containing infromations about player
+        /// Adjunctive class containing informations about player
         public class signUpObj {
             public string email {get;set;}
             public string name {get;set;}

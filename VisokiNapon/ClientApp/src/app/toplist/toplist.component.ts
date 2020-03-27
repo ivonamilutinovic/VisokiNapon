@@ -5,17 +5,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 
-
-// class topListStruct{
-//   username : string;
-//   maxAmount: number;
-
-//   constructor(username: string = "", maxAmount: number = 0){
-//     this.username = username
-//     this.maxAmount = maxAmount
-//   }
-// }
-
 /** Auxiliary structure for generating top list */
 interface topListStruct{
   /** Players username */
@@ -80,7 +69,6 @@ export class ToplistComponent implements OnInit {
     this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message) 
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message) 	 
     this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-
     this.data.currentBackToChoosingModeBoolean.subscribe(message => this.BackToChoosingModeBoolean = message)
     
     this.GetTopList();

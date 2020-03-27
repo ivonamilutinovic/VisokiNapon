@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VISOKI_NAPON.Persistence;
 
 namespace VISOKI_NAPON.Migrations
 {
     [DbContext(typeof(VisokiNaponDbContext))]
-    partial class VisokiNaponDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200310160544_SeedQuestionsTable_v15")]
+    partial class SeedQuestionsTable_v15
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

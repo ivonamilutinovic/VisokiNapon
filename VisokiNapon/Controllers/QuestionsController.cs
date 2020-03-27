@@ -17,8 +17,6 @@ using System.Threading;
 using VISOKI_NAPON.Controllers.Resources;
 using AutoMapper;
 using System.Data.SqlClient;
-// using Microsoft.Data.SqlClient;
-// using System.Data.SqlClient;
 
 namespace VISOKI_NAPON.Controllers
 {   
@@ -49,59 +47,73 @@ namespace VISOKI_NAPON.Controllers
         [HttpGet("/api/v3/questions")]
         public async Task<IEnumerable<QuestionResource>> GetQuestions(){
             var questions = await context.Questions
-                                       .FromSqlRaw("SELECT Id, Text,null as Answer, Category " +
-                                                   "FROM(SELECT TOP 5 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 1 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +                                                        
-                                                        "UNION ALL " +
-                                                        "SELECT TOP 5 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 2 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
-                                                        "UNION ALL " +
-                                                        "SELECT TOP 1 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 4 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
-                                                        "UNION ALL " +
-                                                        "SELECT TOP 5 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 3 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND())) T " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) ;").ToListAsync();           
-
-            var replacementQuestions = await context.Questions
-                                       .FromSqlRaw("SELECT Id, Text,null as Answer, Category " +
-                                                   "FROM(SELECT TOP 2 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 1 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +                                                        
-                                                        "UNION ALL " +
-                                                        "SELECT TOP 2 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 2 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
-                                                        "UNION ALL " +
-                                                        "SELECT TOP 2 * " +
-                                                        "FROM dbo.Questions " +
-                                                        "Where Category = 3 " +
-                                                        "ORDER BY RAND(CHECKSUM(*) * RAND())) T ;").ToListAsync();           
-
-            return mapper.Map<List<Question>, List<QuestionResource>>(questions.Concat(replacementQuestions).ToList());
+                                       .FromSqlRaw(" WITH Privremeno AS " +
+                                                    "( SELECT TOP (7) [Id], [Text], [Answer], [Category] " +
+                                                    "from [VisokiNapon].[dbo].[Questions] " +
+                                                    "Where [Category] = 1 " +
+                                                    "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                    "UNION ALL " +
+                                                    "SELECT TOP (7) [Id], [Text], [Answer], [Category] " +
+                                                    "from [VisokiNapon].[dbo].[Questions] " +
+                                                    "Where [Category] = 5 " +
+                                                    "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                    "UNION ALL " +
+                                                    "SELECT TOP (7) [Id], [Text], [Answer], [Category] " +
+                                                    "from [VisokiNapon].[dbo].[Questions] " + 
+                                                    "Where [Category] = 10 " +
+                                                    "ORDER BY RAND(CHECKSUM(*) * RAND())" +
+                                                    "UNION ALL " +
+                                                    "SELECT TOP (1) [Id], [Text], [Answer], [Category] " +
+                                                    "from [VisokiNapon].[dbo].[Questions] " +
+                                                    "Where [Category] = 4 " +
+                                                    "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                    ") " +
+                                                    "SELECT * " +
+                                                    "FROM   (SELECT TOP (16) * " +
+                                                            "FROM(  SELECT TOP (5) [Id], [Text], [Answer], [Category]" +
+                                                                    "FROM Privremeno " +
+                                                                    "WHERE [Category] = 1 " +
+                                                                    "ORDER BY [Category] ASC " +
+                                                                    "UNION " +
+                                                                    "SELECT TOP (5) [Id], [Text], [Answer], [Category] " +
+                                                                    "FROM Privremeno " +
+                                                                    "WHERE [Category] = 5 " +
+                                                                    "ORDER BY [Category] ASC " +
+                                                                    "UNION " +
+                                                                    "SELECT TOP (5) [Id], [Text], [Answer], [Category] " +
+                                                                    "FROM Privremeno " +
+                                                                    "WHERE [Category] = 10 " +
+                                                                    "ORDER BY [Category] ASC " +
+                                                                    "UNION " +
+                                                                    "SELECT TOP (1) [Id], [Text], [Answer], [Category] " +
+                                                                    "FROM Privremeno " +
+                                                                    "WHERE [Category] = 4 " +
+                                                                    "ORDER BY [Category] ASC) T " +
+                                                                    "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
+                                                            "UNION ALL " +
+                                                            "SELECT * " +
+                                                            "FROM Privremeno " +
+                                                            "WHERE [Category] = 1 " +
+                                                            "ORDER BY [Category] ASC " +
+                                                            "OFFSET 5 ROWS " +
+                                                            "FETCH NEXT 2 ROWS ONLY " +
+                                                            "UNION ALL " +
+                                                            "SELECT * " +
+                                                            "FROM Privremeno " +
+                                                            "WHERE [Category] = 5 " +
+                                                            "ORDER BY [Category] ASC " +
+                                                            "OFFSET 5 ROWS " +
+                                                            "FETCH NEXT 2 ROWS ONLY " +
+                                                            "UNION ALL " +
+                                                            "SELECT * " +
+                                                            "FROM Privremeno " +
+                                                            "WHERE [Category] = 10 " +
+                                                            "ORDER BY [Category] ASC " +
+                                                            "OFFSET 5 ROWS " +
+                                                            "FETCH NEXT 2 ROWS ONLY ) P ;").ToListAsync();
+            
+            return mapper.Map<List<Question>, List<QuestionResource>>(questions);
         }
-        
-        // [HttpGet("/api/crash_rep")]
-        // [HttpGet("/api/crash_rep")]
-        // public async Task<IEnumerable<any>> GetCrR(){
-        //      var crashMid = await "goran".ToListAsync();
-        //      return crashMid;
-        // }
-
-        // [HttpGet("/api/v3/answer")]
-        // public string v(){
-        //     return "initialize....";
-        // }
         
 
         /** ### Desctiption
@@ -112,18 +124,21 @@ namespace VISOKI_NAPON.Controllers
         public async Task<IActionResult> TestName([FromBody]obj obj){
             string ques = await Task.FromResult(context.Questions.AsEnumerable()
             .Where(que => que.Text == obj.tex).Select(que=>que.Answer).FirstOrDefault());
-            if(ques.Equals( obj.ans, StringComparison.CurrentCultureIgnoreCase))
+
+            string quesWithoutAccents = RemoveAccents(ques);
+		    string obj_ansWithoutAccents = RemoveAccents(obj.ans);
+
+            if(quesWithoutAccents.Equals( obj_ansWithoutAccents, StringComparison.CurrentCultureIgnoreCase))
                 return Json(true);
             else 
                 return Json(false);
         }
+
+        static string RemoveAccents(string textWithAccents) {
+		    byte[] temp;
+		    temp = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(textWithAccents);
+		    return System.Text.Encoding.UTF8.GetString(temp);
+	    }
                 
-        // logic
-        // var query = from w in context.Questions where w.Text == text select w.Answer;
-        
-        // [HttpPost("/api/ex/par")]
-        // public UsersError Post([FromBody] string par ){
-        // return par;
-        // }
     }
 }

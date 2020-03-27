@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 namespace VISOKI_NAPON.Controllers.Resources
 {
+    ///API resource class for Question 
     public class QuestionResource
     {
         public int Id { get; set; }

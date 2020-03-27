@@ -79,18 +79,6 @@ export class DataService {
     this.defaultTenderScreen.next(message)
   }
 
-  
-  // private i :number;
-  // private j : number
-  // private k : number;
-
-  // for (i > 0; this.i--){
-  //     var j = Math.floor(Math.random() * this.i);
-  //     var k = this.arrayNumbersS[j];
-  //     this.arrayNumbersS[j] = this.arrayNumberS[this.i - 1];
-  //     this.arrayNumbersS[this.i - 1] = k;
-  // }
-
   /** The initial value for defaultCategoryArray array */
   private defaultCategoryArrayC : Array<number> = [0, 0, 0, 0, 
                                                    0, 0, 0, 0,
@@ -115,9 +103,6 @@ export class DataService {
     this.defaultQTextArrayC.splice(message, 1);
     this.defaultQTextArray.next(this.defaultQTextArrayC)
     
-    // this.defaultQAnswerArrayC.splice(message, 1);
-    // this.defaultQAnswerArray.next(this.defaultQAnswerArrayC)
-    
     this.defaultIsDisabledArrayC.splice(message, 1);
     this.defaultIsDisabledArray.next(this.defaultIsDisabledArrayC)
   }
@@ -137,13 +122,6 @@ export class DataService {
   changeQTextArray(message: Array<string>){
     this.defaultQTextArray.next(message)
   }
-  
-  // private defaultQAnswerArrayC = [...]
-  // private defaultQAnswerArray = new BehaviorSubject<Array<string>>(this.defaultQAnswerArrayC)
-  // currentQAnswerArray = this.defaultQAnswerArray.asObservable();
-  // changeQAnswerArray(message: Array<string>){
-  //   this.defaultQAnswerArray.next(message)
-  // }
 
   /** The initial value for defaultIsDisabledArray array */
   private defaultIsDisabledArrayC : Array<boolean> = [false, false, false, false, 

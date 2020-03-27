@@ -6,10 +6,6 @@ import {Observable} from 'rxjs';
 import { MakeqService } from '../makeq.service';
 import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from '@aspnet/signalr';
 
-// const HttpUploadOptions = {
-//   headers: new HttpHeaders({ "Accept": "application/json" })
-// }
-
 @Component({
   selector: 'app-answer',
   templateUrl: './answer.component.html',
@@ -127,11 +123,9 @@ export class AnswerComponent implements OnInit {
     this.data.currentTopListScreen.subscribe(message => this.TopListScreen = message)
     this.data.currentChooseModeScreen.subscribe(message => this.ChooseModeScreen = message)
     this.data.currentTenderScreen.subscribe(message => this.TenderScreen = message)
-
     this.data.currentQNumber.subscribe(message => this.Number = message)
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
-    // this.data.QAnswerArray.subscribe(message => this.QAnswerArray = message)
     this.data.currentSum.subscribe(message => this.Sum = message)
     this.data.currentGameNotOver.subscribe(message => this.GameNotOver = message)
     this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
@@ -142,13 +136,10 @@ export class AnswerComponent implements OnInit {
     this.data.currentGuaranteedSum.subscribe(message => this.GuaranteedSum = message);
     this.data.currentEndOfGame.subscribe(message => this.EndOfGame = message);
     this.data.currentCorrect.subscribe(message => this.Correct = message);
-  
     this.data.currentusedReplaceQuestionHelp1.subscribe(message => this.usedReplaceQuestionHelp1 = message);
     this.data.currentusedReplaceQuestionHelp2.subscribe(message => this.usedReplaceQuestionHelp2 = message);
-  
     this.data.currentPracticeMode.subscribe(message => this.PracticeMode = message);
     this.data.currentUser.subscribe(message => this.CurrentUser = message);
-
     this.data.currentusedTenderHelp.subscribe(message => this.usedTenderHelp = message);
 
     this.hubConnection = new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl("/chatHub", {
@@ -216,21 +207,12 @@ export class AnswerComponent implements OnInit {
       tex: this.QTextArray[this.Number],
       ans: value
     }
-    // const body = JSON.stringify(obj);
+
     const headerOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http.post('/api/v3/answer/', obj, {
       headers: headerOptions
     }).subscribe(async t => {
       this.response = t
-
-      // var obj = JSON.parse(this.response)
-      // var bool_value = this.response == "true" ? true : false
-      
-      // this.cat = this.CategoryArray[this.Number]
-      // var formthis.data: Formthis.data = new Formthis.data();
-      // formthis.data.append('text', this.QTextArray[this.Number])
-      // formthis.data.append('ans',this.ans)
-      // formthis.data.set('cat', String(this.Number))
 
       if (this.response == true) {
         this._correctAnswerPart1()

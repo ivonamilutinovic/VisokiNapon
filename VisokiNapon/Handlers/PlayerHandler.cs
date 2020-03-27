@@ -194,7 +194,6 @@ namespace VISOKI_NAPON.Handlers
 			context.SaveChanges();
 
 			sendMail(email, random);
-			Console.Write(random + "\n");
 			
             return true;
         }
@@ -259,6 +258,7 @@ namespace VISOKI_NAPON.Handlers
 		
 			var apiKey = Environment.GetEnvironmentVariable("SENDGRID_KEY");
 			var client = new SendGridClient(apiKey);
+			
 			var from = new EmailAddress("support@visokinapon.com", "Visoki Napon Support");
 			var subject = "Welcome to VisokiNapon! Confirm your Email!";
 			var to = new EmailAddress(email, email);

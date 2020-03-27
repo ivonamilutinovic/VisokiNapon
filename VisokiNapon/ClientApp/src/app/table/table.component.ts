@@ -66,7 +66,6 @@ export class TableComponent implements OnInit {
     this.data.currentQNumber.subscribe(message => this.Number = message)
     this.data.currentCategoryArray.subscribe(message => this.CategoryArray = message)
     this.data.currentQTextArray.subscribe(message => this.QTextArray = message)
-    // this.data.NizOdgovoraM.subscribe(message => this.Odgovori = message)
     this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
     this.data.currentIndicator.subscribe(message => this.Indicator = message)
     this.data.currentCounter.subscribe(message => this.Counter = message)

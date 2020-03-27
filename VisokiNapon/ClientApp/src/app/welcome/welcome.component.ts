@@ -5,12 +5,6 @@ import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs';
 
-// const httpOpt = {
-//   headers: new HttpHeaders({
-//     'Content-Type': 'application/json',
-//     'Accept': 'application/json, text/plain'
-//   })
-// };
 
 @Component({
   selector: 'app-welcome',
@@ -41,22 +35,14 @@ export class WelcomeComponent implements OnInit {
   /** Array with text of questions */
   QTextArray                          : Array<string>
   /** Contains list of questions got from server */
-  questions                           : any[]  //$: Observable<QuestionM[]>;
-  // ques                                : string[]
+  questions                           : any[]  
 
   /** Array of indicators whether question is opened or not */
   IsDisabledArray                     : Array<boolean> 
   /** Username of current user */
   User								  : string
   
-  // private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-  // postData = {
-  //   test: 'my content'
-  // }
-  
   constructor(private data : DataService, private makeqService : MakeqService) {
-   // this.http.post('/api/v1/answer', JSON.stringify('log'), httpOpt).toPromise().then(data=>{console.log(data);
-   // })
   }
 
   ngOnInit() {
@@ -73,18 +59,15 @@ export class WelcomeComponent implements OnInit {
   	this.makeqService.getQuestions().subscribe(questions => this.questions = questions);
   	this.data.currentIsDisabledArray.subscribe(message => this.IsDisabledArray = message)
   	this.data.currentUser.subscribe(message => this.User = message)
-    // this.makeqService.postAnswer().subscribe(response => console.log("response from POST", response));
   }
   
   /** Function that redirect player to practise mode */
   practice(){
-    // this.makeqService.validate_user(...).subscribe(res => console.log(res))
     this.data.changePracticeMode(true)
 
     var i = 0
     for(const item of this.questions){
       this.CategoryArray[i] = item["category"]
-      // this.Ids[i] = item["id"]
       this.QTextArray[i] = item["text"]
       this.IsDisabledArray[i]= false
 	    i++
@@ -92,8 +75,7 @@ export class WelcomeComponent implements OnInit {
 
   	this.data.changeIsDisabledArray(this.IsDisabledArray)
     this.data.changeCategoryArray(this.CategoryArray)
-    this.data.changeQTextArray(this.QTextArray)
-    
+    this.data.changeQTextArray(this.QTextArray) 
 	  this.data.changeCounter(0)
 	  this.data.changeIndicator(false)
 	  this.data.changeQNumber(-1)
@@ -108,7 +90,6 @@ export class WelcomeComponent implements OnInit {
 	  this.data.changeusedReplaceQuestionHelp1(false)
 	  this.data.changeusedReplaceQuestionHelp2(false)
   	this.data.changeGameNotOver(true)
-	
     this.data.showWelcomeScreen(false)
     this.data.showQuestionsScreen(true)
   }

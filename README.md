@@ -1,5 +1,8 @@
 # VisokiNapon
 
+## IP adresa servera: [165.22.69.176](https://165.22.69.176)
+
+
 Aplikacija se implementira po uzoru na kviz Visoki napon. 
 Visoki napon je prvi srpski licencirani kviz i emitovan je od 29.06.2006. do 24.06.2011. na televiziji RTS.  
 
@@ -13,14 +16,13 @@ Cilj igrača koji igraju Visoki napon jeste da osvoje što veću sumu. Pored št
 
 ## Pokretanje:
 
-1. Pozicionirati se u folder *ClientApp* iz komandne linije i izvršiti komandu
+1. Kreirati praznu bazu podataka (bez tabela) *VisokiNapon* u SQL Serveru
+
+2. Pozicionirati se u folder *ClientApp* iz komandne linije i izvršiti komandu
 <pre>npm install</pre>
 
-2. Pozicionirati se u glavni folder (na nivou gde je *.csproj* fajl) i izvršiti komandu
+3. Pozicionirati se u glavni folder (na nivou gde je *.csproj* fajl) i izvršiti komandu
 <pre>dotnet restore</pre>
-
-3. U fajlu *appsettings.json* ažurirati ime servera i ime baze po potrebi
-<pre>"Default": "server=DESKTOP-DSSAV0H\\RS2SERVER; database=VisokiNapon; Integrated Security = SSPI;"</pre>
 
 4. Napraviti [SendGrid](https://sendgrid.com/) Api Key da bi aplikacija slala mailove koristeći SendGrid. 
 Otvoriti terminal kao administrator i izvršiti komandu
@@ -28,10 +30,8 @@ Otvoriti terminal kao administrator i izvršiti komandu
 Ukoliko preskočite ovaj korak, nećete dobijati kod u konfirmacionom mailu, a isti možete pratiti putem komandne linije.
 
 5. Izvršiti komandu
-<pre>dotnet-ef database update</pre>
-
-6. Izvršiti komandu
 <pre>dotnet run</pre>
 
-7. U pretraživacu otvoriti stranicu 
+6. U pretraživacu otvoriti stranicu 
 <pre>https://localhost:5001/</pre>
+

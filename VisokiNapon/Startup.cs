@@ -32,7 +32,7 @@ namespace VISOKI_NAPON
         public void ConfigureServices(IServiceCollection services)
         {       
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddDbContext<VisokiNaponDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<VisokiNaponDbContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("Default")));
             
             services.AddControllersWithViews();
 			
@@ -46,10 +46,11 @@ namespace VISOKI_NAPON
             services.AddSignalR();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, VisokiNaponDbContext context)
         {
             app.UseSpaStaticFiles();
-
+            context.Database.Migrate();
+                
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,9 +86,8 @@ namespace VISOKI_NAPON
 
                 if (env.IsDevelopment())
                 {
-                    spa.Options.StartupTimeout = new TimeSpan(0,2,45); 
+                    spa.Options.StartupTimeout = new TimeSpan(0,0,45); 
                     spa.UseAngularCliServer(npmScript: "start");
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
