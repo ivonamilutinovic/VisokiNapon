@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisokiNaponTest", "VisokiNaponTest\VisokiNaponTest.csproj", "{4F7A8E7A-394B-4FF2-8D1C-A9A2EBE9CBEA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VISOKI_NAPON", "..\..\VisokiNapon\VISOKI_NAPON.csproj", "{B5E8C11B-E1B7-46EA-AA0C-B100EAFB4E6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F7A8E7A-394B-4FF2-8D1C-A9A2EBE9CBEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F7A8E7A-394B-4FF2-8D1C-A9A2EBE9CBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F7A8E7A-394B-4FF2-8D1C-A9A2EBE9CBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F7A8E7A-394B-4FF2-8D1C-A9A2EBE9CBEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E8C11B-E1B7-46EA-AA0C-B100EAFB4E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E8C11B-E1B7-46EA-AA0C-B100EAFB4E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E8C11B-E1B7-46EA-AA0C-B100EAFB4E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E8C11B-E1B7-46EA-AA0C-B100EAFB4E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D42A189-0BC4-4494-8D50-971376BE5AE3}
+	EndGlobalSection
+EndGlobal

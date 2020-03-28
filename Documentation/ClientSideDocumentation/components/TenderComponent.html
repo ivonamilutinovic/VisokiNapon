@@ -1,0 +1,1044 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>visoki_napon documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">visoki_napon documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>TenderComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/tender/tender.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-tender</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./tender.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./tender.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#AnsweringScreen">AnsweringScreen</a>
+                            </li>
+                            <li>
+                                <a href="#ChooseModeScreen">ChooseModeScreen</a>
+                            </li>
+                            <li>
+                                <a href="#CurrentUser">CurrentUser</a>
+                            </li>
+                            <li>
+                                <a href="#hubConnection">hubConnection</a>
+                            </li>
+                            <li>
+                                <a href="#LogInScreen">LogInScreen</a>
+                            </li>
+                            <li>
+                                <a href="#QuestionsScreen">QuestionsScreen</a>
+                            </li>
+                            <li>
+                                <a href="#SignUpScreen">SignUpScreen</a>
+                            </li>
+                            <li>
+                                <a href="#TenderScreen">TenderScreen</a>
+                            </li>
+                            <li>
+                                <a href="#TopListScreen">TopListScreen</a>
+                            </li>
+                            <li>
+                                <a href="#WelcomeScreen">WelcomeScreen</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#quitTenderGame">quitTenderGame</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(data: <a href="../injectables/DataService.html">DataService</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>, makeqService: <a href="../injectables/MakeqService.html">MakeqService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/tender/tender.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>data</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>makeqService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MakeqService.html" target="_self" >MakeqService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/tender/tender.component.ts:42</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quitTenderGame"></a>
+                    <span class="name">
+                        <b>
+                            quitTenderGame
+                        </b>
+                        <a href="#quitTenderGame"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>quitTenderGame()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="175"
+                            class="link-to-prism">src/app/tender/tender.component.ts:175</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Function which quits tender mode and redirects player to choose game mode  </p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="AnsweringScreen"></a>
+                        <span class="name">
+                            <b>
+                            AnsweringScreen</b>
+                            <a href="#AnsweringScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/tender/tender.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of TableComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ChooseModeScreen"></a>
+                        <span class="name">
+                            <b>
+                            ChooseModeScreen</b>
+                            <a href="#ChooseModeScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/tender/tender.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of ChoseeModeComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CurrentUser"></a>
+                        <span class="name">
+                            <b>
+                            CurrentUser</b>
+                            <a href="#CurrentUser"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/tender/tender.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Username of the current player </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hubConnection"></a>
+                        <span class="name">
+                            <b>
+                            hubConnection</b>
+                            <a href="#hubConnection"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>HubConnection</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/tender/tender.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>HubConnection for SignalR </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="LogInScreen"></a>
+                        <span class="name">
+                            <b>
+                            LogInScreen</b>
+                            <a href="#LogInScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/tender/tender.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of LogInComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="QuestionsScreen"></a>
+                        <span class="name">
+                            <b>
+                            QuestionsScreen</b>
+                            <a href="#QuestionsScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/tender/tender.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of TableComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="SignUpScreen"></a>
+                        <span class="name">
+                            <b>
+                            SignUpScreen</b>
+                            <a href="#SignUpScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/tender/tender.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of SignUpComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TenderScreen"></a>
+                        <span class="name">
+                            <b>
+                            TenderScreen</b>
+                            <a href="#TenderScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/tender/tender.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of TenderComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="TopListScreen"></a>
+                        <span class="name">
+                            <b>
+                            TopListScreen</b>
+                            <a href="#TopListScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/tender/tender.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of TopListComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="WelcomeScreen"></a>
+                        <span class="name">
+                            <b>
+                            WelcomeScreen</b>
+                            <a href="#WelcomeScreen"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/tender/tender.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Indicator of WelcomeComponent activity </p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
+import { QuestionM } from &#x27;./../models/questionm&#x27;;
+import { MakeqService } from &#x27;../makeq.service&#x27;;
+import { Component, OnInit, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { DataService } from &#x27;../data.service&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { HubConnection, HubConnectionBuilder, HttpTransportType, LogLevel} from &#x27;@aspnet/signalr&#x27;;
+
+
+@Component({
+    selector:    &#x27;app-tender&#x27;,
+    templateUrl: &#x27;./tender.component.html&#x27;,
+    styleUrls:   [&#x27;./tender.component.css&#x27;]
+})
+
+export class TenderComponent implements OnInit {
+   
+  /** HubConnection for SignalR */
+  hubConnection: HubConnection;
+
+  /** Indicator of WelcomeComponent activity */
+  WelcomeScreen                        : boolean
+  /** Indicator of LogInComponent activity */
+  LogInScreen                          : boolean
+  /** Indicator of TableComponent activity */
+  QuestionsScreen                      : boolean
+  /** Indicator of TableComponent activity */
+  AnsweringScreen                      : boolean
+  /** Indicator of SignUpComponent activity */
+  SignUpScreen                         : boolean
+  /** Indicator of TopListComponent activity */
+  TopListScreen                        : boolean
+  /** Indicator of ChoseeModeComponent activity */
+  ChooseModeScreen                     : boolean
+  /** Indicator of TenderComponent activity */
+  TenderScreen                         : boolean
+  /** Username of the current player */
+  CurrentUser                         : string
+
+  constructor(private data: DataService, private http: HttpClient,  private makeqService : MakeqService) {}
+  
+  ngOnInit() {
+    this.data.currentWelcomeScreen.subscribe(message &#x3D;&gt; this.WelcomeScreen &#x3D; message)
+    this.data.currentLogInScreen.subscribe(message &#x3D;&gt; this.LogInScreen &#x3D; message)
+    this.data.currentQuestionsScreen.subscribe(message &#x3D;&gt; this.QuestionsScreen &#x3D; message)
+    this.data.currentAnsweringScreen.subscribe(message &#x3D;&gt; this.AnsweringScreen &#x3D; message)
+    this.data.currentSignUpScreen.subscribe(message &#x3D;&gt; this.SignUpScreen &#x3D; message) 
+    this.data.currentTopListScreen.subscribe(message &#x3D;&gt; this.TopListScreen &#x3D; message) 
+    this.data.currentChooseModeScreen.subscribe(message &#x3D;&gt; this.ChooseModeScreen &#x3D; message) 	 
+    this.data.currentTenderScreen.subscribe(message &#x3D;&gt; this.TenderScreen &#x3D; message) 
+    
+    this.data.currentUser.subscribe(message &#x3D;&gt; this.CurrentUser &#x3D; message);
+
+    this.hubConnection &#x3D; new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl(&quot;/chatHub&quot;, {
+      skipNegotiation: true,
+      transport: HttpTransportType.WebSockets
+    }).build();
+
+    this.hubConnection
+    .start()
+    .then(() &#x3D;&gt; console.log(&quot;Connection started!&quot;))
+    .catch(err &#x3D;&gt; console.log(&quot;An error occured while establishing a connection.&quot;));
+
+    var i &#x3D; 1
+    this.hubConnection.on(&quot;ReceiveMessageVN2Tender&quot;, (user, questionMessage, questionValueMessage) &#x3D;&gt; {
+      var questionMsg &#x3D; questionMessage.replace(/&amp;/g, &quot;&amp;amp;&quot;).replace(/&lt;/g, &quot;&amp;lt;&quot;).replace(/&gt;/g, &quot;&amp;gt;&quot;);
+      var valueMsg &#x3D; questionValueMessage.replace(/&amp;/g, &quot;&amp;amp;&quot;).replace(/&lt;/g, &quot;&amp;lt;&quot;).replace(/&gt;/g, &quot;&amp;gt;&quot;);
+      const br1 &#x3D; document.createElement(&quot;br&quot;);
+      const br2 &#x3D; document.createElement(&quot;br&quot;);
+      const br3 &#x3D; document.createElement(&quot;br&quot;);
+      const br4 &#x3D; document.createElement(&quot;br&quot;);
+      const br5 &#x3D; document.createElement(&quot;br&quot;);
+      
+      const span1 &#x3D; document.createElement(&quot;span&quot;);
+      const span2 &#x3D; document.createElement(&quot;span&quot;);
+      const span3 &#x3D; document.createElement(&quot;span&quot;);
+
+      var div &#x3D; document.createElement(&quot;div&quot;);
+      var divId &#x3D; &quot;div&quot; + i
+      div.setAttribute(&quot;id&quot;, divId);
+      div.setAttribute(&quot;class&quot;, &quot;div_with_margins&quot;);
+      
+      span1.innerHTML &#x3D; &quot;&lt;b&gt;Korisničko ime:&lt;/b&gt; &amp;nbsp;&quot;
+      div.appendChild(span1);
+      var label &#x3D; document.createElement(&quot;label&quot;);
+      label.innerText &#x3D; user;
+      label.id &#x3D; &quot;vnPlayerUsernameId&quot; + i;
+      div.appendChild(label);
+      div.appendChild(br1);
+
+      span2.innerHTML &#x3D; &quot;&lt;b&gt;Pitanje:&lt;/b&gt; &amp;nbsp;&lt;br&gt;&quot;
+      div.appendChild(span2);
+      label &#x3D; document.createElement(&quot;label&quot;);
+      label.setAttribute(&quot;class&quot;, &quot;tender_label&quot;);
+      label.innerText &#x3D; questionMsg;
+      label.id &#x3D; &quot;tenderHelpQuestionId&quot; + i;
+      div.appendChild(label);
+      div.appendChild(br2);
+
+      span3.innerHTML &#x3D; &quot;&lt;b&gt;Vrednost pitanja:&lt;/b&gt; &amp;nbsp;&quot;
+      div.appendChild(span3);
+      label &#x3D; document.createElement(&quot;label&quot;);
+      label.innerText &#x3D; valueMsg;
+      label.id &#x3D; &quot;tenderHelpValueOfQuestionId&quot; + i;
+      div.appendChild(label);
+      div.appendChild(br3);
+
+      var input &#x3D; document.createElement(&quot;input&quot;);
+      input.id &#x3D; &quot;tenderHelpAnswerId&quot; + i;
+      input.setAttribute(&quot;placeholder&quot;, &quot;Unesite odgovor...&quot;);
+      input.setAttribute(&quot;type&quot;, &quot;text&quot;);
+      input.setAttribute(&quot;class&quot;, &quot;tender_input&quot;);
+      input.required &#x3D; true;
+      div.appendChild(input);
+      div.appendChild(br4);
+
+      input &#x3D; document.createElement(&quot;input&quot;);
+      input.id &#x3D; &quot;tenderHelprequestedAmountMessageId&quot; + i;
+      input.setAttribute(&quot;placeholder&quot;, &quot;Unesite traženu sumu...&quot;);
+      input.setAttribute(&quot;class&quot;, &quot;tender_input&quot;);
+      input.setAttribute(&quot;type&quot;, &quot;number&quot;);
+      input.min &#x3D; &quot;0&quot;;
+      input.max &#x3D; questionValueMessage;
+      input.required&#x3D;true;
+      div.appendChild(input);
+      div.appendChild(br5);
+
+      var button &#x3D; document.createElement(&quot;button&quot;);
+      button.type &#x3D; &quot;submit&quot;
+      button.id &#x3D; i.toString();
+      button.innerText &#x3D; &quot;Pošaljite odgovor&quot;;
+      button.setAttribute(&quot;class&quot;, &quot;tender_button&quot;);
+      
+      // Tender player sends the answer and the offered amount to &#x27;Visoki Napon&#x27; Player
+      button.addEventListener(&quot;click&quot;, event &#x3D;&gt; {
+        const index &#x3D; button.id;
+        var vnPlayerUsername &#x3D; (document.getElementById(&quot;vnPlayerUsernameId&quot; + index) as HTMLInputElement).innerText;
+        var answerMessage &#x3D; (document.getElementById(&quot;tenderHelpAnswerId&quot; + index) as HTMLInputElement).value;
+        var requestedAmountElement &#x3D; (document.getElementById(&quot;tenderHelprequestedAmountMessageId&quot; + index) as HTMLInputElement);
+        var requestedAmountMessage &#x3D; requestedAmountElement.value;
+        
+        if(answerMessage &#x3D;&#x3D;&#x3D; &quot;&quot; || requestedAmountMessage &#x3D;&#x3D;&#x3D; &quot;&quot;){
+          alert(&quot;Oba polja su obavezna.&quot;)
+        }
+        else if(parseInt(requestedAmountMessage) &lt; parseInt(requestedAmountElement.min) || parseInt(requestedAmountMessage) &gt; parseInt(requestedAmountElement.max)){
+          alert(&quot;Iznos mora biti između &quot; + requestedAmountElement.min + &quot; i &quot; + requestedAmountElement.max + &quot;.&quot;)
+        }
+        else{
+          var div &#x3D; document.getElementById(divId);
+          div.remove();
+
+          this.hubConnection.invoke(&quot;SendMessageTender2VN&quot;, this.CurrentUser, vnPlayerUsername, answerMessage, requestedAmountMessage.toString()).catch(function (err) {
+            return console.error(err.toString());
+        });  
+        }
+        event.preventDefault();    
+      });
+      div.appendChild(button);
+      document.getElementById(&quot;main_div&quot;).appendChild(div);
+
+      i++;
+    });
+
+    this.hubConnection.on(&quot;ReceiveMessageChangeTenderSum&quot;, (user, TenderAmountMessage) &#x3D;&gt; {
+      if(user &#x3D;&#x3D;&#x3D; this.CurrentUser){
+        var amountLabel &#x3D; document.getElementById(&quot;tenderAmountId&quot;);
+        var amount &#x3D; parseInt(amountLabel.innerText) + parseInt(TenderAmountMessage);
+        amountLabel.innerText &#x3D; amount.toString();
+      }
+
+    });
+  }
+
+  /** Function which quits tender mode and redirects player to choose game mode  */
+  quitTenderGame(){
+    this.data.showTenderScreen(false);
+    this.data.showChooseModeScreen(true);
+    this.hubConnection.stop().then(() &#x3D;&gt; console.log(&quot;Connection Stopped!&quot;)).catch(function (err) {
+      return console.error(err.toString());
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;flex_display&quot;&gt;
+        &lt;span&gt;
+            &amp;nbsp;
+            &lt;b&gt;Vaše korisničko ime:&lt;/b&gt; 
+            &amp;nbsp; 
+            &lt;label id&#x3D;&quot;tenderPlayerUsernameId&quot;&gt; {{CurrentUser}} &lt;/label&gt;
+            &amp;nbsp;
+        &lt;/span&gt;
+        &lt;span&gt;
+            &amp;nbsp;
+            &lt;b&gt;Osvojena suma:&lt;/b&gt; 
+            &amp;nbsp; 
+            &lt;label id&#x3D;&quot;tenderAmountId&quot;&gt;0&lt;/label&gt;
+            &amp;nbsp;
+        &lt;/span&gt;
+        &lt;button (click)&#x3D;&quot;quitTenderGame()&quot;&gt;
+            Napustite tender igru
+        &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id&#x3D;&quot;main_div&quot; class&#x3D;&quot;flex_display&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./tender.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.container{
+  position: relative;
+  top: -30px;
+  left: -20%;
+}
+
+span{
+  border-radius: 2px;
+  border: 1px solid #d8dad7;
+  background-color: #c97dc9;
+  box-shadow: 2px 3px 3px #d8dad7;
+  text-align: bottom;
+  margin: 0px 10px 0px 0px;
+}
+
+.flex_display{
+  display: flex;
+  margin: 30px 0;
+}
+
+button{
+  height: 40px;
+  background-color: #614e75;
+  border: 2px solid #dad8d7;
+  color: white;
+  margin: 0px 10px 0px 0px;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid #d8dad7;
+  border-radius: 4px;
+  box-shadow: 0px 15px 15px #614e75;
+}
+
+button:hover{
+  background-color: #4c3d5c;
+  box-shadow: 0px 15px 15px #5d3c5d;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container">    <div class="flex_display">        <span>            &nbsp;            <b>Vaše korisničko ime:</b>             &nbsp;             <label id="tenderPlayerUsernameId"> {{CurrentUser}} </label>            &nbsp;        </span>        <span>            &nbsp;            <b>Osvojena suma:</b>             &nbsp;             <label id="tenderAmountId">0</label>            &nbsp;        </span>        <button (click)="quitTenderGame()">            Napustite tender igru        </button>    </div>    <div id="main_div" class="flex_display"></div></div></div>'
+    var COMPONENTS = [{'name': 'AnswerComponent', 'selector': 'app-answer'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChooseModeComponent', 'selector': 'app-choosemode'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'TableComponent', 'selector': 'app-table'},{'name': 'TenderComponent', 'selector': 'app-tender'},{'name': 'ToplistComponent', 'selector': 'app-toplist'},{'name': 'WelcomeComponent', 'selector': 'app-welcome'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TenderComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TenderComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
