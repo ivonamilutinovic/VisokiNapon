@@ -17,6 +17,8 @@ using System.Threading;
 using VISOKI_NAPON.Controllers.Resources;
 using AutoMapper;
 using System.Data.SqlClient;
+// using Microsoft.Data.SqlClient;
+// using System.Data.SqlClient;
 
 namespace VISOKI_NAPON.Controllers
 {   
@@ -48,7 +50,7 @@ namespace VISOKI_NAPON.Controllers
         public async Task<IEnumerable<QuestionResource>> GetQuestions(){
             var questions = await context.Questions
                                        .FromSqlRaw(" WITH Privremeno AS " +
-                                                    "( SELECT TOP (7) [Id], [Text], [Answer], [Category] " +
+                                                    "( SELECT TOP (7) Id, Text, Answer, Category " +
                                                     "from [VisokiNapon].[dbo].[Questions] " +
                                                     "Where [Category] = 1 " +
                                                     "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
@@ -68,7 +70,7 @@ namespace VISOKI_NAPON.Controllers
                                                     "Where [Category] = 4 " +
                                                     "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
                                                     ") " +
-                                                    "SELECT * " +
+                                                    "SELECT Id, Text,null as Answer, Category " +
                                                     "FROM   (SELECT TOP (16) * " +
                                                             "FROM(  SELECT TOP (5) [Id], [Text], [Answer], [Category]" +
                                                                     "FROM Privremeno " +
@@ -91,21 +93,21 @@ namespace VISOKI_NAPON.Controllers
                                                                     "ORDER BY [Category] ASC) T " +
                                                                     "ORDER BY RAND(CHECKSUM(*) * RAND()) " +
                                                             "UNION ALL " +
-                                                            "SELECT * " +
+                                                            "SELECT Id, Text,null as Answer, Category " +
                                                             "FROM Privremeno " +
                                                             "WHERE [Category] = 1 " +
                                                             "ORDER BY [Category] ASC " +
                                                             "OFFSET 5 ROWS " +
                                                             "FETCH NEXT 2 ROWS ONLY " +
                                                             "UNION ALL " +
-                                                            "SELECT * " +
+                                                            "SELECT Id, Text,null as Answer, Category " +
                                                             "FROM Privremeno " +
                                                             "WHERE [Category] = 5 " +
                                                             "ORDER BY [Category] ASC " +
                                                             "OFFSET 5 ROWS " +
                                                             "FETCH NEXT 2 ROWS ONLY " +
                                                             "UNION ALL " +
-                                                            "SELECT * " +
+                                                            "SELECT Id, Text,null as Answer, Category " +
                                                             "FROM Privremeno " +
                                                             "WHERE [Category] = 10 " +
                                                             "ORDER BY [Category] ASC " +

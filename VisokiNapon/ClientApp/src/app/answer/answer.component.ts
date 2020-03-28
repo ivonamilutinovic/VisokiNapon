@@ -345,8 +345,8 @@ export class AnswerComponent implements OnInit {
     this.help1 = true
 	  this.help2 = false
 
-    var category = this.CategoryArray[this.Number]
-    this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category - 1]
+    var category = this.ValueOfQuestion/10000==1 ? 1 : (this.ValueOfQuestion/10000==5 ? 2 : 3)	
+    this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category - 2]
     this.data.changeQTextArray(this.QTextArray)
 
     clearTimeout(this.infoBool)
@@ -377,8 +377,8 @@ export class AnswerComponent implements OnInit {
     this.help2 = true
 	  this.help1 = false
 
-    var category = this.CategoryArray[this.Number]
-    this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category]
+    var category = this.ValueOfQuestion/10000==1 ? 1 : (this.ValueOfQuestion/10000==5 ? 2 : 3)
+    this.QTextArray[this.Number] = this.QTextArray[this.QTextArray.length - 6 + 2 * category-1]
     this.data.changeQTextArray(this.QTextArray)
 
     clearTimeout(this.infoBool)
